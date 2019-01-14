@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		300220F977B6319713E4F0FC /* Pods_Dropp3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8336531E43DE75BA66EFF5A4 /* Pods_Dropp3.framework */; };
+		5BB90EC621E9D27D00B69E51 /* DroppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90EC521E9D27D00B69E51 /* DroppService.swift */; };
+		5BB90EC921E9D32B00B69E51 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90EC821E9D32B00B69E51 /* Location.swift */; };
+		5BB90ECB21E9D34500B69E51 /* Dropp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ECA21E9D34500B69E51 /* Dropp.swift */; };
+		5BB90ECE21E9D93600B69E51 /* DroppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */; };
+		5BB90ED121E9DAB800B69E51 /* RealmDropp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED021E9DAB800B69E51 /* RealmDropp.swift */; };
+		5BB90ED321E9DB2600B69E51 /* RealmLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED221E9DB2600B69E51 /* RealmLocation.swift */; };
+		5BB90ED521E9DD3100B69E51 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED421E9DD3100B69E51 /* RealmProvider.swift */; };
 		69B2FDBA21E9CE120080A7B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2FDB921E9CE120080A7B2 /* AppDelegate.swift */; };
 		69B2FDBC21E9CE120080A7B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2FDBB21E9CE120080A7B2 /* ViewController.swift */; };
 		69B2FDBF21E9CE120080A7B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69B2FDBD21E9CE120080A7B2 /* Main.storyboard */; };
@@ -30,6 +37,13 @@
 /* Begin PBXFileReference section */
 		35385996C1EB2F4A6EE52977 /* Pods-Dropp3Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dropp3Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dropp3Tests/Pods-Dropp3Tests.release.xcconfig"; sourceTree = "<group>"; };
 		5AF4084300DA07CC38665AE0 /* Pods-Dropp3Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dropp3Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dropp3Tests/Pods-Dropp3Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		5BB90EC521E9D27D00B69E51 /* DroppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppService.swift; sourceTree = "<group>"; };
+		5BB90EC821E9D32B00B69E51 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		5BB90ECA21E9D34500B69E51 /* Dropp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropp.swift; sourceTree = "<group>"; };
+		5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppProvider.swift; sourceTree = "<group>"; };
+		5BB90ED021E9DAB800B69E51 /* RealmDropp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDropp.swift; sourceTree = "<group>"; };
+		5BB90ED221E9DB2600B69E51 /* RealmLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmLocation.swift; sourceTree = "<group>"; };
+		5BB90ED421E9DD3100B69E51 /* RealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
 		63D69FFCD31D9CE4978E3735 /* Pods-Dropp3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dropp3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dropp3/Pods-Dropp3.debug.xcconfig"; sourceTree = "<group>"; };
 		69B2FDB621E9CE120080A7B2 /* Dropp3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dropp3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B2FDB921E9CE120080A7B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +91,42 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		5BB90EC421E9D24400B69E51 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5BB90EC521E9D27D00B69E51 /* DroppService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		5BB90EC721E9D32100B69E51 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5BB90ECF21E9DAA500B69E51 /* Realm */,
+				5BB90EC821E9D32B00B69E51 /* Location.swift */,
+				5BB90ECA21E9D34500B69E51 /* Dropp.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5BB90ECC21E9D92900B69E51 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */,
+				5BB90ED421E9DD3100B69E51 /* RealmProvider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		5BB90ECF21E9DAA500B69E51 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				5BB90ED021E9DAB800B69E51 /* RealmDropp.swift */,
+				5BB90ED221E9DB2600B69E51 /* RealmLocation.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		69B2FDAD21E9CE120080A7B2 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +150,9 @@
 		69B2FDB821E9CE120080A7B2 /* Dropp3 */ = {
 			isa = PBXGroup;
 			children = (
+				5BB90EC721E9D32100B69E51 /* Models */,
+				5BB90EC421E9D24400B69E51 /* Service */,
+				5BB90ECC21E9D92900B69E51 /* Provider */,
 				69B2FDB921E9CE120080A7B2 /* AppDelegate.swift */,
 				69B2FDBB21E9CE120080A7B2 /* ViewController.swift */,
 				69B2FDBD21E9CE120080A7B2 /* Main.storyboard */,
@@ -237,15 +290,21 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Dropp3/Pods-Dropp3-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -303,8 +362,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BB90ED321E9DB2600B69E51 /* RealmLocation.swift in Sources */,
+				5BB90ED121E9DAB800B69E51 /* RealmDropp.swift in Sources */,
+				5BB90ECE21E9D93600B69E51 /* DroppProvider.swift in Sources */,
 				69B2FDBC21E9CE120080A7B2 /* ViewController.swift in Sources */,
+				5BB90ECB21E9D34500B69E51 /* Dropp.swift in Sources */,
+				5BB90EC621E9D27D00B69E51 /* DroppService.swift in Sources */,
+				5BB90EC921E9D32B00B69E51 /* Location.swift in Sources */,
 				69B2FDBA21E9CE120080A7B2 /* AppDelegate.swift in Sources */,
+				5BB90ED521E9DD3100B69E51 /* RealmProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

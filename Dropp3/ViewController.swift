@@ -9,12 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    let provider: DroppProvider = MainDroppProvider(droppService: DroppServiceAccessor(shouldSucceed: true))
+    provider.getDropps(around: Location(latitude: 0, longitude: 0))
   }
-
-
 }
-

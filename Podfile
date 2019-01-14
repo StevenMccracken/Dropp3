@@ -7,6 +7,8 @@ target 'Dropp3' do
 
   # Pods for Dropp3
   pod 'RealmSwift'
+  pod 'Swinject'
+  pod 'ReactiveSwift'
 
   target 'Dropp3Tests' do
     inherit! :search_paths
