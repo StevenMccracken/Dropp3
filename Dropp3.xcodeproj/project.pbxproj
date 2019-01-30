@@ -9,14 +9,29 @@
 /* Begin PBXBuildFile section */
 		300220F977B6319713E4F0FC /* Pods_Dropp3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8336531E43DE75BA66EFF5A4 /* Pods_Dropp3.framework */; };
 		5BB90EC621E9D27D00B69E51 /* DroppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90EC521E9D27D00B69E51 /* DroppService.swift */; };
-		5BB90EC921E9D32B00B69E51 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90EC821E9D32B00B69E51 /* Location.swift */; };
-		5BB90ECB21E9D34500B69E51 /* Dropp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ECA21E9D34500B69E51 /* Dropp.swift */; };
+		5BB90EC921E9D32B00B69E51 /* LocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90EC821E9D32B00B69E51 /* LocationProtocol.swift */; };
 		5BB90ECE21E9D93600B69E51 /* DroppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */; };
-		5BB90ED121E9DAB800B69E51 /* RealmDropp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED021E9DAB800B69E51 /* RealmDropp.swift */; };
-		5BB90ED321E9DB2600B69E51 /* RealmLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED221E9DB2600B69E51 /* RealmLocation.swift */; };
+		5BB90ED121E9DAB800B69E51 /* Dropp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED021E9DAB800B69E51 /* Dropp.swift */; };
+		5BB90ED321E9DB2600B69E51 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED221E9DB2600B69E51 /* Location.swift */; };
 		5BB90ED521E9DD3100B69E51 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED421E9DD3100B69E51 /* RealmProvider.swift */; };
+		69321E3321F551BD00103A74 /* ContainerConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69321E3221F551BD00103A74 /* ContainerConsumer.swift */; };
+		69321E3721F5626D00103A74 /* NearbyDropps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69321E3621F5626D00103A74 /* NearbyDropps.storyboard */; };
+		69321E3A21F5692F00103A74 /* NearbyDroppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69321E3921F5692F00103A74 /* NearbyDroppsViewController.swift */; };
+		69321E4821F5940F00103A74 /* NearbyDroppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69321E4621F5940F00103A74 /* NearbyDroppTableViewCell.swift */; };
+		69321E4921F5940F00103A74 /* NearbyDroppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69321E4721F5940F00103A74 /* NearbyDroppTableViewCell.xib */; };
+		695AE3BE21FE54A700672D85 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3BD21FE54A700672D85 /* MainViewController.swift */; };
+		695AE3C221FEB09F00672D85 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3C121FEB09F00672D85 /* User.swift */; };
+		695AE3C521FEB64200672D85 /* UserView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695AE3C421FEB64200672D85 /* UserView.storyboard */; };
+		695AE3C721FEB6C400672D85 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3C621FEB6C400672D85 /* UserViewController.swift */; };
+		695AE3CA21FEB8CA00672D85 /* UserDroppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3C821FEB8CA00672D85 /* UserDroppTableViewCell.swift */; };
+		695AE3CB21FEB8CA00672D85 /* UserDroppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 695AE3C921FEB8CA00672D85 /* UserDroppTableViewCell.xib */; };
+		695AE3CE21FFC47600672D85 /* UserInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3CC21FFC47600672D85 /* UserInfoTableViewCell.swift */; };
+		695AE3CF21FFC47600672D85 /* UserInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 695AE3CD21FFC47600672D85 /* UserInfoTableViewCell.xib */; };
+		695AE3D421FFD1EA00672D85 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3D321FFD1EA00672D85 /* UserService.swift */; };
+		695AE3D621FFE85000672D85 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3D521FFE85000672D85 /* ListViewController.swift */; };
+		695AE3DD22014BA900672D85 /* LocationView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695AE3DC22014BA900672D85 /* LocationView.storyboard */; };
+		695AE3DF22014D6B00672D85 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3DE22014D6B00672D85 /* LocationViewController.swift */; };
 		69B2FDBA21E9CE120080A7B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2FDB921E9CE120080A7B2 /* AppDelegate.swift */; };
-		69B2FDBC21E9CE120080A7B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2FDBB21E9CE120080A7B2 /* ViewController.swift */; };
 		69B2FDBF21E9CE120080A7B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69B2FDBD21E9CE120080A7B2 /* Main.storyboard */; };
 		69B2FDC121E9CE130080A7B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69B2FDC021E9CE130080A7B2 /* Assets.xcassets */; };
 		69B2FDC421E9CE130080A7B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69B2FDC221E9CE130080A7B2 /* LaunchScreen.storyboard */; };
@@ -38,16 +53,31 @@
 		35385996C1EB2F4A6EE52977 /* Pods-Dropp3Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dropp3Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dropp3Tests/Pods-Dropp3Tests.release.xcconfig"; sourceTree = "<group>"; };
 		5AF4084300DA07CC38665AE0 /* Pods-Dropp3Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dropp3Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dropp3Tests/Pods-Dropp3Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		5BB90EC521E9D27D00B69E51 /* DroppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppService.swift; sourceTree = "<group>"; };
-		5BB90EC821E9D32B00B69E51 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		5BB90ECA21E9D34500B69E51 /* Dropp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropp.swift; sourceTree = "<group>"; };
+		5BB90EC821E9D32B00B69E51 /* LocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProtocol.swift; sourceTree = "<group>"; };
 		5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppProvider.swift; sourceTree = "<group>"; };
-		5BB90ED021E9DAB800B69E51 /* RealmDropp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDropp.swift; sourceTree = "<group>"; };
-		5BB90ED221E9DB2600B69E51 /* RealmLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmLocation.swift; sourceTree = "<group>"; };
+		5BB90ED021E9DAB800B69E51 /* Dropp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropp.swift; sourceTree = "<group>"; };
+		5BB90ED221E9DB2600B69E51 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		5BB90ED421E9DD3100B69E51 /* RealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
 		63D69FFCD31D9CE4978E3735 /* Pods-Dropp3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dropp3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dropp3/Pods-Dropp3.debug.xcconfig"; sourceTree = "<group>"; };
+		69321E3221F551BD00103A74 /* ContainerConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerConsumer.swift; sourceTree = "<group>"; };
+		69321E3621F5626D00103A74 /* NearbyDropps.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NearbyDropps.storyboard; sourceTree = "<group>"; };
+		69321E3921F5692F00103A74 /* NearbyDroppsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDroppsViewController.swift; sourceTree = "<group>"; };
+		69321E4621F5940F00103A74 /* NearbyDroppTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDroppTableViewCell.swift; sourceTree = "<group>"; };
+		69321E4721F5940F00103A74 /* NearbyDroppTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NearbyDroppTableViewCell.xib; sourceTree = "<group>"; };
+		695AE3BD21FE54A700672D85 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		695AE3C121FEB09F00672D85 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		695AE3C421FEB64200672D85 /* UserView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserView.storyboard; sourceTree = "<group>"; };
+		695AE3C621FEB6C400672D85 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		695AE3C821FEB8CA00672D85 /* UserDroppTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDroppTableViewCell.swift; sourceTree = "<group>"; };
+		695AE3C921FEB8CA00672D85 /* UserDroppTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDroppTableViewCell.xib; sourceTree = "<group>"; };
+		695AE3CC21FFC47600672D85 /* UserInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoTableViewCell.swift; sourceTree = "<group>"; };
+		695AE3CD21FFC47600672D85 /* UserInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserInfoTableViewCell.xib; sourceTree = "<group>"; };
+		695AE3D321FFD1EA00672D85 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		695AE3D521FFE85000672D85 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		695AE3DC22014BA900672D85 /* LocationView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationView.storyboard; sourceTree = "<group>"; };
+		695AE3DE22014D6B00672D85 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		69B2FDB621E9CE120080A7B2 /* Dropp3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dropp3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B2FDB921E9CE120080A7B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		69B2FDBB21E9CE120080A7B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		69B2FDBE21E9CE120080A7B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		69B2FDC021E9CE130080A7B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		69B2FDC321E9CE130080A7B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -94,6 +124,7 @@
 		5BB90EC421E9D24400B69E51 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				695AE3D321FFD1EA00672D85 /* UserService.swift */,
 				5BB90EC521E9D27D00B69E51 /* DroppService.swift */,
 			);
 			path = Service;
@@ -102,9 +133,8 @@
 		5BB90EC721E9D32100B69E51 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5BB90ECF21E9DAA500B69E51 /* Realm */,
-				5BB90EC821E9D32B00B69E51 /* Location.swift */,
-				5BB90ECA21E9D34500B69E51 /* Dropp.swift */,
+				69321E2F21EF8D6300103A74 /* Protocol */,
+				69321E3021EF8D6C00103A74 /* Implementation */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -112,19 +142,123 @@
 		5BB90ECC21E9D92900B69E51 /* Provider */ = {
 			isa = PBXGroup;
 			children = (
-				5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */,
 				5BB90ED421E9DD3100B69E51 /* RealmProvider.swift */,
+				5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
 		};
-		5BB90ECF21E9DAA500B69E51 /* Realm */ = {
+		69321E2F21EF8D6300103A74 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				5BB90ED021E9DAB800B69E51 /* RealmDropp.swift */,
-				5BB90ED221E9DB2600B69E51 /* RealmLocation.swift */,
+				5BB90EC821E9D32B00B69E51 /* LocationProtocol.swift */,
 			);
-			path = Realm;
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		69321E3021EF8D6C00103A74 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				695AE3C121FEB09F00672D85 /* User.swift */,
+				5BB90ED021E9DAB800B69E51 /* Dropp.swift */,
+				5BB90ED221E9DB2600B69E51 /* Location.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		69321E3121F5513F00103A74 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				69B2FDB921E9CE120080A7B2 /* AppDelegate.swift */,
+				69321E3221F551BD00103A74 /* ContainerConsumer.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		69321E3421F5623F00103A74 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				695AE3C321FEB51100672D85 /* User */,
+				69321E3521F5624800103A74 /* Main */,
+				695AE3DB220149FA00672D85 /* Location */,
+				69321E3821F5627300103A74 /* Nearby Dropps */,
+				695AE3D521FFE85000672D85 /* ListViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		69321E3521F5624800103A74 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				69B2FDBD21E9CE120080A7B2 /* Main.storyboard */,
+				695AE3BD21FE54A700672D85 /* MainViewController.swift */,
+				69B2FDC221E9CE130080A7B2 /* LaunchScreen.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		69321E3821F5627300103A74 /* Nearby Dropps */ = {
+			isa = PBXGroup;
+			children = (
+				69321E3621F5626D00103A74 /* NearbyDropps.storyboard */,
+				69321E3921F5692F00103A74 /* NearbyDroppsViewController.swift */,
+				69321E4721F5940F00103A74 /* NearbyDroppTableViewCell.xib */,
+				69321E4621F5940F00103A74 /* NearbyDroppTableViewCell.swift */,
+			);
+			path = "Nearby Dropps";
+			sourceTree = "<group>";
+		};
+		69321E3B21F57D8500103A74 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		695AE3C321FEB51100672D85 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				695AE3D021FFC81200672D85 /* Cells */,
+				695AE3C421FEB64200672D85 /* UserView.storyboard */,
+				695AE3C621FEB6C400672D85 /* UserViewController.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		695AE3D021FFC81200672D85 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				695AE3D121FFD17800672D85 /* Info */,
+				695AE3D221FFD17E00672D85 /* Dropp */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		695AE3D121FFD17800672D85 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				695AE3CD21FFC47600672D85 /* UserInfoTableViewCell.xib */,
+				695AE3CC21FFC47600672D85 /* UserInfoTableViewCell.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		695AE3D221FFD17E00672D85 /* Dropp */ = {
+			isa = PBXGroup;
+			children = (
+				695AE3C921FEB8CA00672D85 /* UserDroppTableViewCell.xib */,
+				695AE3C821FEB8CA00672D85 /* UserDroppTableViewCell.swift */,
+			);
+			path = Dropp;
+			sourceTree = "<group>";
+		};
+		695AE3DB220149FA00672D85 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				695AE3DC22014BA900672D85 /* LocationView.storyboard */,
+				695AE3DE22014D6B00672D85 /* LocationViewController.swift */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 		69B2FDAD21E9CE120080A7B2 = {
@@ -150,14 +284,13 @@
 		69B2FDB821E9CE120080A7B2 /* Dropp3 */ = {
 			isa = PBXGroup;
 			children = (
+				69321E3B21F57D8500103A74 /* Extensions */,
+				69321E3121F5513F00103A74 /* Main */,
+				69321E3421F5623F00103A74 /* Views */,
 				5BB90EC721E9D32100B69E51 /* Models */,
 				5BB90EC421E9D24400B69E51 /* Service */,
 				5BB90ECC21E9D92900B69E51 /* Provider */,
-				69B2FDB921E9CE120080A7B2 /* AppDelegate.swift */,
-				69B2FDBB21E9CE120080A7B2 /* ViewController.swift */,
-				69B2FDBD21E9CE120080A7B2 /* Main.storyboard */,
 				69B2FDC021E9CE130080A7B2 /* Assets.xcassets */,
-				69B2FDC221E9CE130080A7B2 /* LaunchScreen.storyboard */,
 				69B2FDC521E9CE130080A7B2 /* Info.plist */,
 			);
 			path = Dropp3;
@@ -265,9 +398,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				695AE3DD22014BA900672D85 /* LocationView.storyboard in Resources */,
+				695AE3CF21FFC47600672D85 /* UserInfoTableViewCell.xib in Resources */,
+				695AE3C521FEB64200672D85 /* UserView.storyboard in Resources */,
+				695AE3CB21FEB8CA00672D85 /* UserDroppTableViewCell.xib in Resources */,
+				69321E4921F5940F00103A74 /* NearbyDroppTableViewCell.xib in Resources */,
 				69B2FDC421E9CE130080A7B2 /* LaunchScreen.storyboard in Resources */,
 				69B2FDC121E9CE130080A7B2 /* Assets.xcassets in Resources */,
 				69B2FDBF21E9CE120080A7B2 /* Main.storyboard in Resources */,
+				69321E3721F5626D00103A74 /* NearbyDropps.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,15 +501,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BB90ED321E9DB2600B69E51 /* RealmLocation.swift in Sources */,
-				5BB90ED121E9DAB800B69E51 /* RealmDropp.swift in Sources */,
+				695AE3D621FFE85000672D85 /* ListViewController.swift in Sources */,
+				5BB90ED321E9DB2600B69E51 /* Location.swift in Sources */,
+				695AE3C721FEB6C400672D85 /* UserViewController.swift in Sources */,
+				69321E3321F551BD00103A74 /* ContainerConsumer.swift in Sources */,
+				69321E4821F5940F00103A74 /* NearbyDroppTableViewCell.swift in Sources */,
+				695AE3BE21FE54A700672D85 /* MainViewController.swift in Sources */,
+				5BB90ED121E9DAB800B69E51 /* Dropp.swift in Sources */,
 				5BB90ECE21E9D93600B69E51 /* DroppProvider.swift in Sources */,
-				69B2FDBC21E9CE120080A7B2 /* ViewController.swift in Sources */,
-				5BB90ECB21E9D34500B69E51 /* Dropp.swift in Sources */,
+				695AE3C221FEB09F00672D85 /* User.swift in Sources */,
+				69321E3A21F5692F00103A74 /* NearbyDroppsViewController.swift in Sources */,
 				5BB90EC621E9D27D00B69E51 /* DroppService.swift in Sources */,
-				5BB90EC921E9D32B00B69E51 /* Location.swift in Sources */,
+				5BB90EC921E9D32B00B69E51 /* LocationProtocol.swift in Sources */,
 				69B2FDBA21E9CE120080A7B2 /* AppDelegate.swift in Sources */,
+				695AE3D421FFD1EA00672D85 /* UserService.swift in Sources */,
+				695AE3CA21FEB8CA00672D85 /* UserDroppTableViewCell.swift in Sources */,
+				695AE3DF22014D6B00672D85 /* LocationViewController.swift in Sources */,
 				5BB90ED521E9DD3100B69E51 /* RealmProvider.swift in Sources */,
+				695AE3CE21FFC47600672D85 /* UserInfoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

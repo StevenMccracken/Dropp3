@@ -7,16 +7,18 @@
 //
 
 import UIKit
+import Swinject
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-
+  let container = Container()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    RealmProvider().configure()
+    configureDependencies()
+    setupSingleConfigurations()
     return true
   }
 
@@ -41,7 +43,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
-
-
 }
 
+// MARK: - Dependency configuration
+
+extension AppDelegate {
+  private func configureDependencies() {
+    container.register(RealmProvider.self) { _ in RealmProvider() }
+    container.register(DroppService.self) { _ in DroppServiceAccessor() }
+    container.register(DroppProvider.self) { _ in MainDroppProvider() }
+  }
+
+  private func setupSingleConfigurations() {
+    container.resolve(RealmProvider.self)!.configure()
+  }
+}
+
+// MARK: - Current convenience
+
+extension AppDelegate {
+  /// The application's current custom application delegate. Can be called from any thread
+  static var current: AppDelegate {
+    if Thread.isMainThread {
+      return UIApplication.shared.delegate as! AppDelegate
+    }
+
+    var delegate: UIApplicationDelegate!
+    DispatchQueue.main.sync {
+      delegate = UIApplication.shared.delegate
+    }
+
+    return delegate as! AppDelegate
+  }
+}

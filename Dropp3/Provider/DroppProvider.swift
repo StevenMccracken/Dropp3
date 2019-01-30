@@ -9,25 +9,50 @@
 import Foundation
 import RealmSwift
 
+/// Something that provides dropps
 protocol DroppProvider {
-    var droppService: DroppService { get set }
-    func getDropps(around location: Location)
+  /**
+   Gets dropps around a given location
+   - parameter location: the location to search around
+   - parameter completion: closure returning dropp collection changes
+   - returns: token that allows the `completion` parameter to receive calls. You must invalidate this token's strong reference at some point
+   */
+  @discardableResult
+  func getDropps(around location: LocationProtocol, completion: ((RealmCollectionChange<Results<Dropp>>) -> Void)?) -> NotificationToken?
 }
 
-class MainDroppProvider {
-    var droppService: DroppService
-    init(droppService: DroppService) {
-        self.droppService = droppService
-    }
+class MainDroppProvider: ContainerConsumer {
+  var droppService: DroppService!
+  var realmProvider: RealmProvider!
+  init() {
+    resolveDepedencies()
+  }
 }
+
+// MARK: - DroppServiceAccessor
 
 extension MainDroppProvider: DroppProvider {
-    func getDropps(around location: Location) {
-        droppService.getDropps(around: location, success: { dropps in
-            let realmDropps: [RealmDropp] = dropps.map { RealmDropp(dropp: $0) }
-            RealmProvider().add(realmDropps, update: true)
-        }) { error in
-            debugPrint(error)
-        }
+  func getDropps(around location: LocationProtocol, completion: ((RealmCollectionChange<Results<Dropp>>) -> Void)?) -> NotificationToken? {
+    var token: NotificationToken?
+    if let completion = completion {
+      token = realmProvider.observe(resultsForType: Dropp.self, completion: completion)
     }
+
+    droppService.getDropps(around: location, success: { [weak self] dropps in
+      self?.realmProvider.add(dropps, update: true)
+    }) { error in
+      debugPrint(error)
+    }
+
+    return token
+  }
+}
+
+// MARK: - DependencyContaining
+
+extension MainDroppProvider: DependencyContaining {
+  func resolveDepedencies() {
+    droppService = container.resolve(DroppService.self)!
+    realmProvider = container.resolve(RealmProvider.self)!
+  }
 }

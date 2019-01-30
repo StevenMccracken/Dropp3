@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eKj-qc-V9y">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Location-->
+        <scene sceneID="o95-Ce-IF4">
+            <objects>
+                <viewController title="Location" hidesBottomBarWhenPushed="YES" id="eKj-qc-V9y" customClass="LocationViewController" customModule="Dropp3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3T3-uL-Jve">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PZN-Oq-Uhc">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="PZN-Oq-Uhc" secondAttribute="trailing" id="12O-fW-McC"/>
+                            <constraint firstItem="PZN-Oq-Uhc" firstAttribute="leading" secondItem="3T3-uL-Jve" secondAttribute="leading" id="5OT-1c-dco"/>
+                            <constraint firstItem="PZN-Oq-Uhc" firstAttribute="top" secondItem="0XD-CK-Sq1" secondAttribute="top" id="CjG-SY-LWw"/>
+                            <constraint firstAttribute="bottom" secondItem="PZN-Oq-Uhc" secondAttribute="bottom" id="SFS-vM-F29"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0XD-CK-Sq1"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Coordinates" id="2pw-XE-fwV"/>
+                        <barButtonItem systemItem="flexibleSpace" id="yhL-DM-193"/>
+                        <barButtonItem title="Locate" id="6zx-Kc-8xx"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="coordinatesButton" destination="2pw-XE-fwV" id="BSF-bb-i7X"/>
+                        <outlet property="currentLocationButton" destination="6zx-Kc-8xx" id="JIb-WI-nGE"/>
+                        <outlet property="mapView" destination="PZN-Oq-Uhc" id="fr3-TK-KTG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nmn-3O-jJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="89" y="130"/>
+        </scene>
+    </scenes>
+</document>

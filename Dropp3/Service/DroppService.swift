@@ -8,35 +8,42 @@
 
 import Foundation
 
+/// Something that provides services for dropps
 protocol DroppService {
-    func getDropps(around location: Location, success: @escaping ([Dropp]) -> Void, failure: ((Error) -> Void)?)
+  /**
+   Retrieves dropps around a given location
+   - parameter location: the location to search around
+   - parameter success: closure returning list of dropps around the given location
+   - parameter failure: closure returning errors that occurred while searching
+   */
+  func getDropps(around location: LocationProtocol, success: @escaping ([Dropp]) -> Void, failure: ((Error) -> Void)?)
 }
 
-struct DroppServiceAccessor {
-    let shouldSucceed: Bool
-    private struct Constants {
-        static let errorCode = 900
-        static let domain = "com.dropp.droppService"
-    }
+private struct Constants {
+  static let errorCode = 1
+  static let domain = "com.dropp.droppService"
+}
+
+class DroppServiceAccessor: ContainerConsumer {
+  var realmProvider: RealmProvider!
+  init() {
+    realmProvider = container.resolve(RealmProvider.self)
+  }
 }
 
 extension DroppServiceAccessor: DroppService {
-    func getDropps(around location: Location, success: @escaping ([Dropp]) -> Void, failure: ((Error) -> Void)?) {
-        let shouldSucceed = self.shouldSucceed
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(1)) {
-            if shouldSucceed {
-                let dropps: [Dropp] = (0..<10).map { _ in
-                    let location = Location(latitude: Double.random(in: 0..<100), longitude: Double.random(in: 0..<100))
-                    let hasImage: Bool = Int.random(in: 0..<2) == 1
-                    let message = "\(UUID().uuidString) \(UUID().uuidString) \(UUID().uuidString). \(UUID().uuidString).\n\(UUID().uuidString) \(UUID().uuidString)"
-                    return Dropp(username: UUID().uuidString, location: location, hasImage: hasImage, message: message)
-                }
+  func getDropps(around location: LocationProtocol, success: @escaping ([Dropp]) -> Void, failure: ((Error) -> Void)?) {
+    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+      let user = User(username: UUID().uuidString, firstName: UUID().uuidString, lastName: UUID().uuidString)
+      let dropps: [Dropp] = (0..<10).map { _ in
+        let location = Location(latitude: Double.random(in: 0..<100), longitude: Double.random(in: 0..<100))
+        let message = "\(UUID().uuidString) \(UUID().uuidString) \(UUID().uuidString). \(UUID().uuidString).\n\(UUID().uuidString) \(UUID().uuidString)"
+        return Dropp(user: user, location: location, hasImage: Bool.random(), message: message)
+      }
 
-                success(dropps)
-            } else {
-                let error = NSError(domain: Constants.domain, code: Constants.errorCode, userInfo: nil)
-                failure?(error)
-            }
-        }
+      user.dropps.append(objectsIn: dropps)
+      self?.realmProvider.add(user)
+      success(dropps)
     }
+  }
 }
