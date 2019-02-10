@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 
 class Dropp: Object {
-
   @objc dynamic var hidden: Bool = false
   @objc dynamic var message: String = ""
   @objc dynamic var hasImage: Bool = false

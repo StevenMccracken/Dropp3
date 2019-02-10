@@ -43,10 +43,18 @@ struct RealmProvider {
     add([data], update: update)
   }
 
-  func runTransaction(action: () -> Void) {
+  func runTransaction(withoutNotifying tokens: [NotificationToken?] = [], action: () -> Void) {
     guard isRealmAccessible else { return }
     let realm = try! Realm()
     realm.refresh()
+    let validTokens = tokens.compactMap({ $0 })
+    guard validTokens.isEmpty else {
+      realm.beginWrite()
+      action()
+      try? realm.commitWrite(withoutNotifying: validTokens)
+      return
+    }
+
     try? realm.write {
       action()
     }
@@ -110,9 +118,7 @@ extension RealmProvider {
     var configuration = Realm.Configuration()
     configuration.deleteRealmIfMigrationNeeded = true
     Realm.Configuration.defaultConfiguration = configuration
-    guard let location = Realm.Configuration.defaultConfiguration.fileURL?.absoluteString else {
-      fatalError()
-    }
+    guard let location = Realm.Configuration.defaultConfiguration.fileURL?.absoluteString else { fatalError() }
     debugPrint("Realm location: \(location)")
   }
 }

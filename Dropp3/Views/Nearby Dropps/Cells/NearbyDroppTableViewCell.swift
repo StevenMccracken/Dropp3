@@ -57,10 +57,7 @@ extension NearbyDroppTableViewCell {
   func provide(dropp: Dropp) {
     messageLabel.text = dropp.message
     usernameButton.setTitle(dropp.user?.username, for: .normal)
-    guard let location = dropp.location else {
-      fatalError()
-    }
-
+    guard let location = dropp.location else { fatalError() }
     locationLabel.text = "\(location.latitude), \(location.longitude)"
     hidesContent = dropp.hidden
   }

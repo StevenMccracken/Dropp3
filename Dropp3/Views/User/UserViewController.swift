@@ -12,29 +12,31 @@ import RealmSwift
 private struct Constants {
   static let droppCellID = "droppCellID"
   static let profileCellID = "profileCellID"
+  static let friendSegueID = "ViewFriendshipSegue"
   static let minimumRowHeight: CGFloat = 45
 }
 
-class UserViewController: UIViewController, ContainerConsumer {
+class UserViewController: UIViewController, RealmProviderConsumer, CurrentUserConsumer, DroppProviderConsumer {
+
+  struct TableConstants {
+    static let userSection = IndexPath(row: 0, section: 0)
+  }
 
   // MARK: - Data
 
   var user: User!
-  private var token: NotificationToken?
-  private var realmProvider: RealmProvider!
-
-  private var dropps: List<Dropp> {
-    return user.dropps
-  }
+  private(set) var userToken: NotificationToken?
+  private(set) var droppsToken: NotificationToken?
 
   // MARK: - Views
 
-  @IBOutlet private weak var tableView: UITableView!
+  @IBOutlet weak var tableView: UITableView!
 
   // MARK: - Init
 
   deinit {
-    token?.invalidate()
+    userToken?.invalidate()
+    droppsToken?.invalidate()
   }
 }
 
@@ -43,20 +45,49 @@ class UserViewController: UIViewController, ContainerConsumer {
 extension UserViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    resolveDepedencies()
     configureViews()
+    userToken = user.observe { [weak self] objectChange in
+      switch objectChange {
+      case .deleted:
+        if self?.user == self?.currentUser { return }
+        self?.navigationController?.popViewController(animated: true)
+      case .change(_):
+        self?.tableView.reloadRows(at: [TableConstants.userSection], with: .automatic)
+      case .error(let error):
+        fatalError(error.localizedDescription)
+      }
+    }
+
+    droppsToken = user.dropps.observe { [weak self] collectionChange in
+      switch collectionChange {
+      case .initial(_):
+        self?.tableView.reloadData()
+      case .update(_, let deletions, let insertions, let modifications):
+        self?.tableView.update(section: 1, deletions: deletions, insertions: insertions, modifications: modifications)
+      case .error(let error):
+        fatalError(error.localizedDescription)
+      }
+    }
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    super.prepare(for: segue, sender: sender)
+    if segue.identifier == Constants.friendSegueID {
+      guard let friendshipViewController = segue.destination as? FriendshipViewController else { fatalError() }
+      friendshipViewController.status = .unconnected
+    }
   }
 }
 
 // MARK: - View configuration
 
 extension UserViewController {
-  private func configureViews() {
+  @objc func configureViews() {
     configureTableView()
     navigationItem.title = user.username
   }
 
-  private func configureTableView() {
+  @objc func configureTableView() {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.separatorInset = .zero
@@ -79,7 +110,7 @@ extension UserViewController: UITableViewDataSource {
     case 0:
       return 1
     case 1:
-      return dropps.count
+      return user.dropps.count
     default:
       fatalError()
     }
@@ -89,28 +120,26 @@ extension UserViewController: UITableViewDataSource {
     let cell: UITableViewCell
     switch indexPath.section {
     case 0:
-      guard let infoCell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellID, for: indexPath) as? UserInfoTableViewCell else {
-        fatalError()
-      }
-
+      guard let infoCell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellID, for: indexPath) as? UserInfoTableViewCell else { fatalError() }
       infoCell.delegate = self
       infoCell.provide(user: user)
       infoCell.selectionStyle = .none
       cell = infoCell
     case 1:
-      guard let droppCell = tableView.dequeueReusableCell(withIdentifier: Constants.droppCellID, for: indexPath) as? UserDroppTableViewCell else {
-        fatalError()
-      }
-
+      guard let droppCell = tableView.dequeueReusableCell(withIdentifier: Constants.droppCellID, for: indexPath) as? UserDroppTableViewCell else { fatalError() }
       droppCell.delegate = self
       droppCell.selectionStyle = .default
-      droppCell.provide(dropp: dropps[indexPath.row])
+      droppCell.provide(dropp: user.dropps[indexPath.row])
       cell = droppCell
     default:
       fatalError()
     }
 
     return cell
+  }
+
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return false
   }
 }
 
@@ -126,22 +155,19 @@ extension UserViewController: UITableViewDelegate {
 
 extension UserViewController: UserDroppCellDelegate {
   func userDroppTableViewCell(shouldShowLocationFromCell userDroppTableViewCell: UserDroppTableViewCell) {
-    guard let locationViewController = UIStoryboard(name: "LocationView", bundle: .main).instantiateInitialViewController() as? LocationViewController,
-      let indexPath = tableView.indexPath(for: userDroppTableViewCell) else {
-        fatalError()
-    }
-
-    locationViewController.location = dropps[indexPath.row].location
+    guard let indexPath = tableView.indexPath(for: userDroppTableViewCell) else { fatalError() }
+    let locationViewController: LocationViewController = .controller()
+    locationViewController.location = user.dropps[indexPath.row].location
+    locationViewController.navigationItem.backBarButtonItem?.title = nil
     navigationController?.pushViewController(locationViewController, animated: true)
   }
-
 }
 
 // MARK: - UserInfoCellDelegate
 
 extension UserViewController: UserInfoCellDelegate {
   func userInfoTableViewCell(shouldShowDroppsFromCell userInfoTableViewCell: UserInfoTableViewCell) {
-    if dropps.isEmpty {
+    if user.dropps.isEmpty {
       return
     }
 
@@ -154,14 +180,5 @@ extension UserViewController: UserInfoCellDelegate {
 
   func userInfoTableViewCell(shouldShowFollowingFromCell userInfoTableViewCell: UserInfoTableViewCell) {
     debugPrint("Show following")
-  }
-
-}
-
-// MARK: - DependencyContaining
-
-extension UserViewController: DependencyContaining {
-  func resolveDepedencies() {
-    realmProvider = container.resolve(RealmProvider.self)
   }
 }

@@ -13,12 +13,21 @@ import Swinject
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-  let container = Container()
+  let container = Container() { container in
+    container.register(RealmProvider.self) { _ in RealmProvider() }
+    container.register(CurrentUser.self) { resolver in
+      let currentUsers = resolver.resolve(RealmProvider.self)?.objects(CurrentUser.self)
+      return currentUsers?.first ?? .noUser
+    }
+
+    container.register(DroppProvider.self) { _ in MainDroppProvider() }
+    container.register(DroppService.self) { _ in DroppServiceAccessor() }
+    container.register(NearbyDroppsViewModelProtocol.self) { _ in NearbyDroppsViewModel() }
+  }
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    configureDependencies()
-    setupSingleConfigurations()
+    applyConfigurations()
     return true
   }
 
@@ -45,16 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 }
 
-// MARK: - Dependency configuration
+// MARK: - One time configurations
 
 extension AppDelegate {
-  private func configureDependencies() {
-    container.register(RealmProvider.self) { _ in RealmProvider() }
-    container.register(DroppService.self) { _ in DroppServiceAccessor() }
-    container.register(DroppProvider.self) { _ in MainDroppProvider() }
-  }
-
-  private func setupSingleConfigurations() {
+  private func applyConfigurations() {
     container.resolve(RealmProvider.self)!.configure()
   }
 }

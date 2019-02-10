@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 /// Something that provides dropps
-protocol DroppProvider {
+protocol DroppProvider: RealmProviderConsumer, DroppServiceConsumer {
   /**
    Gets dropps around a given location
    - parameter location: the location to search around
@@ -19,19 +19,24 @@ protocol DroppProvider {
    */
   @discardableResult
   func getDropps(around location: LocationProtocol, completion: ((RealmCollectionChange<Results<Dropp>>) -> Void)?) -> NotificationToken?
+
+  func addDroppForCurrentUser()
 }
 
-class MainDroppProvider: ContainerConsumer {
-  var droppService: DroppService!
-  var realmProvider: RealmProvider!
-  init() {
-    resolveDepedencies()
-  }
+class MainDroppProvider: CurrentUserConsumer {
 }
 
 // MARK: - DroppServiceAccessor
 
 extension MainDroppProvider: DroppProvider {
+  func addDroppForCurrentUser() {
+    guard let currentUser = self.currentUser else { fatalError() }
+    let dropp = Dropp(user: currentUser, location: Location(latitude: 1, longitude: 1), hasImage: false, message: UUID().uuidString)
+    realmProvider.runTransaction {
+      currentUser.dropps.append(dropp)
+    }
+  }
+
   func getDropps(around location: LocationProtocol, completion: ((RealmCollectionChange<Results<Dropp>>) -> Void)?) -> NotificationToken? {
     var token: NotificationToken?
     if let completion = completion {
@@ -45,14 +50,5 @@ extension MainDroppProvider: DroppProvider {
     }
 
     return token
-  }
-}
-
-// MARK: - DependencyContaining
-
-extension MainDroppProvider: DependencyContaining {
-  func resolveDepedencies() {
-    droppService = container.resolve(DroppService.self)!
-    realmProvider = container.resolve(RealmProvider.self)!
   }
 }

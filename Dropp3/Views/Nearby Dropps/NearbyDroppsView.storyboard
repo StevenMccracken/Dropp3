@@ -50,8 +50,8 @@
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
-                                <include reference="62v-ie-3vH"/>
                                 <exclude reference="QmJ-pj-bWh"/>
+                                <include reference="62v-ie-3vH"/>
                             </mask>
                         </variation>
                     </view>

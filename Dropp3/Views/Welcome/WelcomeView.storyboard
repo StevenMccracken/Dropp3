@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rje-qg-Ld0">
+    <device id="retina6_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+    </dependencies>
+    <scenes>
+        <!--Welcome-->
+        <scene sceneID="jbT-g7-b45">
+            <objects>
+                <pageViewController storyboardIdentifier="WelcomeView" autoresizesArchivedViewToFullSize="NO" title="Welcome" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="rje-qg-Ld0" customClass="WelcomeViewController" customModule="Dropp3" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Welcome" id="D9V-ia-2cf"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aGp-aN-l08" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1217" y="145"/>
+        </scene>
+    </scenes>
+</document>

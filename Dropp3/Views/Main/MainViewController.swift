@@ -7,6 +7,87 @@
 //
 
 import UIKit
+import RealmSwift
 
-class MainViewController: UITabBarController {
+class MainViewController: UINavigationController, RealmProviderConsumer, CurrentUserConsumer {
+  private struct Constants {
+    static let welcomeViewID = "WelcomeView"
+  }
+
+  private var token: NotificationToken?
+  private var shouldShowWelcomeView = false {
+    didSet {
+      if shouldShowWelcomeView {
+        showWelcomeView()
+      } else {
+        showNearbyView()
+      }
+    }
+  }
+
+  deinit {
+    token?.invalidate()
+  }
+}
+
+// MARK: - View lifecycle
+
+extension MainViewController {
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    token = realmProvider.observe(resultsForType: CurrentUser.self) { [weak self] collectionChange in
+      switch collectionChange {
+      case .initial(_):
+        self?.shouldShowWelcomeView = self?.currentUser == nil
+      case .update(_, let deletions, let insertions, _):
+        if !insertions.isEmpty {
+          // new current user registered
+          self?.shouldShowWelcomeView = false
+          self?.dismiss(animated: true, completion: nil)
+        } else if !deletions.isEmpty {
+          // current user de-registered
+          self?.shouldShowWelcomeView = true
+        } else {
+          debugPrint("Current user was updated")
+        }
+      case .error(let error):
+        fatalError(error.localizedDescription)
+      }
+    }
+  }
+}
+
+// MARK: - View configuration
+
+private extension MainViewController {
+  func showWelcomeView() {
+    let welcomeViewController: WelcomeViewController = .controller()
+    let navigationController = UINavigationController(rootViewController: welcomeViewController)
+    children.first?.present(navigationController, animated: true) { [weak self] in
+      self?.popToRootViewController(animated: true)
+    }
+  }
+
+  func showNearbyView() {
+    let nearbyDroppsViewController: NearbyDroppsViewController = .controller()
+    let navigationItem = nearbyDroppsViewController.navigationItem
+    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(profileAction(_:)))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postAction(_:)))
+    setViewControllers([nearbyDroppsViewController], animated: true)
+  }
+}
+
+// MARK: - Actions
+
+private extension MainViewController {
+  @objc private func profileAction(_ sender: UIBarButtonItem) {
+    let profileViewController: CurrentUserViewController = .controller()
+    profileViewController.user = currentUser
+    pushViewController(profileViewController, animated: true)
+  }
+
+  @objc private func postAction(_ sender: UIBarButtonItem) {
+    let postViewController = UIViewController()
+    pushViewController(postViewController, animated: true)
+  }
 }

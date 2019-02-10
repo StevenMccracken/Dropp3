@@ -12,7 +12,7 @@
         <!--Location-->
         <scene sceneID="o95-Ce-IF4">
             <objects>
-                <viewController title="Location" hidesBottomBarWhenPushed="YES" id="eKj-qc-V9y" customClass="LocationViewController" customModule="Dropp3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Location" id="eKj-qc-V9y" customClass="LocationViewController" customModule="Dropp3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3T3-uL-Jve">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,9 +31,9 @@
                         <viewLayoutGuide key="safeArea" id="0XD-CK-Sq1"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Coordinates" id="2pw-XE-fwV"/>
-                        <barButtonItem systemItem="flexibleSpace" id="yhL-DM-193"/>
                         <barButtonItem title="Locate" id="6zx-Kc-8xx"/>
+                        <barButtonItem systemItem="flexibleSpace" id="yhL-DM-193"/>
+                        <barButtonItem title="Coordinates" id="2pw-XE-fwV"/>
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

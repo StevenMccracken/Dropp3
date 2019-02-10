@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CsW-hX-Ken">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -31,6 +31,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LcT-YE-h3m"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem systemItem="flexibleSpace" id="3Mo-01-DuQ"/>
+                        <barButtonItem title="Friendship" id="zpE-oO-DKc">
+                            <connections>
+                                <segue destination="49L-ve-KWP" kind="show" identifier="ViewFriendshipSegue" id="h4B-fp-Tk7"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="Le5-v9-djk"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="CsW-hX-Ken" id="Tdx-et-yT4"/>
                     </connections>
@@ -38,6 +48,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHi-0n-hzz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="97" y="134"/>
+        </scene>
+        <!--FriendshipView-->
+        <scene sceneID="CRT-8Z-CY0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FriendshipView" id="49L-ve-KWP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wNr-8O-dFx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="895" y="133"/>
         </scene>
     </scenes>
 </document>

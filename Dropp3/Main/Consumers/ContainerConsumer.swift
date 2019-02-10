@@ -22,7 +22,3 @@ extension ContainerConsumer {
     return AppDelegate.current.container
   }
 }
-
-protocol DependencyContaining {
-  func resolveDepedencies()
-}

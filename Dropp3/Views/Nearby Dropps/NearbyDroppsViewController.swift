@@ -15,21 +15,14 @@ private struct Constants {
   static let showUserSegue = "showUserSegue"
   static let tableViewFadeAlphaDuration = 0.5
   static let tableViewFadeHiddenDuration = 0.15
-  static func hiddenTitle(for dropp: Dropp) -> String {
-    return dropp.hidden ? "Unhide" : "Hide"
-  }
 }
 
 class NearbyDroppsViewController: UIViewController, ContainerConsumer {
-
-  // MARK: - Data
-
-  private var token: NotificationToken?
-  private var droppProvider: DroppProvider!
-  private var realmProvider: RealmProvider!
-  private var dropps: Results<Dropp> {
-    return realmProvider.objects(Dropp.self)!
-  }
+  private lazy var viewModel: NearbyDroppsViewModelProtocol = {
+    var viewModel = container.resolve(NearbyDroppsViewModelProtocol.self)!
+    viewModel.delegate = self
+    return viewModel
+  }()
 
   private var showsListView: Bool {
     get {
@@ -78,12 +71,6 @@ class NearbyDroppsViewController: UIViewController, ContainerConsumer {
     gestureRecognizer.delegate = self
     return gestureRecognizer
   }()
-
-  // MARK: - Init
-
-  deinit {
-    token?.invalidate()
-  }
 }
 
 // MARK: - View lifecycle
@@ -91,27 +78,8 @@ class NearbyDroppsViewController: UIViewController, ContainerConsumer {
 extension NearbyDroppsViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    resolveDepedencies()
     configureViews()
-    performInitialFetch()
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(action))
-  }
-
-  @objc private func action() {
-    let dropps = self.dropps
-    let listViewController = ListViewController(numberOfItems: dropps.count, initialSelectedIndexes: nil, itemForIndex: {
-      let dropp = dropps[$0]
-      return (dropp.identifier, dropp.user?.fullName)
-    }, didSelectItemsAtIndexes: { index in
-      print(index)
-    })
-
-    listViewController.present(from: self, barButtonItem: navigationItem.rightBarButtonItem, animated: true, completion: nil)
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setToolbarHidden(true, animated: false)
+    viewModel.viewDidLoad()
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -119,12 +87,9 @@ extension NearbyDroppsViewController {
     if segue.identifier == Constants.showUserSegue {
       guard let destination = segue.destination as? UserViewController,
         let cell = sender as? NearbyDroppTableViewCell,
-        let indexPath = tableView.indexPath(for: cell) else {
-          fatalError()
-      }
+        let indexPath = tableView.indexPath(for: cell) else { fatalError() }
 
-      destination.user = dropps[indexPath.row].user!
-      navigationController?.setToolbarHidden(true, animated: true)
+      destination.user = viewModel.dropps[indexPath.row].user!
     }
   }
 }
@@ -156,16 +121,13 @@ extension NearbyDroppsViewController {
 
 extension NearbyDroppsViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return dropps.count
+    return viewModel.dropps.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID, for: indexPath) as? NearbyDroppTableViewCell else {
-      fatalError()
-    }
-
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID, for: indexPath) as? NearbyDroppTableViewCell else { fatalError() }
     cell.delegate = self
-    cell.provide(dropp: dropps[indexPath.row])
+    cell.provide(dropp: viewModel.dropps[indexPath.row])
     return cell
   }
 
@@ -174,13 +136,12 @@ extension NearbyDroppsViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-    let dropp = dropps[indexPath.row]
-    let hideAction = UITableViewRowAction(style: .normal, title: Constants.hiddenTitle(for: dropp)) { [weak self] (_, indexPath) in
-      self?.realmProvider.runTransaction {
-        dropp.hidden.toggle()
-      }
+    let title = viewModel.title(forEditActionAtRow: indexPath.row)
+    let hideAction = UITableViewRowAction(style: .normal, title: title) { [weak self] (_, indexPath) in
+      self?.viewModel.shouldPerformEditAction(atRow: indexPath.row)
     }
 
+    hideAction.backgroundColor = .buttonBackground
     return [hideAction]
   }
 }
@@ -206,7 +167,7 @@ extension NearbyDroppsViewController {
   }
 
   @IBAction private func refreshAction(_ sender: UIBarButtonItem) {
-    droppProvider.getDropps(around: Location(latitude: 0, longitude: 0), completion: nil)
+    viewModel.shouldRefreshData()
   }
 
   @IBAction private func locateAction(_ sender: UIBarButtonItem) {
@@ -228,48 +189,20 @@ extension NearbyDroppsViewController: UIGestureRecognizerDelegate {
   }
 }
 
-// MARK: - Data fetching
-
-extension NearbyDroppsViewController {
-  private func performInitialFetch() {
-    token = droppProvider.getDropps(around: Location(latitude: 0, longitude: 0)) { [weak self] collectionChange in
-      guard let `self` = self, let tableView = self.tableView else { return }
-      switch collectionChange {
-      case .initial(_):
-        tableView.reloadData()
-      case .update(_, let deletions, let insertions, let modifications):
-        tableView.performBatchUpdates({
-          [(tableView.insertRows, insertions),
-           (tableView.deleteRows, deletions),
-           (tableView.reloadRows, modifications)].forEach(self.perform)
-        }, completion: nil)
-      case .error(let error):
-        // An error occurred while opening the Realm file on the background worker thread
-        fatalError("\(error)")
-      }
-    }
-  }
-
-  private func perform(update: ([IndexPath], UITableView.RowAnimation) -> Void, forIndexes indexes: [Int]) {
-    if indexes.isEmpty { return }
-    let indexPaths = indexes.map { IndexPath(row: $0, section: 0) }
-    update(indexPaths, .automatic)
-  }
-}
-
-// MARK: - DependencyContaining
-
-extension NearbyDroppsViewController: DependencyContaining {
-  func resolveDepedencies() {
-    droppProvider = container.resolve(DroppProvider.self)
-    realmProvider = container.resolve(RealmProvider.self)
-  }
-}
-
 // MARK: - NearbyDroppCellDelegate
 
 extension NearbyDroppsViewController: NearbyDroppCellDelegate {
   func nearbyDroppTableViewCell(shouldShowUserFromCell nearbyDroppTableViewCell: NearbyDroppTableViewCell) {
     performSegue(withIdentifier: Constants.showUserSegue, sender: nearbyDroppTableViewCell)
+  }
+}
+
+extension NearbyDroppsViewController: NearbyDroppsViewModelDelegate {
+  func reloadData() {
+    tableView.reloadData()
+  }
+
+  func updateData(deletions: [Int], insertions: [Int], modifications: [Int]) {
+    tableView.update(deletions: deletions, insertions: insertions, modifications: modifications)
   }
 }

@@ -31,6 +31,11 @@ extension UserDroppTableViewCell {
     messageLabel.text = nil
     locationButton.setTitle(nil, for: .normal)
   }
+
+  override func setEditing(_ editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: animated)
+    locationButton.isEnabled = !editing
+  }
 }
 
 // MARK: - Data providing
@@ -38,10 +43,7 @@ extension UserDroppTableViewCell {
 extension UserDroppTableViewCell {
   func provide(dropp: Dropp) {
     messageLabel.text = dropp.message
-    guard let location = dropp.location else {
-      fatalError()
-    }
-
+    guard let location = dropp.location else { fatalError() }
     locationButton.setTitle("\(location.latitude), \(location.longitude)", for: .normal)
   }
 }

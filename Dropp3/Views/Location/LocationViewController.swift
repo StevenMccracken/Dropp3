@@ -45,24 +45,13 @@ extension LocationViewController {
     super.viewDidLoad()
     configureViews()
   }
-
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    navigationController?.setToolbarHidden(true, animated: true)
-  }
 }
 
 // MARK: - View configuration
 
 private extension LocationViewController {
   func configureViews() {
-    configureNavigation()
     configureMapView()
-  }
-
-  func configureNavigation() {
-    navigationItem.backBarButtonItem?.title = nil
-    navigationController?.setToolbarHidden(false, animated: false)
   }
 
   func configureMapView() {

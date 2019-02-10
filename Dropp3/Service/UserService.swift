@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+protocol UserService {
+  func logIn(username: String, password: String, success: (() -> Void)?, failure: @escaping (Error) -> Void)
+  func signUp(username: String, password: String, firstName: String, lastName: String, success: (() -> Void)?, failure: @escaping (Error) -> Void)
+}
+
+class UserServiceAccessor {
+  
+}
