@@ -69,6 +69,7 @@ extension SignUpViewController {
     let user = CurrentUser(username: username, firstName: firstName, lastName: lastName)
     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
       self?.realmProvider.add(user)
+      self?.realmProvider.add(user as User)
     }
   }
 

@@ -22,6 +22,7 @@ protocol NearbyDroppsViewModelProtocol: RealmProviderConsumer, DroppProviderCons
   func shouldRefreshData()
   func shouldPerformEditAction(atRow row: Int)
   func title(forEditActionAtRow row: Int) -> String
+  func user(forRow row: Int) -> User
 }
 
 class NearbyDroppsViewModel {
@@ -32,6 +33,8 @@ class NearbyDroppsViewModel {
     token?.invalidate()
   }
 }
+
+// MARK: - NearbyDroppsViewModelProtocol
 
 extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
   var dropps: Results<Dropp> {
@@ -44,6 +47,11 @@ extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
 
   func title(forEditActionAtRow row: Int) -> String {
     return dropps[row].hidden ? "Unhide" : "Hide"
+  }
+
+  func user(forRow row: Int) -> User {
+    let userID: String! = dropps[row].userID
+    return realmProvider.object(User.self, key: userID)!
   }
 
   func shouldPerformEditAction(atRow row: Int) {

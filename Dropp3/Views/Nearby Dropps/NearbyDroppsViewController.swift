@@ -88,8 +88,8 @@ extension NearbyDroppsViewController {
       guard let destination = segue.destination as? UserViewController,
         let cell = sender as? NearbyDroppTableViewCell,
         let indexPath = tableView.indexPath(for: cell) else { fatalError() }
-
-      destination.user = viewModel.dropps[indexPath.row].user!
+      let userViewModel = UserViewModel(user: viewModel.user(forRow: indexPath.row))
+      destination.viewModel = userViewModel
     }
   }
 }

@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class MainViewController: UINavigationController, RealmProviderConsumer, CurrentUserConsumer {
+class MainViewController: UINavigationController, RealmProviderConsumer, CurrentUserConsumer, DroppProviderConsumer {
   private struct Constants {
     static let welcomeViewID = "WelcomeView"
   }
@@ -82,12 +82,11 @@ private extension MainViewController {
 private extension MainViewController {
   @objc private func profileAction(_ sender: UIBarButtonItem) {
     let profileViewController: CurrentUserViewController = .controller()
-    profileViewController.user = currentUser
+    profileViewController.currentUserViewModel = CurrentUserViewModel(user: currentUser!)
     pushViewController(profileViewController, animated: true)
   }
 
   @objc private func postAction(_ sender: UIBarButtonItem) {
-    let postViewController = UIViewController()
-    pushViewController(postViewController, animated: true)
+    droppProvider.addDroppForCurrentUser()
   }
 }

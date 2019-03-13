@@ -47,6 +47,8 @@ extension LogInViewController {
     let user = CurrentUser(username: username, firstName: UUID().uuidString, lastName: UUID().uuidString)
     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
       self?.realmProvider.add(user)
+      let normalUser = user.copy() as! User
+      self?.realmProvider.add(normalUser)
     }
   }
 

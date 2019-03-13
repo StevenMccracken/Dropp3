@@ -31,7 +31,8 @@ class MainDroppProvider: CurrentUserConsumer {
 extension MainDroppProvider: DroppProvider {
   func addDroppForCurrentUser() {
     guard let currentUser = self.currentUser else { fatalError() }
-    let dropp = Dropp(user: currentUser, location: Location(latitude: 1, longitude: 1), hasImage: false, message: UUID().uuidString)
+    let dropp = Dropp(userID: currentUser.identifier, location: Location(latitude: 1, longitude: 1), hasImage: false, message: UUID().uuidString)
+    realmProvider.add(dropp)
     realmProvider.runTransaction {
       currentUser.dropps.append(dropp)
     }

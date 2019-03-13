@@ -38,3 +38,21 @@ class User: Object {
     return "identifier"
   }
 }
+
+// MARK: - NSCopying
+
+extension User: NSCopying {
+  func copy(with zone: NSZone? = nil) -> Any {
+    let user = User(username: username, firstName: firstName, lastName: lastName)
+    user.identifier = identifier
+    return user
+  }
+}
+
+// MARK: - Equatable
+
+extension User {
+  static func == (lhs: User, rhs: User) -> Bool {
+    return lhs.identifier == rhs.identifier
+  }
+}

@@ -26,6 +26,8 @@
 		69321E3A21F5692F00103A74 /* NearbyDroppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69321E3921F5692F00103A74 /* NearbyDroppsViewController.swift */; };
 		69321E4821F5940F00103A74 /* NearbyDroppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69321E4621F5940F00103A74 /* NearbyDroppTableViewCell.swift */; };
 		69321E4921F5940F00103A74 /* NearbyDroppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69321E4721F5940F00103A74 /* NearbyDroppTableViewCell.xib */; };
+		694120452213D26E00839F4C /* UserViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694120442213D26E00839F4C /* UserViewProtocols.swift */; };
+		694120482213D31B00839F4C /* CurrentUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694120472213D31B00839F4C /* CurrentUserViewModel.swift */; };
 		695AE3BE21FE54A700672D85 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3BD21FE54A700672D85 /* MainViewController.swift */; };
 		695AE3C221FEB09F00672D85 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3C121FEB09F00672D85 /* User.swift */; };
 		695AE3C521FEB64200672D85 /* UserView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695AE3C421FEB64200672D85 /* UserView.storyboard */; };
@@ -38,6 +40,7 @@
 		695AE3D621FFE85000672D85 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3D521FFE85000672D85 /* ListViewController.swift */; };
 		695AE3DD22014BA900672D85 /* LocationView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695AE3DC22014BA900672D85 /* LocationView.storyboard */; };
 		695AE3DF22014D6B00672D85 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3DE22014D6B00672D85 /* LocationViewController.swift */; };
+		696FF97822125EDE00FA5D82 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696FF97722125EDE00FA5D82 /* UserViewModel.swift */; };
 		6976265C220FEE0100990882 /* UITableView+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976265B220FEE0100990882 /* UITableView+Data.swift */; };
 		6976265E220FF53A00990882 /* UIBarButtonItem+Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976265D220FF53A00990882 /* UIBarButtonItem+Items.swift */; };
 		69A46AE0220C01CF001EA7F9 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46ADF220C01CF001EA7F9 /* CurrentUser.swift */; };
@@ -93,6 +96,8 @@
 		69321E3921F5692F00103A74 /* NearbyDroppsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDroppsViewController.swift; sourceTree = "<group>"; };
 		69321E4621F5940F00103A74 /* NearbyDroppTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDroppTableViewCell.swift; sourceTree = "<group>"; };
 		69321E4721F5940F00103A74 /* NearbyDroppTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NearbyDroppTableViewCell.xib; sourceTree = "<group>"; };
+		694120442213D26E00839F4C /* UserViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewProtocols.swift; sourceTree = "<group>"; };
+		694120472213D31B00839F4C /* CurrentUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserViewModel.swift; sourceTree = "<group>"; };
 		695AE3BD21FE54A700672D85 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		695AE3C121FEB09F00672D85 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		695AE3C421FEB64200672D85 /* UserView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserView.storyboard; sourceTree = "<group>"; };
@@ -105,6 +110,7 @@
 		695AE3D521FFE85000672D85 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		695AE3DC22014BA900672D85 /* LocationView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationView.storyboard; sourceTree = "<group>"; };
 		695AE3DE22014D6B00672D85 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		696FF97722125EDE00FA5D82 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		6976265B220FEE0100990882 /* UITableView+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Data.swift"; sourceTree = "<group>"; };
 		6976265D220FF53A00990882 /* UIBarButtonItem+Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Items.swift"; sourceTree = "<group>"; };
 		69A46ADF220C01CF001EA7F9 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
@@ -278,12 +284,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		694120462213D2EC00839F4C /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				696FF97722125EDE00FA5D82 /* UserViewModel.swift */,
+				694120442213D26E00839F4C /* UserViewProtocols.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 		695AE3C321FEB51100672D85 /* User */ = {
 			isa = PBXGroup;
 			children = (
 				695AE3D021FFC81200672D85 /* Cells */,
 				69FAD4F1220685F100789AFD /* Friendship */,
 				6976265F220FFBF500990882 /* Current User */,
+				694120462213D2EC00839F4C /* View Model */,
 				695AE3C421FEB64200672D85 /* UserView.storyboard */,
 				695AE3C621FEB6C400672D85 /* UserViewController.swift */,
 			);
@@ -331,6 +347,7 @@
 			children = (
 				69A46AF4220F9F4C001EA7F9 /* CurrentUserView.storyboard */,
 				69A46AF2220F9F37001EA7F9 /* CurrentUserViewController.swift */,
+				694120472213D31B00839F4C /* CurrentUserViewModel.swift */,
 			);
 			path = "Current User";
 			sourceTree = "<group>";
@@ -639,6 +656,7 @@
 				69A46AEF220F8CF6001EA7F9 /* AppearanceManager.swift in Sources */,
 				69A46AE7220D62E3001EA7F9 /* DroppServiceConsumer.swift in Sources */,
 				69FAD4F52206889A00789AFD /* FriendshipViewController.swift in Sources */,
+				694120482213D31B00839F4C /* CurrentUserViewModel.swift in Sources */,
 				695AE3D621FFE85000672D85 /* ListViewController.swift in Sources */,
 				5BB90ED321E9DB2600B69E51 /* Location.swift in Sources */,
 				69B9D18622035E38004CAF6F /* NearbyDroppsViewModel.swift in Sources */,
@@ -654,6 +672,7 @@
 				5BB90ECE21E9D93600B69E51 /* DroppProvider.swift in Sources */,
 				695AE3C221FEB09F00672D85 /* User.swift in Sources */,
 				69A46AE0220C01CF001EA7F9 /* CurrentUser.swift in Sources */,
+				694120452213D26E00839F4C /* UserViewProtocols.swift in Sources */,
 				69A46AF3220F9F37001EA7F9 /* CurrentUserViewController.swift in Sources */,
 				69321E3A21F5692F00103A74 /* NearbyDroppsViewController.swift in Sources */,
 				5BB90EC621E9D27D00B69E51 /* DroppService.swift in Sources */,
@@ -661,6 +680,7 @@
 				69FAD4F02206806C00789AFD /* UIViewController+StoryboardInit.swift in Sources */,
 				69B2FDBA21E9CE120080A7B2 /* AppDelegate.swift in Sources */,
 				69A46AE2220D58C4001EA7F9 /* RealmProviderConsumer.swift in Sources */,
+				696FF97822125EDE00FA5D82 /* UserViewModel.swift in Sources */,
 				695AE3D421FFD1EA00672D85 /* UserService.swift in Sources */,
 				6976265C220FEE0100990882 /* UITableView+Data.swift in Sources */,
 				6911727A220701240042212D /* CurrentUserConsumer.swift in Sources */,

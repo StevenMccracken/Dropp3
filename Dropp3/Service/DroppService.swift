@@ -34,15 +34,20 @@ class DroppServiceAccessor: ContainerConsumer {
 extension DroppServiceAccessor: DroppService {
   func getDropps(around location: LocationProtocol, success: @escaping ([Dropp]) -> Void, failure: ((Error) -> Void)?) {
     DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+      guard let `self` = self else { return }
       let user = User(username: UUID().uuidString, firstName: UUID().uuidString, lastName: UUID().uuidString)
       let dropps: [Dropp] = (0..<10).map { _ in
         let location = Location(latitude: Double.random(in: 0..<100), longitude: Double.random(in: 0..<100))
         let message = "\(UUID().uuidString) \(UUID().uuidString) \(UUID().uuidString). \(UUID().uuidString).\n\(UUID().uuidString) \(UUID().uuidString)"
-        return Dropp(user: user, location: location, hasImage: Bool.random(), message: message)
+        return Dropp(userID: user.identifier, location: location, hasImage: Bool.random(), message: message)
       }
 
-      user.dropps.append(objectsIn: dropps)
-      self?.realmProvider.add(user)
+      self.realmProvider.add(user)
+      self.realmProvider.add(dropps)
+      self.realmProvider.runTransaction {
+        user.dropps.append(objectsIn: dropps)
+      }
+
       success(dropps)
     }
   }

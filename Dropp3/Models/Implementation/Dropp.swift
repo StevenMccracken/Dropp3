@@ -14,14 +14,14 @@ class Dropp: Object {
   @objc dynamic var message: String = ""
   @objc dynamic var hasImage: Bool = false
   @objc dynamic var identifier: String = ""
-  @objc dynamic var user: User?
+  @objc dynamic var userID: String?
   @objc dynamic var location: Location?
   
   // MARK: - Init
 
-  convenience init(user: User, location: Location, hasImage: Bool, message: String) {
+  convenience init(userID: String, location: Location, hasImage: Bool, message: String) {
     self.init()
-    self.user = user
+    self.userID = userID
     self.message = message
     self.hasImage = hasImage
     self.location = location

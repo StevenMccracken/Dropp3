@@ -16,7 +16,7 @@ protocol NearbyDroppCellDelegate: AnyObject {
   func nearbyDroppTableViewCell(shouldShowUserFromCell nearbyDroppTableViewCell: NearbyDroppTableViewCell)
 }
 
-class NearbyDroppTableViewCell: UITableViewCell {
+class NearbyDroppTableViewCell: UITableViewCell, RealmProviderConsumer {
   static let nib = UINib(nibName: "NearbyDroppTableViewCell", bundle: .main)
 
   weak var delegate: NearbyDroppCellDelegate?
@@ -56,7 +56,8 @@ class NearbyDroppTableViewCell: UITableViewCell {
 extension NearbyDroppTableViewCell {
   func provide(dropp: Dropp) {
     messageLabel.text = dropp.message
-    usernameButton.setTitle(dropp.user?.username, for: .normal)
+    let user = realmProvider.object(User.self, key: dropp.userID!)
+    usernameButton.setTitle(user?.username, for: .normal)
     guard let location = dropp.location else { fatalError() }
     locationLabel.text = "\(location.latitude), \(location.longitude)"
     hidesContent = dropp.hidden
