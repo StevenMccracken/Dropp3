@@ -13,6 +13,36 @@ protocol UserService {
   func signUp(username: String, password: String, firstName: String, lastName: String, success: (() -> Void)?, failure: @escaping (Error) -> Void)
 }
 
-class UserServiceAccessor {
-  
+private struct Constants {
+  static let errorCode = 1
+  static let domain = "com.dropp.userService"
+}
+
+class UserServiceAccessor: RealmProviderConsumer {
+}
+
+extension UserServiceAccessor: UserService {
+  func logIn(username: String, password: String, success: (() -> Void)?, failure: @escaping (Error) -> Void) {
+    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+      guard let `self` = self else { return }
+      let currentUser = CurrentUser(username: username,
+                                    firstName: String(UUID().uuidString.split(separator: "-").first!),
+                                    lastName: String(UUID().uuidString.split(separator: "-").first!))
+      let baseUser: User = currentUser.clone()
+      self.realmProvider.add(currentUser)
+      self.realmProvider.add(baseUser)
+      success?()
+    }
+  }
+
+  func signUp(username: String, password: String, firstName: String, lastName: String, success: (() -> Void)?, failure: @escaping (Error) -> Void) {
+    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+      guard let `self` = self else { return }
+      let currentUser = CurrentUser(username: username, firstName: firstName, lastName: lastName)
+      let baseUser: User = currentUser.clone()
+      self.realmProvider.add(currentUser)
+      self.realmProvider.add(baseUser)
+      success?()
+    }
+  }
 }

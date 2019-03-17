@@ -13,13 +13,17 @@ import Swinject
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
+
+  /// The depedency container for the application
   let container = Container() { container in
     container.register(RealmProvider.self) { _ in RealmProvider() }
     container.register(CurrentUser.self) { resolver in
+      /// There must always be a `nonnil` current user instance
       let currentUsers = resolver.resolve(RealmProvider.self)?.objects(CurrentUser.self)
       return currentUsers?.first ?? .noUser
     }
 
+    container.register(UserService.self) { _ in UserServiceAccessor() }
     container.register(DroppProvider.self) { _ in MainDroppProvider() }
     container.register(DroppService.self) { _ in DroppServiceAccessor() }
     container.register(NearbyDroppsViewModelProtocol.self) { _ in NearbyDroppsViewModel() }
@@ -56,8 +60,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // MARK: - One time configurations
 
-extension AppDelegate {
-  private func applyConfigurations() {
+private extension AppDelegate {
+  /// Configures registered dependencies for initial use
+  func applyConfigurations() {
     container.resolve(RealmProvider.self)!.configure()
   }
 }

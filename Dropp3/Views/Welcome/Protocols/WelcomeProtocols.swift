@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol WelcomeViewPage: ContainerConsumer {
+protocol WelcomeViewPage: UserServiceConsumer {
   var delegate: WelcomeViewDelegate? { get set }
 }
 

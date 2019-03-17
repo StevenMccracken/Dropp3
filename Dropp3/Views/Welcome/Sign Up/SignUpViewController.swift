@@ -8,8 +8,9 @@
 
 import UIKit
 
-class SignUpViewController: UITableViewController, WelcomeViewPage, RealmProviderConsumer {
+class SignUpViewController: UITableViewController, WelcomeViewPage {
   var delegate: WelcomeViewDelegate?
+  private var currentUserService: UserService?
   private var textFields: [UITextField] = []
   private var nonWhitespaceTextFields: Set<UITextField> = []
   private var textFieldValidations: [UITextField: UInt] = [:]
@@ -66,10 +67,10 @@ extension SignUpViewController {
   @IBAction private func signUpAction(_ sender: Any) {
     signUpButton.isEnabled = false
     delegate?.welcomeViewChild(self, didToggleLoading: true)
-    let user = CurrentUser(username: username, firstName: firstName, lastName: lastName)
-    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
-      self?.realmProvider.add(user)
-      self?.realmProvider.add(user as User)
+    currentUserService = userService
+    currentUserService?.signUp(username: username, password: password, firstName: firstName, lastName: lastName, success: nil) { [weak self] error in
+      self?.currentUserService = nil
+      print(error)
     }
   }
 

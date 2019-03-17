@@ -8,8 +8,9 @@
 
 import UIKit
 
-class LogInViewController: UITableViewController, WelcomeViewPage, RealmProviderConsumer {
+class LogInViewController: UITableViewController, WelcomeViewPage {
   var delegate: WelcomeViewDelegate?
+  private var currentUserService: UserService?
   private var textFields: [UITextField] = []
   private var textFieldValidations: [UITextField: UInt] = [:]
 
@@ -44,11 +45,10 @@ extension LogInViewController {
   @IBAction private func logInAction(_ sender: Any) {
     logInButton.isEnabled = false
     delegate?.welcomeViewChild(self, didToggleLoading: true)
-    let user = CurrentUser(username: username, firstName: UUID().uuidString, lastName: UUID().uuidString)
-    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
-      self?.realmProvider.add(user)
-      let normalUser = user.copy() as! User
-      self?.realmProvider.add(normalUser)
+    currentUserService = userService
+    currentUserService?.logIn(username: username, password: UUID().uuidString, success: nil) { [weak self] error in
+      self?.currentUserService = nil
+      print(error)
     }
   }
 

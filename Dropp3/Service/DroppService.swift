@@ -24,11 +24,7 @@ private struct Constants {
   static let domain = "com.dropp.droppService"
 }
 
-class DroppServiceAccessor: ContainerConsumer {
-  var realmProvider: RealmProvider!
-  init() {
-    realmProvider = container.resolve(RealmProvider.self)
-  }
+class DroppServiceAccessor: RealmProviderConsumer {
 }
 
 extension DroppServiceAccessor: DroppService {

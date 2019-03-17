@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 
 extension UITableView {
+  /**
+   Performs batch updates to the given section for given row deletions, insertions, and modifications.
+   Updates will only take effect if the given list is not empty
+   - parameter section: the section to update
+   - parameter deletions: the deletions to update with
+   - parameter insertions: the insertions to update with
+   - parameter modifications: the modifications to update with
+   */
   func update(section: Int = 0, deletions: [Int], insertions: [Int], modifications: [Int]) {
     performBatchUpdates({
       [(insertRows, insertions, section),
@@ -18,6 +26,12 @@ extension UITableView {
     })
   }
 
+  /**
+   Performs a table view update function for given rows in a section, using `automatic` animation
+   - parameter update: the table view update function
+   - parameter indexes: the rows to update. Returns immediately if empty
+   - parameter section: the section to update
+   */
   private func perform(update: ([IndexPath], UITableView.RowAnimation) -> Void, forIndexes indexes: [Int], in section: Int) {
     if indexes.isEmpty { return }
     let indexPaths = indexes.map { IndexPath(row: $0, section: section) }

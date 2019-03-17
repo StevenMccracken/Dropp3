@@ -9,9 +9,6 @@
 import UIKit
 
 class WelcomeViewController: UIPageViewController {
-  private struct Constants {
-  }
-
   typealias Page = WelcomeViewPage & UIViewController
   private var pages: [Page] = []
 
@@ -100,6 +97,8 @@ extension WelcomeViewController: UIPageViewControllerDelegate {
     view.backgroundColor = newViewController?.view.backgroundColor
   }
 }
+
+// MARK: - WelcomeViewDelegate
 
 extension WelcomeViewController: WelcomeViewDelegate {
   func welcomeViewChild(_ child: UIViewController & WelcomeViewPage, didToggleLoading loading: Bool) {
