@@ -28,9 +28,7 @@ extension UserServiceAccessor: UserService {
       let currentUser = CurrentUser(username: username,
                                     firstName: String(UUID().uuidString.split(separator: "-").first!),
                                     lastName: String(UUID().uuidString.split(separator: "-").first!))
-      let baseUser: User = currentUser.clone()
       self.realmProvider.add(currentUser)
-      self.realmProvider.add(baseUser)
       success?()
     }
   }
@@ -39,9 +37,7 @@ extension UserServiceAccessor: UserService {
     DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
       guard let `self` = self else { return }
       let currentUser = CurrentUser(username: username, firstName: firstName, lastName: lastName)
-      let baseUser: User = currentUser.clone()
       self.realmProvider.add(currentUser)
-      self.realmProvider.add(baseUser)
       success?()
     }
   }

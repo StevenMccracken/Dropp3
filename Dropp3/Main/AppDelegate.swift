@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return currentUsers?.first ?? .noUser
     }
 
+    container.register(UserProvider.self) { _ in MainUserProvider() }
     container.register(UserService.self) { _ in UserServiceAccessor() }
     container.register(DroppProvider.self) { _ in MainDroppProvider() }
     container.register(DroppService.self) { _ in DroppServiceAccessor() }

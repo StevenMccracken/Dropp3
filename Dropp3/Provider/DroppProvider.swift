@@ -27,7 +27,7 @@ protocol DroppProvider: RealmProviderConsumer, DroppServiceConsumer {
 class MainDroppProvider: CurrentUserConsumer {
 }
 
-// MARK: - DroppServiceAccessor
+// MARK: - DroppProvider
 
 extension MainDroppProvider: DroppProvider {
   func addDroppForCurrentUser() {

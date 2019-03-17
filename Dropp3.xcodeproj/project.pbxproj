@@ -45,6 +45,8 @@
 		6976265E220FF53A00990882 /* UIBarButtonItem+Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976265D220FF53A00990882 /* UIBarButtonItem+Items.swift */; };
 		699CADAB223EB95F0064750D /* NSObject+Clone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CADAA223EB95F0064750D /* NSObject+Clone.swift */; };
 		699CADAD223EBB940064750D /* UserServiceConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CADAC223EBB940064750D /* UserServiceConsumer.swift */; };
+		699CADC2223F04A70064750D /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CADC1223F04A70064750D /* UserProvider.swift */; };
+		699CADC4223F05C90064750D /* UserProviderConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CADC3223F05C90064750D /* UserProviderConsumer.swift */; };
 		69A46AE0220C01CF001EA7F9 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46ADF220C01CF001EA7F9 /* CurrentUser.swift */; };
 		69A46AE2220D58C4001EA7F9 /* RealmProviderConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AE1220D58C4001EA7F9 /* RealmProviderConsumer.swift */; };
 		69A46AE5220D5AD6001EA7F9 /* DroppProviderConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AE4220D5AD6001EA7F9 /* DroppProviderConsumer.swift */; };
@@ -117,6 +119,8 @@
 		6976265D220FF53A00990882 /* UIBarButtonItem+Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Items.swift"; sourceTree = "<group>"; };
 		699CADAA223EB95F0064750D /* NSObject+Clone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Clone.swift"; sourceTree = "<group>"; };
 		699CADAC223EBB940064750D /* UserServiceConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceConsumer.swift; sourceTree = "<group>"; };
+		699CADC1223F04A70064750D /* UserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
+		699CADC3223F05C90064750D /* UserProviderConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProviderConsumer.swift; sourceTree = "<group>"; };
 		69A46ADF220C01CF001EA7F9 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		69A46AE1220D58C4001EA7F9 /* RealmProviderConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProviderConsumer.swift; sourceTree = "<group>"; };
 		69A46AE4220D5AD6001EA7F9 /* DroppProviderConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppProviderConsumer.swift; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB90ED421E9DD3100B69E51 /* RealmProvider.swift */,
+				699CADC1223F04A70064750D /* UserProvider.swift */,
 				5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */,
 			);
 			path = Provider;
@@ -366,6 +371,7 @@
 				69A46AE6220D62E3001EA7F9 /* DroppServiceConsumer.swift */,
 				69A46AE1220D58C4001EA7F9 /* RealmProviderConsumer.swift */,
 				69A46AE4220D5AD6001EA7F9 /* DroppProviderConsumer.swift */,
+				699CADC3223F05C90064750D /* UserProviderConsumer.swift */,
 			);
 			path = Consumers;
 			sourceTree = "<group>";
@@ -688,6 +694,7 @@
 				69FAD4F02206806C00789AFD /* UIViewController+StoryboardInit.swift in Sources */,
 				69B2FDBA21E9CE120080A7B2 /* AppDelegate.swift in Sources */,
 				69A46AE2220D58C4001EA7F9 /* RealmProviderConsumer.swift in Sources */,
+				699CADC4223F05C90064750D /* UserProviderConsumer.swift in Sources */,
 				696FF97822125EDE00FA5D82 /* UserViewModel.swift in Sources */,
 				695AE3D421FFD1EA00672D85 /* UserService.swift in Sources */,
 				6976265C220FEE0100990882 /* UITableView+Data.swift in Sources */,
@@ -698,6 +705,7 @@
 				5BB90ED521E9DD3100B69E51 /* RealmProvider.swift in Sources */,
 				6911728122070A340042212D /* LogInViewController.swift in Sources */,
 				6911728322070A560042212D /* SignUpViewController.swift in Sources */,
+				699CADC2223F04A70064750D /* UserProvider.swift in Sources */,
 				695AE3CE21FFC47600672D85 /* UserInfoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
