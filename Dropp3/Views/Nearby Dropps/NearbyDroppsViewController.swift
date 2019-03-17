@@ -12,7 +12,6 @@ import RealmSwift
 
 private struct Constants {
   static let cellID = "cellID"
-  static let showUserSegue = "showUserSegue"
   static let tableViewFadeAlphaDuration = 0.5
   static let tableViewFadeHiddenDuration = 0.15
 }
@@ -80,17 +79,6 @@ extension NearbyDroppsViewController {
     super.viewDidLoad()
     configureViews()
     viewModel.viewDidLoad()
-  }
-
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    super.prepare(for: segue, sender: sender)
-    if segue.identifier == Constants.showUserSegue {
-      guard let destination = segue.destination as? UserViewController,
-        let cell = sender as? NearbyDroppTableViewCell,
-        let indexPath = tableView.indexPath(for: cell) else { fatalError() }
-      let userViewModel = UserViewModel(user: viewModel.user(forRow: indexPath.row))
-      destination.viewModel = userViewModel
-    }
   }
 }
 
@@ -193,7 +181,9 @@ extension NearbyDroppsViewController: UIGestureRecognizerDelegate {
 
 extension NearbyDroppsViewController: NearbyDroppCellDelegate {
   func nearbyDroppTableViewCell(shouldShowUserFromCell nearbyDroppTableViewCell: NearbyDroppTableViewCell) {
-    performSegue(withIdentifier: Constants.showUserSegue, sender: nearbyDroppTableViewCell)
+    guard let indexPath = tableView.indexPath(for: nearbyDroppTableViewCell) else { fatalError() }
+    let userViewController = viewModel.controller(forRow: indexPath.row)
+    navigationController?.pushViewController(userViewController, animated: true)
   }
 }
 

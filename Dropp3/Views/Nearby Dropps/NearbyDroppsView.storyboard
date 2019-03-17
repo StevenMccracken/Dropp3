@@ -82,20 +82,11 @@
                         <outlet property="mapView" destination="hf7-Ti-m6z" id="y6S-jr-CdT"/>
                         <outlet property="refreshButton" destination="YD9-H1-fyM" id="DCu-OF-MWz"/>
                         <outlet property="tableView" destination="ybH-4I-1es" id="t9g-c8-eki"/>
-                        <segue destination="mr6-vn-rN4" kind="show" identifier="showUserSegue" id="8kJ-Q0-sNo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nIe-wv-W6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="61.619190404797607" y="112.8"/>
-        </scene>
-        <!--UserView-->
-        <scene sceneID="62H-dr-O8K">
-            <objects>
-                <viewControllerPlaceholder storyboardName="UserView" id="mr6-vn-rN4" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GQV-uJ-1bt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1043" y="113"/>
         </scene>
     </scenes>
 </document>
