@@ -87,6 +87,6 @@ private extension MainViewController {
   }
 
   @objc private func postAction(_ sender: UIBarButtonItem) {
-    droppProvider.addDroppForCurrentUser()
+    droppProvider.addDroppForRandomUser()
   }
 }

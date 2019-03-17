@@ -118,20 +118,6 @@ extension NearbyDroppsViewController: UITableViewDataSource {
     cell.provide(dropp: viewModel.dropps[indexPath.row])
     return cell
   }
-
-  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    return true
-  }
-
-  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-    let title = viewModel.title(forEditActionAtRow: indexPath.row)
-    let hideAction = UITableViewRowAction(style: .normal, title: title) { [weak self] (_, indexPath) in
-      self?.viewModel.shouldPerformEditAction(atRow: indexPath.row)
-    }
-
-    hideAction.backgroundColor = .buttonBackground
-    return [hideAction]
-  }
 }
 
 // MARK: - UITableViewDelegate

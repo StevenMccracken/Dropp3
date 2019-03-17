@@ -20,8 +20,6 @@ protocol NearbyDroppsViewModelProtocol: RealmProviderConsumer, DroppProviderCons
 
   func viewDidLoad()
   func shouldRefreshData()
-  func shouldPerformEditAction(atRow row: Int)
-  func title(forEditActionAtRow row: Int) -> String
   func controller(forRow row: Int) -> UserViewController
 }
 
@@ -45,10 +43,6 @@ extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
     shouldRefreshData()
   }
 
-  func title(forEditActionAtRow row: Int) -> String {
-    return dropps[row].hidden ? "Unhide" : "Hide"
-  }
-
   func controller(forRow row: Int) -> UserViewController {
     let userID: String! = dropps[row].userID
     let userViewController: UserViewController
@@ -63,13 +57,6 @@ extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
     }
 
     return userViewController
-  }
-
-  func shouldPerformEditAction(atRow row: Int) {
-    let dropp = dropps[row]
-    realmProvider.runTransaction {
-      dropp.hidden.toggle()
-    }
   }
 
   func shouldRefreshData() {

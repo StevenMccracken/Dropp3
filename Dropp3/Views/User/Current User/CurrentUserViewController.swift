@@ -33,6 +33,11 @@ extension CurrentUserViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     currentUserViewModel.currentUserViewDelegate = self
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postAction(_:)))
+  }
+
+  @objc private func postAction(_ sender: UIBarButtonItem) {
+    MainDroppProvider().addDroppForCurrentUser()
   }
 }
 

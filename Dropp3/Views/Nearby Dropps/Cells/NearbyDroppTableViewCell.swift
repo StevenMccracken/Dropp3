@@ -26,28 +26,13 @@ class NearbyDroppTableViewCell: UITableViewCell, RealmProviderConsumer {
   @IBOutlet private weak var messageLabel: UILabel!
   @IBOutlet private weak var locationLabel: UILabel!
   @IBOutlet private weak var usernameButton: UIButton!
-  @IBOutlet private weak var locationRegularHeightConstraint: NSLayoutConstraint!
-  private var originalLocationHeight: CGFloat!
 
   // MARK: - View configuration
-
-  private var hidesContent: Bool = false {
-    didSet {
-      locationRegularHeightConstraint.constant = hidesContent ? Constants.hiddenHeight : originalLocationHeight
-      [usernameButton, messageLabel].forEach { $0?.isHidden = hidesContent }
-    }
-  }
-
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    originalLocationHeight = locationRegularHeightConstraint.constant
-  }
 
   override func prepareForReuse() {
     super.prepareForReuse()
     usernameButton.setTitle(nil, for: .normal)
     [messageLabel, locationLabel].forEach { $0.text = nil }
-    hidesContent = false
   }
 }
 
@@ -60,7 +45,6 @@ extension NearbyDroppTableViewCell {
     usernameButton.setTitle(user?.username, for: .normal)
     guard let location = dropp.location else { fatalError() }
     locationLabel.text = "\(location.latitude), \(location.longitude)"
-    hidesContent = dropp.hidden
   }
 }
 

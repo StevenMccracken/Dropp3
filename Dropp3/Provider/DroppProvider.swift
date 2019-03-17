@@ -21,6 +21,7 @@ protocol DroppProvider: RealmProviderConsumer, DroppServiceConsumer {
   func getDropps(around location: LocationProtocol, completion: ((RealmCollectionChange<Results<Dropp>>) -> Void)?) -> NotificationToken?
 
   func addDroppForCurrentUser()
+  func addDroppForRandomUser()
 }
 
 class MainDroppProvider: CurrentUserConsumer {
@@ -35,6 +36,16 @@ extension MainDroppProvider: DroppProvider {
     realmProvider.add(dropp)
     realmProvider.runTransaction {
       currentUser.dropps.append(dropp)
+    }
+  }
+
+  func addDroppForRandomUser() {
+    let user: User = .random()
+    realmProvider.add(user)
+    let dropp = Dropp(userID: user.identifier, location: Location(latitude: 1, longitude: 1), hasImage: false, message: UUID().uuidString)
+    realmProvider.add(dropp)
+    realmProvider.runTransaction {
+      user.dropps.append(dropp)
     }
   }
 
