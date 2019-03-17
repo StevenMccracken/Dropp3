@@ -74,7 +74,7 @@ extension CurrentUserViewController {
     tableView.performBatchUpdates({ [weak self] in
       self?.tableView.deleteRows(at: indexPaths, with: .automatic)
       if refreshUserInfo {
-        self?.tableView.reloadRows(at: [TableConstants.userSection], with: .automatic)
+        self?.tableView.reloadRows(at: [TableConstants.userIndexPath], with: .automatic)
       }
     }, completion: nil)
   }
@@ -83,7 +83,7 @@ extension CurrentUserViewController {
   private func endEditing() {
     currentUserViewModel.finishEditing()
     setEditing(false, animated: true)
-    tableView.insertRows(at: [TableConstants.userSection], with: .top)
+    tableView.insertRows(at: [TableConstants.userIndexPath], with: .top)
   }
 }
 
@@ -92,7 +92,7 @@ extension CurrentUserViewController {
 extension CurrentUserViewController {
   @objc private func editAction(_ sender: UIBarButtonItem) {
     setEditing(true, animated: true)
-    tableView.deleteRows(at: [TableConstants.userSection], with: .top)
+    tableView.deleteRows(at: [TableConstants.userIndexPath], with: .top)
   }
 
   @objc private func cancelAction(_ sender: UIBarButtonItem) {
@@ -101,7 +101,7 @@ extension CurrentUserViewController {
 
   @objc private func deleteAction(_ sender: UIBarButtonItem) {
     currentUserViewModel.deleteSelectedDropps { rows in
-      let indexPaths = rows.map { IndexPath(row: $0, section: 0) }
+      let indexPaths = rows.map { IndexPath(row: $0, section: TableConstants.droppsSection) }
       deleteRows(at: indexPaths, refreshUserInfo: false)
     }
 

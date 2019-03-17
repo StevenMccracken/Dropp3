@@ -18,7 +18,9 @@ private struct Constants {
 
 class UserViewController: UIViewController {
   struct TableConstants {
-    static let userSection = IndexPath(row: 0, section: 0)
+    static let userSection = 0
+    static let droppsSection = 1
+    static let userIndexPath = IndexPath(row: 0, section: TableConstants.userSection)
   }
 
   // MARK: - Data
@@ -82,13 +84,13 @@ extension UserViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell: UITableViewCell
     switch indexPath.section {
-    case 0:
+    case TableConstants.userSection:
       guard let infoCell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellID, for: indexPath) as? UserInfoTableViewCell else { fatalError() }
       infoCell.delegate = self
       infoCell.provide(user: viewModel.user)
       infoCell.selectionStyle = .none
       cell = infoCell
-    case 1:
+    case TableConstants.droppsSection:
       guard let droppCell = tableView.dequeueReusableCell(withIdentifier: Constants.droppCellID, for: indexPath) as? UserDroppTableViewCell else { fatalError() }
       droppCell.delegate = self
       droppCell.selectionStyle = .default
@@ -134,7 +136,7 @@ extension UserViewController: UserInfoCellDelegate {
       return
     }
 
-    tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
+    tableView.scrollToRow(at: IndexPath(row: 0, section: TableConstants.droppsSection), at: .top, animated: true)
   }
 
   func userInfoTableViewCell(shouldShowFollowersFromCell userInfoTableViewCell: UserInfoTableViewCell) {
@@ -156,10 +158,10 @@ extension UserViewController: UserViewModelDelegate {
   }
 
   func updateUserData() {
-    tableView.reloadRows(at: [TableConstants.userSection], with: .automatic)
+    tableView.reloadRows(at: [TableConstants.userIndexPath], with: .automatic)
   }
 
   func updateData(deletions: [Int], insertions: [Int], modifications: [Int]) {
-    tableView.update(section: 1, deletions: deletions, insertions: insertions, modifications: modifications)
+    tableView.update(section: TableConstants.droppsSection, deletions: deletions, insertions: insertions, modifications: modifications)
   }
 }
