@@ -28,6 +28,8 @@ class NearbyDroppsViewController: UIViewController, ContainerConsumer {
       return !tableView.isHidden
     }
     set {
+      let generator = UIImpactFeedbackGenerator(style: .light)
+      generator.prepare()
       UIView.transition(with: tableView, duration: Constants.tableViewFadeHiddenDuration, options: .transitionCrossDissolve, animations: { [weak self] in
         self?.tableView.isHidden = !newValue
         self?.listButton.isEnabled = !newValue
@@ -36,6 +38,8 @@ class NearbyDroppsViewController: UIViewController, ContainerConsumer {
       UIView.animate(withDuration: Constants.tableViewFadeAlphaDuration) { [weak self] in
         self?.tableView.alpha = newValue ? 1 : 0
       }
+
+      generator.impactOccurred()
     }
   }
 
@@ -101,7 +105,7 @@ extension NearbyDroppsViewController {
 
   private func configureMapView() {
     mapView.delegate = self
-    [panGestureRecognizer, doubleTapGestureRecognizer, pinchGestureRecognizer].forEach { mapView.addGestureRecognizer($0) }
+    [panGestureRecognizer, doubleTapGestureRecognizer, pinchGestureRecognizer].forEach(mapView.addGestureRecognizer)
   }
 }
 

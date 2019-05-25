@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import CoreLocation
 
-class Location: Object, Codable, LocationProtocol {
+class Location: Object, Decodable, LocationProtocol {
   var coreLocation: CLLocation {
     return CLLocation(latitude: latitude, longitude: longitude)
   }

@@ -14,7 +14,7 @@ protocol CurrentUserConsumer: ContainerConsumer {
   var currentUser: CurrentUser? { get }
 }
 
-// MARK: - Default current user implementation
+// MARK: - Default implementation
 
 extension CurrentUserConsumer {
   var currentUser: CurrentUser? {

@@ -8,9 +8,12 @@
 
 import Foundation
 
+/// Something that consumes dropp services
 protocol DroppServiceConsumer: ContainerConsumer {
   var droppService: DroppService { get }
 }
+
+// MARK: - Default implementation
 
 extension DroppServiceConsumer {
   var droppService: DroppService {

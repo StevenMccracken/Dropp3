@@ -87,6 +87,9 @@ private extension MainViewController {
   }
 
   @objc private func postAction(_ sender: UIBarButtonItem) {
+    let generator = UINotificationFeedbackGenerator()
+    generator.prepare()
     droppProvider.addDroppForRandomUser()
+    generator.notificationOccurred(.success)
   }
 }

@@ -8,9 +8,12 @@
 
 import Foundation
 
+/// Something that consumes a realm provider
 protocol RealmProviderConsumer: ContainerConsumer {
   var realmProvider: RealmProvider { get }
 }
+
+// MARK: - Default implementation
 
 extension RealmProviderConsumer {
   var realmProvider: RealmProvider {

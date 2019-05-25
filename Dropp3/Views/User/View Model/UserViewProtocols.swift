@@ -25,4 +25,5 @@ protocol UserViewModelProtocol {
 
   func viewDidLoad()
   func shouldRefreshData()
+  func didRefreshData()
 }

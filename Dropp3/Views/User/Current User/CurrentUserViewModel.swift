@@ -9,6 +9,7 @@
 import Foundation
 
 protocol CurrentUserViewDelegate: AnyObject {
+  func toggleEditButton(enabled: Bool)
   func toggleDeleteButton(enabled: Bool)
 }
 
@@ -28,8 +29,9 @@ class CurrentUserViewModel: UserViewModel, RealmProviderConsumer, DroppProviderC
   private lazy var selectedRowsForDeletion: Set<Int> = []
   weak var currentUserViewDelegate: CurrentUserViewDelegate?
 
-  override var title: String {
-    return "You"
+  override func didRefreshData() {
+    super.didRefreshData()
+    currentUserViewDelegate?.toggleEditButton(enabled: !user.dropps.isEmpty)
   }
 
   private func validateDeletionState() {
@@ -68,6 +70,7 @@ extension CurrentUserViewModel: CurrentUserViewModelProtocol {
     }
 
     realmProvider.delete(dropps)
+    didRefreshData()
   }
 
   func deleteDropp(atIndex index: Int, performUpdates: () -> Void) {
@@ -78,6 +81,7 @@ extension CurrentUserViewModel: CurrentUserViewModelProtocol {
     }
 
     realmProvider.delete(dropp)
+    didRefreshData()
   }
 
   func finishEditing() {

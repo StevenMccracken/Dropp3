@@ -34,6 +34,10 @@ class UserViewModel: CurrentUserConsumer {
   deinit {
     tokens.forEach { $0.invalidate() }
   }
+
+  func didRefreshData() {
+    // no-op
+  }
 }
 
 // MARK: - UserViewModelProtocol
@@ -76,6 +80,8 @@ extension UserViewModel: UserViewModelProtocol {
       case .error(let error):
         fatalError(error.localizedDescription)
       }
+
+      self?.didRefreshData()
     }
 
     let userToken = user.observe { [weak self] objectChange in
@@ -85,6 +91,7 @@ extension UserViewModel: UserViewModelProtocol {
         self?.delegate?.exitView()
       case .change(_):
         self?.delegate?.updateUserData()
+        self?.didRefreshData()
       case .error(let error):
         fatalError(error.localizedDescription)
       }

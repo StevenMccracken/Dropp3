@@ -43,10 +43,11 @@
 		696FF97822125EDE00FA5D82 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696FF97722125EDE00FA5D82 /* UserViewModel.swift */; };
 		6976265C220FEE0100990882 /* UITableView+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976265B220FEE0100990882 /* UITableView+Data.swift */; };
 		6976265E220FF53A00990882 /* UIBarButtonItem+Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976265D220FF53A00990882 /* UIBarButtonItem+Items.swift */; };
-		699CADAB223EB95F0064750D /* NSObject+Clone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CADAA223EB95F0064750D /* NSObject+Clone.swift */; };
 		699CADAD223EBB940064750D /* UserServiceConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CADAC223EBB940064750D /* UserServiceConsumer.swift */; };
 		699CADC2223F04A70064750D /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CADC1223F04A70064750D /* UserProvider.swift */; };
 		699CADC4223F05C90064750D /* UserProviderConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CADC3223F05C90064750D /* UserProviderConsumer.swift */; };
+		699CADCB2241FEE60064750D /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CADCA2241FEE60064750D /* Domain.swift */; };
+		699CADCD2241FF260064750D /* ServiceErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CADCC2241FF260064750D /* ServiceErrorCode.swift */; };
 		69A46AE0220C01CF001EA7F9 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46ADF220C01CF001EA7F9 /* CurrentUser.swift */; };
 		69A46AE2220D58C4001EA7F9 /* RealmProviderConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AE1220D58C4001EA7F9 /* RealmProviderConsumer.swift */; };
 		69A46AE5220D5AD6001EA7F9 /* DroppProviderConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AE4220D5AD6001EA7F9 /* DroppProviderConsumer.swift */; };
@@ -117,10 +118,11 @@
 		696FF97722125EDE00FA5D82 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		6976265B220FEE0100990882 /* UITableView+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Data.swift"; sourceTree = "<group>"; };
 		6976265D220FF53A00990882 /* UIBarButtonItem+Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Items.swift"; sourceTree = "<group>"; };
-		699CADAA223EB95F0064750D /* NSObject+Clone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Clone.swift"; sourceTree = "<group>"; };
 		699CADAC223EBB940064750D /* UserServiceConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceConsumer.swift; sourceTree = "<group>"; };
 		699CADC1223F04A70064750D /* UserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
 		699CADC3223F05C90064750D /* UserProviderConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProviderConsumer.swift; sourceTree = "<group>"; };
+		699CADCA2241FEE60064750D /* Domain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
+		699CADCC2241FF260064750D /* ServiceErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceErrorCode.swift; sourceTree = "<group>"; };
 		69A46ADF220C01CF001EA7F9 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		69A46AE1220D58C4001EA7F9 /* RealmProviderConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProviderConsumer.swift; sourceTree = "<group>"; };
 		69A46AE4220D5AD6001EA7F9 /* DroppProviderConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppProviderConsumer.swift; sourceTree = "<group>"; };
@@ -286,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				69A46AF0220F902B001EA7F9 /* Colors.swift */,
-				699CADAA223EB95F0064750D /* NSObject+Clone.swift */,
 				6976265B220FEE0100990882 /* UITableView+Data.swift */,
 				6976265D220FF53A00990882 /* UIBarButtonItem+Items.swift */,
 				69FAD4EF2206806C00789AFD /* UIViewController+StoryboardInit.swift */,
@@ -362,6 +363,15 @@
 			path = "Current User";
 			sourceTree = "<group>";
 		};
+		699CADC92241FEC50064750D /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				699CADCA2241FEE60064750D /* Domain.swift */,
+				699CADCC2241FF260064750D /* ServiceErrorCode.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		69A46AE3220D590D001EA7F9 /* Consumers */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,6 +435,7 @@
 		69B2FDB821E9CE120080A7B2 /* Dropp3 */ = {
 			isa = PBXGroup;
 			children = (
+				699CADC92241FEC50064750D /* Constants */,
 				69321E3B21F57D8500103A74 /* Extensions */,
 				69321E3121F5513F00103A74 /* Main */,
 				69321E3421F5623F00103A74 /* Views */,
@@ -526,9 +537,11 @@
 				TargetAttributes = {
 					69B2FDB521E9CE120080A7B2 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					69B2FDC921E9CE130080A7B2 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 69B2FDB521E9CE120080A7B2;
 					};
 				};
@@ -671,12 +684,13 @@
 				694120482213D31B00839F4C /* CurrentUserViewModel.swift in Sources */,
 				695AE3D621FFE85000672D85 /* ListViewController.swift in Sources */,
 				5BB90ED321E9DB2600B69E51 /* Location.swift in Sources */,
+				699CADCB2241FEE60064750D /* Domain.swift in Sources */,
+				699CADCD2241FF260064750D /* ServiceErrorCode.swift in Sources */,
 				69B9D18622035E38004CAF6F /* NearbyDroppsViewModel.swift in Sources */,
 				695AE3C721FEB6C400672D85 /* UserViewController.swift in Sources */,
 				69321E3321F551BD00103A74 /* ContainerConsumer.swift in Sources */,
 				69321E4821F5940F00103A74 /* NearbyDroppTableViewCell.swift in Sources */,
 				6976265E220FF53A00990882 /* UIBarButtonItem+Items.swift in Sources */,
-				699CADAB223EB95F0064750D /* NSObject+Clone.swift in Sources */,
 				695AE3BE21FE54A700672D85 /* MainViewController.swift in Sources */,
 				6911727F220706CF0042212D /* WelcomeViewController.swift in Sources */,
 				5BB90ED121E9DAB800B69E51 /* Dropp.swift in Sources */,
@@ -799,14 +813,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -855,13 +869,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -881,7 +895,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = steve.Dropp3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -901,7 +915,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = steve.Dropp3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -922,7 +936,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = steve.Dropp3Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dropp3.app/Dropp3";
 			};
@@ -944,7 +958,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = steve.Dropp3Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dropp3.app/Dropp3";
 			};

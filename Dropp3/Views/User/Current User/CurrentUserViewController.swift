@@ -37,7 +37,10 @@ extension CurrentUserViewController {
   }
 
   @objc private func postAction(_ sender: UIBarButtonItem) {
+    let generator = UINotificationFeedbackGenerator()
+    generator.prepare()
     MainDroppProvider().addDroppForCurrentUser()
+    generator.notificationOccurred(.success)
   }
 }
 
@@ -110,7 +113,10 @@ extension CurrentUserViewController {
       deleteRows(at: indexPaths, refreshUserInfo: false)
     }
 
+    let generator = UINotificationFeedbackGenerator()
+    generator.prepare()
     endEditing()
+    generator.notificationOccurred(.success)
   }
 
   @objc private func logOutAction(_ sender: UIBarButtonItem) {
@@ -120,7 +126,10 @@ extension CurrentUserViewController {
     }))
 
     alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    let generator = UINotificationFeedbackGenerator()
+    generator.prepare()
     alertController.present(from: self, barButtonItem: sender, sourceView: nil, animated: true, completion: nil)
+    generator.notificationOccurred(.warning)
   }
 
   @objc private func profileAction(_ sender: UIBarButtonItem) {
@@ -149,7 +158,10 @@ extension CurrentUserViewController {
     if isEditing { return nil }
     let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { [weak self] (_, indexPath) in
       self?.currentUserViewModel.deleteDropp(atIndex: indexPath.row) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.prepare()
         self?.deleteRows(at: [indexPath])
+        generator.notificationOccurred(.success)
       }
     }
 
@@ -178,6 +190,10 @@ extension CurrentUserViewController {
 // MARK: - CurrentUserViewDelegate
 
 extension CurrentUserViewController: CurrentUserViewDelegate {
+  func toggleEditButton(enabled: Bool) {
+    editButton.isEnabled = enabled
+  }
+
   func toggleDeleteButton(enabled: Bool) {
     deleteButton.isEnabled = enabled
   }

@@ -8,9 +8,12 @@
 
 import Foundation
 
+/// Something that consumes user services
 protocol UserServiceConsumer: ContainerConsumer {
   var userService: UserService { get }
 }
+
+// MARK: - Default implementation
 
 extension UserServiceConsumer {
   var userService: UserService {
