@@ -7,22 +7,21 @@
 //
 
 import UIKit
+import ReactiveSwift
+import ReactiveCocoa
 
 class LogInViewController: UITableViewController, WelcomeViewPage {
+  var viewModel: LogInViewModel! = LogInViewModel()
   var delegate: WelcomeViewDelegate?
-  private var currentUserService: UserService?
-  private var textFields: [UITextField] = []
-  private var textFieldValidations: [UITextField: UInt] = [:]
+
+  private var textFields: [UITextField]!
+  private var logInAction: CocoaAction<Any>!
 
   // MARK: - Outlets
 
   @IBOutlet weak var logInButton: UIButton!
   @IBOutlet weak var usernameTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
-
-  private var username: String {
-    return usernameTextField.text!
-  }
 }
 
 // MARK: - View lifecycle
@@ -31,10 +30,24 @@ extension LogInViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Log In"
-    textFieldValidations = [
-      usernameTextField: 8,
-      passwordTextField: 10
-    ]
+    logInButton.reactive.isEnabled <~ viewModel.logInEnabled.producer
+    viewModel.username <~ usernameTextField.reactive.continuousTextValues.producer
+    viewModel.password <~ passwordTextField.reactive.continuousTextValues.producer
+    logInAction = CocoaAction(viewModel.logInAction, input: ())
+    logInButton.addTarget(logInAction, action: CocoaAction<Any>.selector, for: .touchUpInside)
+    logInButton.reactive.controlEvents(.touchUpInside).observeValues { [unowned self] _ in
+      self.delegate?.welcomeViewChild(self, didToggleLoading: true)
+    }
+
+    viewModel.logInSignal.observeResult { result in
+      guard let success = result.value else { return }
+      print(success)
+    }
+
+    viewModel.logInSignal.observeFailed { error in
+      print(error.localizedDescription)
+    }
+
     textFields = [usernameTextField, passwordTextField]
   }
 }
@@ -43,25 +56,24 @@ extension LogInViewController {
 
 extension LogInViewController {
   @IBAction private func logInAction(_ sender: Any) {
-    logInButton.isEnabled = false
-    delegate?.welcomeViewChild(self, didToggleLoading: true)
-    currentUserService = userService
-    currentUserService?.logIn(username: username, password: UUID().uuidString, success: nil) { [weak self] error in
-      self?.currentUserService = nil
-      print(error)
-    }
+//    logInButton.isEnabled = false
+//    currentUserService = userService
+//    currentUserService?.logIn(username: username, password: UUID().uuidString, success: nil) { [weak self] error in
+//      self?.currentUserService = nil
+//      print(error)
+//    }
   }
 
   @IBAction func textFieldDidChange(_ sender: UITextField) {
-    let validations: [Bool] = textFieldValidations.map { (textField, requiredCharacters) in
-      let trimmedText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-      let matchesValidation = trimmedText.count >= requiredCharacters
-      textField.textColor = matchesValidation ? .black : .disabled
-      return matchesValidation
-    }
-
-    let validTextFields = validations.filter { $0 }
-    logInButton.isEnabled = validTextFields.count == textFieldValidations.count
+//    let validations: [Bool] = textFieldValidations.map { (textField, requiredCharacters) in
+//      let trimmedText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+//      let matchesValidation = trimmedText.count >= requiredCharacters
+//      textField.textColor = matchesValidation ? .black : .disabled
+//      return matchesValidation
+//    }
+//
+//    let validTextFields = validations.filter { $0 }
+//    logInButton.isEnabled = validTextFields.count == textFieldValidations.count
   }
 }
 

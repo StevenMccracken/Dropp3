@@ -26,6 +26,7 @@
 		69321E3A21F5692F00103A74 /* NearbyDroppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69321E3921F5692F00103A74 /* NearbyDroppsViewController.swift */; };
 		69321E4821F5940F00103A74 /* NearbyDroppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69321E4621F5940F00103A74 /* NearbyDroppTableViewCell.swift */; };
 		69321E4921F5940F00103A74 /* NearbyDroppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69321E4721F5940F00103A74 /* NearbyDroppTableViewCell.xib */; };
+		693268B42299E24200C4D573 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693268B32299E24200C4D573 /* LogInViewModel.swift */; };
 		694120452213D26E00839F4C /* UserViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694120442213D26E00839F4C /* UserViewProtocols.swift */; };
 		694120482213D31B00839F4C /* CurrentUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694120472213D31B00839F4C /* CurrentUserViewModel.swift */; };
 		695AE3BE21FE54A700672D85 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695AE3BD21FE54A700672D85 /* MainViewController.swift */; };
@@ -101,6 +102,7 @@
 		69321E3921F5692F00103A74 /* NearbyDroppsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDroppsViewController.swift; sourceTree = "<group>"; };
 		69321E4621F5940F00103A74 /* NearbyDroppTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDroppTableViewCell.swift; sourceTree = "<group>"; };
 		69321E4721F5940F00103A74 /* NearbyDroppTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NearbyDroppTableViewCell.xib; sourceTree = "<group>"; };
+		693268B32299E24200C4D573 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
 		694120442213D26E00839F4C /* UserViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewProtocols.swift; sourceTree = "<group>"; };
 		694120472213D31B00839F4C /* CurrentUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserViewModel.swift; sourceTree = "<group>"; };
 		695AE3BD21FE54A700672D85 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 		69A46AEB220F848E001EA7F9 /* Log In */ = {
 			isa = PBXGroup;
 			children = (
+				693268B32299E24200C4D573 /* LogInViewModel.swift */,
 				69117284220719750042212D /* LogInView.storyboard */,
 				6911728022070A340042212D /* LogInViewController.swift */,
 			);
@@ -606,20 +609,20 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Dropp3/Pods-Dropp3-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -702,6 +705,7 @@
 				69A46AE0220C01CF001EA7F9 /* CurrentUser.swift in Sources */,
 				694120452213D26E00839F4C /* UserViewProtocols.swift in Sources */,
 				69A46AF3220F9F37001EA7F9 /* CurrentUserViewController.swift in Sources */,
+				693268B42299E24200C4D573 /* LogInViewModel.swift in Sources */,
 				69321E3A21F5692F00103A74 /* NearbyDroppsViewController.swift in Sources */,
 				5BB90EC621E9D27D00B69E51 /* DroppService.swift in Sources */,
 				5BB90EC921E9D32B00B69E51 /* LocationProtocol.swift in Sources */,

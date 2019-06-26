@@ -1,34 +1,34 @@
 PODS:
-  - ReactiveSwift (4.0.0):
-    - Result (~> 4.0)
-  - Realm (3.11.2):
-    - Realm/Headers (= 3.11.2)
-  - Realm/Headers (3.11.2)
-  - RealmSwift (3.11.2):
-    - Realm (= 3.11.2)
-  - Result (4.0.0)
-  - Swinject (2.5.0)
+  - ReactiveCocoa (10.0.0):
+    - ReactiveSwift (~> 6.0)
+  - ReactiveSwift (6.0.0)
+  - Realm (3.15.0):
+    - Realm/Headers (= 3.15.0)
+  - Realm/Headers (3.15.0)
+  - RealmSwift (3.15.0):
+    - Realm (= 3.15.0)
+  - Swinject (2.6.0)
 
 DEPENDENCIES:
-  - ReactiveSwift
-  - RealmSwift
-  - Swinject
+  - ReactiveCocoa (= 10.0.0)
+  - RealmSwift (= 3.15.0)
+  - Swinject (= 2.6.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - ReactiveCocoa
     - ReactiveSwift
     - Realm
     - RealmSwift
-    - Result
     - Swinject
 
 SPEC CHECKSUMS:
-  ReactiveSwift: a2bb9ace428a109e9c0209615645d9d286c8c433
-  Realm: 864477d028db77f7c5a0cba64a4892ad53db128a
-  RealmSwift: 12b8262fc08020b47de4fd88eb3d5c9425b34ec7
-  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
-  Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
+  ReactiveCocoa: 6d4c37ba236f5d9a7a55b2172cd09f19ba85f574
+  ReactiveSwift: 24b7ed245617bbfd30ee0c87779b6c64ac1b4518
+  Realm: 9b834e1be6062f544805252c812348872dc5d4ed
+  RealmSwift: 8a41886f8ab6efef9eb8df97de2f2bb911561a79
+  Swinject: 48a96cda93633cf2860697b4ce76ab5db9ebaca2
 
-PODFILE CHECKSUM: 170aad1e291d706de19a6364768924eebf4e18fb
+PODFILE CHECKSUM: da0e69b63af602b32961933028519830943bb304
 
 COCOAPODS: 1.5.3
