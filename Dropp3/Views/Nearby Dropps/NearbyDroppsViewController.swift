@@ -153,7 +153,7 @@ extension NearbyDroppsViewController {
   }
 
   @IBAction private func locateAction(_ sender: UIBarButtonItem) {
-    print("locate")
+    debugPrint("locate")
   }
 
   @objc private func mapUserInteractionAction(_ gestureRecognizer: UIGestureRecognizer) {

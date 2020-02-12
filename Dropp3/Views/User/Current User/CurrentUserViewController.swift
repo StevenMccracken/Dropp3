@@ -161,7 +161,11 @@ extension CurrentUserViewController {
     let alertController = UIAlertController(title: logOutTitle, message: nil, preferredStyle: .actionSheet)
     let yesTitle = NSLocalizedString("Yes", comment: "Button confirming the log out action")
     alertController.addAction(UIAlertAction(title: yesTitle, style: .destructive, handler: { [weak self] _ in
-      self?.currentUserViewModel.shouldLogOut()
+      guard let strongSelf = self else { return }
+      strongSelf.currentUserViewModel.shouldLogOut()
+      if strongSelf.didPresentViewController {
+        strongSelf.dismiss(animated: true, completion: nil)
+      }
     }))
 
     let cancelTitle = NSLocalizedString("Cancel", comment: "Button canceling the log out action")

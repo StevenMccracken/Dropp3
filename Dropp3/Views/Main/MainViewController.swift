@@ -65,7 +65,7 @@ private extension MainViewController {
     welcomeViewController.isModalInPresentation = true
     let navigationController = UINavigationController(rootViewController: welcomeViewController)
     children.first?.present(navigationController, animated: true) { [weak self] in
-      self?.popToRootViewController(animated: true)
+      self?.setViewControllers([.controller(from: "LaunchScreen", bundle: .main)], animated: true)
     }
   }
 

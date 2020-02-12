@@ -74,7 +74,7 @@ extension SignUpViewController {
                                lastName: lastName,
                                success: nil) { [weak self] error in
                                 self?.currentUserService = nil
-                                print(error)
+                                debugPrint(error)
     }
   }
 
