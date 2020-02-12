@@ -67,12 +67,14 @@ extension WelcomeViewController {
 // MARK: - UIPageViewControllerDataSource
 
 extension WelcomeViewController: UIPageViewControllerDataSource {
-  func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+  func pageViewController(_ pageViewController: UIPageViewController,
+                          viewControllerBefore viewController: UIViewController) -> UIViewController? {
     guard viewController.isKind(of: LogInViewController.self) else { return nil }
     return pages.first
   }
   
-  func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+  func pageViewController(_ pageViewController: UIPageViewController,
+                          viewControllerAfter viewController: UIViewController) -> UIViewController? {
     guard viewController.isKind(of: SignUpViewController.self) else { return nil }
     return pages.last
   }
@@ -90,7 +92,10 @@ extension WelcomeViewController: UIPageViewControllerDataSource {
 // MARK: - UIPageViewControllerDelegate
 
 extension WelcomeViewController: UIPageViewControllerDelegate {
-  func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+  func pageViewController(_ pageViewController: UIPageViewController,
+                          didFinishAnimating finished: Bool,
+                          previousViewControllers: [UIViewController],
+                          transitionCompleted completed: Bool) {
     guard completed else { return }
     let newViewController = pages.filter { !previousViewControllers.contains($0) }.first
     navigationItem.prompt = newViewController?.title

@@ -10,8 +10,8 @@ import UIKit
 import RealmSwift
 
 private struct Constants {
-  static let droppCellID = "droppCellID"
-  static let profileCellID = "profileCellID"
+  static let droppCellID = UUID().uuidString
+  static let profileCellID = UUID().uuidString
   static let friendSegueID = "ViewFriendshipSegue"
   static let minimumRowHeight: CGFloat = 45
 }
@@ -85,13 +85,19 @@ extension UserViewController: UITableViewDataSource {
     let cell: UITableViewCell
     switch indexPath.section {
     case TableConstants.userSection:
-      guard let infoCell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellID, for: indexPath) as? UserInfoTableViewCell else { fatalError() }
+      guard let infoCell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellID,
+                                                         for: indexPath) as? UserInfoTableViewCell else {
+                                                          fatalError()
+      }
       infoCell.delegate = self
       infoCell.provide(user: viewModel.user)
       infoCell.selectionStyle = .none
       cell = infoCell
     case TableConstants.droppsSection:
-      guard let droppCell = tableView.dequeueReusableCell(withIdentifier: Constants.droppCellID, for: indexPath) as? UserDroppTableViewCell else { fatalError() }
+      guard let droppCell = tableView.dequeueReusableCell(withIdentifier: Constants.droppCellID,
+                                                          for: indexPath) as? UserDroppTableViewCell else {
+                                                            fatalError()
+      }
       droppCell.delegate = self
       droppCell.selectionStyle = .default
       droppCell.provide(dropp: viewModel.user.dropps[indexPath.row])
@@ -148,6 +154,8 @@ extension UserViewController: UserInfoCellDelegate {
   }
 }
 
+// MARK: - UserViewModelDelegate
+
 extension UserViewController: UserViewModelDelegate {
   func exitView() {
     navigationController?.popViewController(animated: true)
@@ -162,6 +170,9 @@ extension UserViewController: UserViewModelDelegate {
   }
 
   func updateData(deletions: [Int], insertions: [Int], modifications: [Int]) {
-    tableView.update(section: TableConstants.droppsSection, deletions: deletions, insertions: insertions, modifications: modifications)
+    tableView.update(section: TableConstants.droppsSection,
+                     deletions: deletions,
+                     insertions: insertions,
+                     modifications: modifications)
   }
 }

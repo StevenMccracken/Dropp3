@@ -46,7 +46,7 @@ class SignUpViewController: UITableViewController, WelcomeViewPage {
 extension SignUpViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = "Sign Up"
+    title = NSLocalizedString("Sign Up", comment: "Title telling the user to sign up for the app")
     textFieldValidations = [
       usernameTextField: 8,
       firstNameTextField: 2,
@@ -68,9 +68,13 @@ extension SignUpViewController {
     signUpButton.isEnabled = false
     delegate?.welcomeViewChild(self, didToggleLoading: true)
     currentUserService = userService
-    currentUserService?.signUp(username: username, password: password, firstName: firstName, lastName: lastName, success: nil) { [weak self] error in
-      self?.currentUserService = nil
-      print(error)
+    currentUserService?.signUp(username: username,
+                               password: password,
+                               firstName: firstName,
+                               lastName: lastName,
+                               success: nil) { [weak self] error in
+                                self?.currentUserService = nil
+                                print(error)
     }
   }
 
@@ -100,7 +104,9 @@ extension SignUpViewController {
 // MARK: - UITextFieldDelegate
 
 extension SignUpViewController: UITextFieldDelegate {
-  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
+                 replacementString string: String) -> Bool {
     guard nonWhitespaceTextFields.contains(textField) else { return true }
     return string.rangeOfCharacter(from: .whitespaces) == nil
   }

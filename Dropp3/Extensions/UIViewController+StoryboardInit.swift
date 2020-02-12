@@ -22,7 +22,9 @@ extension UIViewController {
    it is assumed the view controller is the initial view controller of the storyboard. Default is `nil`
    - returns: the view controller
    */
-  static func controller<T: UIViewController>(from storyboardName: String? = nil, bundle: Bundle? = nil, with identifier: String? = nil) -> T {
+  static func controller<T: UIViewController>(from storyboardName: String? = nil,
+                                              bundle: Bundle? = nil,
+                                              with identifier: String? = nil) -> T {
     let name: String
     if let storyboardName = storyboardName {
       name = storyboardName

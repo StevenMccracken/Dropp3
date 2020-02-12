@@ -72,7 +72,9 @@ struct RealmProvider {
     delete([data])
   }
 
-  func observe<T: Object>(resultsForType type: T.Type, withPredicate predicate: NSPredicate? = nil, completion: @escaping (RealmCollectionChange<Results<T>>) -> Void) -> NotificationToken? {
+  func observe<T: Object>(resultsForType type: T.Type,
+                          withPredicate predicate: NSPredicate? = nil,
+                          completion: @escaping (RealmCollectionChange<Results<T>>) -> Void) -> NotificationToken? {
     guard isRealmAccessible else { return nil }
     let realm = try! Realm()
     realm.refresh()

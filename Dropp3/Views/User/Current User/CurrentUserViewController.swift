@@ -12,13 +12,40 @@ class CurrentUserViewController: UserViewController {
 
   // MARK: - Buttons
 
-  private lazy var editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editAction(_:)))
-  private lazy var deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteAction(_:)))
-  private lazy var cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction(_:)))
-  private lazy var logoutButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logOutAction(_:)))
-  private lazy var profileButton = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(profileAction(_:)))
+  private lazy var editButton = UIBarButtonItem(barButtonSystemItem: .edit,
+                                                target: self,
+                                                action: #selector(editAction(_:)))
+  private lazy var deleteButton = UIBarButtonItem(barButtonSystemItem: .trash,
+                                                  target: self,
+                                                  action: #selector(deleteAction(_:)))
+  private lazy var cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                  target: self,
+                                                  action: #selector(cancelAction(_:)))
+  private lazy var logoutButton: UIBarButtonItem = {
+    let title = NSLocalizedString("Logout", comment: "Button prompting the user to log out")
+    let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(logOutAction(_:)))
+    return button
+  }()
+
+  private lazy var profileButton: UIBarButtonItem = {
+    let title = NSLocalizedString("More", comment: "Button routing the user to more configuration options")
+    let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(profileAction(_:)))
+    return button
+  }()
+
+  private lazy var doneButton = UIBarButtonItem(barButtonSystemItem: .done,
+                                                target: self,
+                                                action: #selector(doneAction(_:)))
+  private lazy var postButton: UIBarButtonItem = {
+    let title = NSLocalizedString("Post", comment: "Button prompting the user to create a new dropp")
+    let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(postAction(_:)))
+    return button
+  }()
 
   // MARK: - Public data
+
+  /// Default is `false`
+  var didPresentViewController: Bool = false
 
   var currentUserViewModel: CurrentUserViewModelProtocol! {
     didSet {
@@ -33,7 +60,6 @@ extension CurrentUserViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     currentUserViewModel.currentUserViewDelegate = self
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postAction(_:)))
   }
 
   @objc private func postAction(_ sender: UIBarButtonItem) {
@@ -49,6 +75,11 @@ extension CurrentUserViewController {
 extension CurrentUserViewController {
   override func configureViews() {
     super.configureViews()
+    navigationItem.rightBarButtonItem = postButton
+    if didPresentViewController {
+      navigationItem.leftBarButtonItem = doneButton
+    }
+
     setEditing(false, animated: false)
   }
 
@@ -60,8 +91,14 @@ extension CurrentUserViewController {
 
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: animated)
+    isModalInPresentation = editing
     tableView.setEditing(editing, animated: animated)
-    navigationItem.setHidesBackButton(editing, animated: animated)
+    postButton.isEnabled = !editing
+    if didPresentViewController {
+      doneButton.isEnabled = !editing
+    } else {
+      navigationItem.setHidesBackButton(editing, animated: animated)
+    }
 
     let toolbarItems: [UIBarButtonItem]
     if isEditing {
@@ -120,12 +157,15 @@ extension CurrentUserViewController {
   }
 
   @objc private func logOutAction(_ sender: UIBarButtonItem) {
-    let alertController = UIAlertController(title: "Log out?", message: nil, preferredStyle: .actionSheet)
-    alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [weak self] _ in
+    let logOutTitle = NSLocalizedString("Log out?", comment: "Question confirming if the user wants to log out")
+    let alertController = UIAlertController(title: logOutTitle, message: nil, preferredStyle: .actionSheet)
+    let yesTitle = NSLocalizedString("Yes", comment: "Button confirming the log out action")
+    alertController.addAction(UIAlertAction(title: yesTitle, style: .destructive, handler: { [weak self] _ in
       self?.currentUserViewModel.shouldLogOut()
     }))
 
-    alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    let cancelTitle = NSLocalizedString("Cancel", comment: "Button canceling the log out action")
+    alertController.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
     let generator = UINotificationFeedbackGenerator()
     generator.prepare()
     alertController.present(from: self, barButtonItem: sender, sourceView: nil, animated: true, completion: nil)
@@ -133,6 +173,10 @@ extension CurrentUserViewController {
   }
 
   @objc private func profileAction(_ sender: UIBarButtonItem) {
+  }
+
+  @objc private func doneAction(_ sender: UIBarButtonItem) {
+    dismiss(animated: true, completion: nil)
   }
 }
 
@@ -156,7 +200,8 @@ extension CurrentUserViewController {
 extension CurrentUserViewController {
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
     if isEditing { return nil }
-    let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { [weak self] (_, indexPath) in
+    let deleteTitle = NSLocalizedString("Delete", comment: "Button prompting the user to delete the item")
+    let deleteAction = UITableViewRowAction(style: .default, title: deleteTitle) { [weak self] (_, indexPath) in
       self?.currentUserViewModel.deleteDropp(atIndex: indexPath.row) {
         let generator = UINotificationFeedbackGenerator()
         generator.prepare()

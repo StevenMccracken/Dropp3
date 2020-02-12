@@ -18,7 +18,8 @@ protocol DroppProvider: RealmProviderConsumer, DroppServiceConsumer {
    - returns: token that allows the `completion` parameter to receive calls. You must invalidate this token's strong reference at some point
    */
   @discardableResult
-  func getDropps(around location: LocationProtocol, completion: ((RealmCollectionChange<Results<Dropp>>) -> Void)?) -> NotificationToken?
+  func getDropps(around location: LocationProtocol,
+                 completion: ((RealmCollectionChange<Results<Dropp>>) -> Void)?) -> NotificationToken?
 
   func addDroppForCurrentUser()
   func addDroppForRandomUser()
@@ -32,7 +33,10 @@ class MainDroppProvider: CurrentUserConsumer {
 extension MainDroppProvider: DroppProvider {
   func addDroppForCurrentUser() {
     guard let currentUser = self.currentUser else { fatalError() }
-    let dropp = Dropp(userID: currentUser.identifier, location: Location(latitude: 1, longitude: 1), hasImage: false, message: UUID().uuidString)
+    let dropp = Dropp(userID: currentUser.identifier,
+                      location: Location(latitude: 1, longitude: 1),
+                      hasImage: false,
+                      message: UUID().uuidString)
     realmProvider.add(dropp)
     realmProvider.runTransaction {
       currentUser.dropps.append(dropp)
@@ -42,14 +46,18 @@ extension MainDroppProvider: DroppProvider {
   func addDroppForRandomUser() {
     let user: User = .random()
     realmProvider.add(user)
-    let dropp = Dropp(userID: user.identifier, location: Location(latitude: 1, longitude: 1), hasImage: false, message: UUID().uuidString)
+    let dropp = Dropp(userID: user.identifier,
+                      location: Location(latitude: 1, longitude: 1),
+                      hasImage: false,
+                      message: UUID().uuidString)
     realmProvider.add(dropp)
     realmProvider.runTransaction {
       user.dropps.append(dropp)
     }
   }
 
-  func getDropps(around location: LocationProtocol, completion: ((RealmCollectionChange<Results<Dropp>>) -> Void)?) -> NotificationToken? {
+  func getDropps(around location: LocationProtocol,
+                 completion: ((RealmCollectionChange<Results<Dropp>>) -> Void)?) -> NotificationToken? {
     var token: NotificationToken?
     if let completion = completion {
       token = realmProvider.observe(resultsForType: Dropp.self, completion: completion)

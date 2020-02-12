@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     container.register(UserProvider.self) { _ in MainUserProvider() }
     container.register(UserService.self) { _ in UserServiceAccessor() }
+      .inObjectScope(.container)
     container.register(DroppProvider.self) { _ in MainDroppProvider() }
     container.register(DroppService.self) { _ in DroppServiceAccessor() }
     container.register(NearbyDroppsViewModelProtocol.self) { _ in NearbyDroppsViewModel() }

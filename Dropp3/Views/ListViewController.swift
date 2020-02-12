@@ -102,17 +102,31 @@ extension ListViewController {
     tableView.delegate = self
     tableView.dataSource = self
     navigationItem.title = "Select an Item"
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction(_:)))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                       target: self,
+                                                       action: #selector(cancelAction(_:)))
     if multiSelectionClosure != nil {
-      navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Apply", style: .plain, target: self, action: #selector(applyAction(_:)))
+      let title = NSLocalizedString("Apply", comment: "Button informing the user that changes will be applied")
+      navigationItem.rightBarButtonItem = UIBarButtonItem(title: title,
+                                                          style: .plain,
+                                                          target: self,
+                                                          action: #selector(applyAction(_:)))
       navigationItem.rightBarButtonItem?.isEnabled = false
     }
   }
 
-  override func present(from presentingViewController: UIViewController, barButtonItem: UIBarButtonItem? = nil, sourceView: UIView? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
+  override func present(from presentingViewController: UIViewController,
+                        barButtonItem: UIBarButtonItem? = nil,
+                        sourceView: UIView? = nil,
+                        animated: Bool = true,
+                        completion: (() -> Void)? = nil) {
     let navigationController = UINavigationController(rootViewController: self)
     navigationController.navigationBar.isTranslucent = false
-    navigationController.present(from: presentingViewController, barButtonItem: barButtonItem, sourceView: sourceView, animated: animated, completion: completion)
+    navigationController.present(from: presentingViewController,
+                                 barButtonItem: barButtonItem,
+                                 sourceView: sourceView,
+                                 animated: animated,
+                                 completion: completion)
   }
 }
 
@@ -176,7 +190,11 @@ extension ListViewController {
 }
 
 extension UIViewController {
-  @objc func present(from presentingViewController: UIViewController, barButtonItem: UIBarButtonItem? = nil, sourceView: UIView? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
+  @objc func present(from presentingViewController: UIViewController,
+                     barButtonItem: UIBarButtonItem? = nil,
+                     sourceView: UIView? = nil,
+                     animated: Bool = true,
+                     completion: (() -> Void)? = nil) {
     modalPresentationStyle = .popover
     if let barButtonItem = barButtonItem {
       popoverPresentationController?.barButtonItem = barButtonItem

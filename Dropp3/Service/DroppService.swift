@@ -24,14 +24,20 @@ protocol DroppService {
    - parameter success: closure returning list of dropps around the given location
    - parameter failure: closure returning errors that occurred while searching
    */
-  func getDropps(around location: LocationProtocol, success: @escaping ([Dropp]) -> Void, failure: ((DroppServiceError.NearbyDroppsError) -> Void)?)
+  func getDropps(around location: LocationProtocol,
+                 success: @escaping ([Dropp]) -> Void,
+                 failure: ((DroppServiceError.NearbyDroppsError) -> Void)?)
 }
 
 class DroppServiceAccessor: RealmProviderConsumer {
 }
 
+// MARK: - DroppService
+
 extension DroppServiceAccessor: DroppService {
-  func getDropps(around location: LocationProtocol, success: @escaping ([Dropp]) -> Void, failure: ((DroppServiceError.NearbyDroppsError) -> Void)?) {
+  func getDropps(around location: LocationProtocol,
+                 success: @escaping ([Dropp]) -> Void,
+                 failure: ((DroppServiceError.NearbyDroppsError) -> Void)?) {
     DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
       guard let `self` = self else { return }
       let user = User(username: UUID().uuidString, firstName: UUID().uuidString, lastName: UUID().uuidString)

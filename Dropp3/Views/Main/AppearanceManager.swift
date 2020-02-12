@@ -20,6 +20,7 @@ class AppearanceManager: NSObject {
 private extension AppearanceManager {
   func customizeAppearances() {
     customizeButtons()
+    customizeBarButtonItems()
   }
 
   func customizeButtons() {
@@ -28,6 +29,11 @@ private extension AppearanceManager {
     appearance.setTitleColor(.primary, for: .normal)
     appearance.setTitleColor(.primaryLight, for: .highlighted)
     appearance.setTitleColor(UIColor.primary.withAlphaComponent(0.5), for: .disabled)
+  }
+
+  func customizeBarButtonItems() {
+    let appearance = UIBarButtonItem.appearance()
+    appearance.tintColor = .primary
   }
 }
 

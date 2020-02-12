@@ -62,6 +62,7 @@ extension MainViewController {
 private extension MainViewController {
   func showWelcomeView() {
     let welcomeViewController: WelcomeViewController = .controller()
+    welcomeViewController.isModalInPresentation = true
     let navigationController = UINavigationController(rootViewController: welcomeViewController)
     children.first?.present(navigationController, animated: true) { [weak self] in
       self?.popToRootViewController(animated: true)
@@ -71,8 +72,15 @@ private extension MainViewController {
   func showNearbyView() {
     let nearbyDroppsViewController: NearbyDroppsViewController = .controller()
     let navigationItem = nearbyDroppsViewController.navigationItem
-    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(profileAction(_:)))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postAction(_:)))
+    let profileTitle = NSLocalizedString("Profile", comment: "Button routing the user to view their own profile")
+    navigationItem.leftBarButtonItem = UIBarButtonItem(title: profileTitle,
+                                                       style: .plain,
+                                                       target: self,
+                                                       action: #selector(profileAction(_:)))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post",
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(postAction(_:)))
     setViewControllers([nearbyDroppsViewController], animated: true)
   }
 }
@@ -82,8 +90,11 @@ private extension MainViewController {
 private extension MainViewController {
   @objc private func profileAction(_ sender: UIBarButtonItem) {
     let profileViewController: CurrentUserViewController = .controller()
+    profileViewController.didPresentViewController = true
     profileViewController.currentUserViewModel = CurrentUserViewModel(user: currentUser!)
-    pushViewController(profileViewController, animated: true)
+    let navigationController = UINavigationController(rootViewController: profileViewController)
+    navigationController.isToolbarHidden = false
+    present(navigationController, animated: true, completion: nil)
   }
 
   @objc private func postAction(_ sender: UIBarButtonItem) {

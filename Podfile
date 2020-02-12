@@ -6,8 +6,8 @@ target 'Dropp3' do
   use_frameworks!
 
   # Pods for Dropp3
-  pod 'RealmSwift', '3.15.0'
-  pod 'Swinject', '2.6.0'
+  pod 'RealmSwift', '3.17.3'
+  pod 'Swinject', '2.6.2'
   pod 'ReactiveCocoa', '10.0.0'
 
   target 'Dropp3Tests' do

@@ -11,7 +11,7 @@ import MapKit
 import RealmSwift
 
 private struct Constants {
-  static let cellID = "cellID"
+  static let cellID = UUID().uuidString
   static let tableViewFadeAlphaDuration = 0.5
   static let tableViewFadeHiddenDuration = 0.15
 }
@@ -30,9 +30,12 @@ class NearbyDroppsViewController: UIViewController, ContainerConsumer {
     set {
       let generator = UIImpactFeedbackGenerator(style: .light)
       generator.prepare()
-      UIView.transition(with: tableView, duration: Constants.tableViewFadeHiddenDuration, options: .transitionCrossDissolve, animations: { [weak self] in
-        self?.tableView.isHidden = !newValue
-        self?.listButton.isEnabled = !newValue
+      UIView.transition(with: tableView,
+                        duration: Constants.tableViewFadeHiddenDuration,
+                        options: .transitionCrossDissolve,
+                        animations: { [weak self] in
+                          self?.tableView.isHidden = !newValue
+                          self?.listButton.isEnabled = !newValue
       })
 
       UIView.animate(withDuration: Constants.tableViewFadeAlphaDuration) { [weak self] in
@@ -117,7 +120,8 @@ extension NearbyDroppsViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID, for: indexPath) as? NearbyDroppTableViewCell else { fatalError() }
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID,
+                                                   for: indexPath) as? NearbyDroppTableViewCell else { fatalError() }
     cell.delegate = self
     cell.provide(dropp: viewModel.dropps[indexPath.row])
     return cell
@@ -162,7 +166,8 @@ extension NearbyDroppsViewController {
 // MARK: - UIGestureRecognizerDelegate
 
 extension NearbyDroppsViewController: UIGestureRecognizerDelegate {
-  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                         shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     return true
   }
 }
