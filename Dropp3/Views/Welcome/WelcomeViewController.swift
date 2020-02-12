@@ -29,7 +29,7 @@ class WelcomeViewController: UIPageViewController {
     }
   }
 
-  private lazy var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .gray)
+  private lazy var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .medium)
   private lazy var loadingIndicatorItem: UIBarButtonItem = UIBarButtonItem(customView: loadingIndicator)
 }
 

@@ -198,20 +198,22 @@ extension CurrentUserViewController {
 // MARK: - UITableViewDelegate
 
 extension CurrentUserViewController {
-  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+  func tableView(_ tableView: UITableView,
+                 trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     if isEditing { return nil }
     let deleteTitle = NSLocalizedString("Delete", comment: "Button prompting the user to delete the item")
-    let deleteAction = UITableViewRowAction(style: .default, title: deleteTitle) { [weak self] (_, indexPath) in
-      self?.currentUserViewModel.deleteDropp(atIndex: indexPath.row) {
-        let generator = UINotificationFeedbackGenerator()
-        generator.prepare()
-        self?.deleteRows(at: [indexPath])
-        generator.notificationOccurred(.success)
-      }
+    let deleteAction = UIContextualAction(style: .destructive,
+                                          title: deleteTitle) { [weak self] (action, view, completionHandler) in
+                                            self?.currentUserViewModel.deleteDropp(atIndex: indexPath.row,
+                                                                                   performUpdates: {
+                                                                                    let generator = UINotificationFeedbackGenerator()
+                                                                                    generator.prepare()
+                                                                                    self?.deleteRows(at: [indexPath])
+                                                                                    generator.notificationOccurred(.success)
+                                            })
     }
-
     deleteAction.backgroundColor = .buttonBackground
-    return [deleteAction]
+    return UISwipeActionsConfiguration(actions: [deleteAction])
   }
 
   override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

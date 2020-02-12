@@ -31,11 +31,11 @@ struct RealmProvider {
     let realm = try! Realm()
     realm.refresh()
     if realm.isInWriteTransaction {
-      return realm.add(data, update: update)
+      return realm.add(data, update: update ? .all : .modified)
     }
 
     try? realm.write {
-      realm.add(data, update: update)
+      realm.add(data, update: update ? .all : .modified)
     }
   }
 
