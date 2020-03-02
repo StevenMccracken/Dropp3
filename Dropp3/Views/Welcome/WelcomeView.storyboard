@@ -1,23 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rje-qg-Ld0">
-    <device id="retina6_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ib0-we-42K">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Welcome-->
-        <scene sceneID="jbT-g7-b45">
+        <!--Welcome View Controller-->
+        <scene sceneID="n1X-ca-hl5">
             <objects>
-                <pageViewController storyboardIdentifier="WelcomeView" autoresizesArchivedViewToFullSize="NO" title="Welcome" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="rje-qg-Ld0" customClass="WelcomeViewController" customModule="Dropp3" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Welcome" id="D9V-ia-2cf"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aGp-aN-l08" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="WelcomeView" id="Ib0-we-42K" customClass="WelcomeViewController" customModule="Dropp3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9g0-Mi-aDV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="am8-Zs-32T">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items/>
+                            </toolbar>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSb-sv-Nku">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <connections>
+                                    <segue destination="63j-ao-x1W" kind="embed" id="caa-Nw-kw7"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="am8-Zs-32T" firstAttribute="top" secondItem="hSb-sv-Nku" secondAttribute="bottom" id="0w4-Hf-CU7"/>
+                            <constraint firstItem="am8-Zs-32T" firstAttribute="centerX" secondItem="9g0-Mi-aDV" secondAttribute="centerX" id="Hyi-A3-zd0"/>
+                            <constraint firstItem="hSb-sv-Nku" firstAttribute="leading" secondItem="9g0-Mi-aDV" secondAttribute="leading" id="Z1H-Cq-nil"/>
+                            <constraint firstAttribute="trailing" secondItem="hSb-sv-Nku" secondAttribute="trailing" id="fMO-Th-BNo"/>
+                            <constraint firstItem="am8-Zs-32T" firstAttribute="leading" secondItem="WHq-HC-30F" secondAttribute="leading" id="gl6-fU-HQN"/>
+                            <constraint firstItem="am8-Zs-32T" firstAttribute="bottom" secondItem="WHq-HC-30F" secondAttribute="bottom" id="tCI-Pd-Tb5"/>
+                            <constraint firstItem="hSb-sv-Nku" firstAttribute="top" secondItem="WHq-HC-30F" secondAttribute="top" id="vib-HL-AXX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WHq-HC-30F"/>
+                    </view>
+                    <connections>
+                        <outlet property="toolbar" destination="am8-Zs-32T" id="kpK-xa-DkU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Fl-lf-X7I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1217" y="145"/>
+            <point key="canvasLocation" x="2976.811594202899" y="132.58928571428572"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="mL7-LG-dJ3">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="63j-ao-x1W" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hWL-3l-IE4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3950.7246376811599" y="132.92410714285714"/>
         </scene>
     </scenes>
 </document>

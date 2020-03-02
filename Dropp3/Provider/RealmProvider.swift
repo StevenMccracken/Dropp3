@@ -47,7 +47,7 @@ struct RealmProvider {
     guard isRealmAccessible else { return }
     let realm = try! Realm()
     realm.refresh()
-    let validTokens = tokens.compactMap({ $0 })
+    let validTokens = tokens.compactMap { $0 }
     guard validTokens.isEmpty else {
       realm.beginWrite()
       action()
@@ -104,16 +104,7 @@ struct RealmProvider {
 
 extension RealmProvider {
   var isRealmAccessible: Bool {
-    let isAccessible: Bool
-    do {
-      _ = try Realm()
-      isAccessible = true
-    } catch {
-      debugPrint("Realm is not accessible")
-      isAccessible = false
-    }
-
-    return isAccessible
+    return (try? Realm()) != nil
   }
 
   func configure() {

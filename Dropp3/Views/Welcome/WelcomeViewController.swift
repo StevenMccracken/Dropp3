@@ -8,19 +8,32 @@
 
 import UIKit
 
-class WelcomeViewController: UIPageViewController {
-  typealias Page = WelcomeViewPage & UIViewController
-  private var pages: [Page] = []
+final class WelcomeViewController: UIViewController {
+  // MARK: - State
 
-  // MARK: - Loading
+  private enum State: Int, CaseIterable {
+    case signUp
+    case logIn
+  }
 
+  // MARK: - State management
+
+  private var pages: [WelcomeViewPage] = []
+  private var state: State = .signUp {
+    didSet {
+      configurePage(for: state, from: oldValue)
+      configurePageNavigation(for: state)
+    }
+  }
   private var loading: Bool = false {
     didSet {
       if loading {
-        view.endEditing(true)
+        pages.forEach { $0.setEditing(false, animated: true) }
+        [logInButton, signUpButton].forEach { $0.isEnabled = false }
         loadingIndicator.startAnimating()
         navigationItem.setRightBarButton(loadingIndicatorItem, animated: true)
       } else {
+        [logInButton, signUpButton].forEach { $0.isEnabled = true }
         navigationItem.setRightBarButton(nil, animated: true)
         loadingIndicator.stopAnimating()
       }
@@ -29,8 +42,25 @@ class WelcomeViewController: UIPageViewController {
     }
   }
 
+  // MARK: - UI objects
+
+  @IBOutlet private weak var toolbar: UIToolbar!
+  private var pageViewController: UIPageViewController! {
+    didSet {
+      pageViewController.delegate = self
+      pageViewController.dataSource = self
+    }
+  }
   private lazy var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .medium)
   private lazy var loadingIndicatorItem: UIBarButtonItem = UIBarButtonItem(customView: loadingIndicator)
+  private lazy var signUpButton: UIBarButtonItem = UIBarButtonItem(title: "Sign Up",
+                                                                   style: .plain,
+                                                                   target: self,
+                                                                   action: #selector(switchPageAction(_:)))
+  private lazy var logInButton: UIBarButtonItem = UIBarButtonItem(title: "Log In",
+                                                                  style: .plain,
+                                                                  target: self,
+                                                                  action: #selector(switchPageAction(_:)))
 }
 
 // MARK: - View lifecycle
@@ -38,29 +68,45 @@ class WelcomeViewController: UIPageViewController {
 extension WelcomeViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    setUpPages()
-    setUpNavigation()
-    setUpPageViewController()
-  }
+    self.pageViewController = (children.first as! UIPageViewController) // Added parentheses to silence warning
+    navigationItem.prompt = NSLocalizedString("Welcome", comment: "View header providing a welcoming message")
 
-  private func setUpPages() {
+    // Confifigure pages
     let logInViewController: LogInViewController = .controller()
     let signUpViewController: SignUpViewController = .controller()
     logInViewController.delegate = self
     signUpViewController.delegate = self
     pages = [signUpViewController, logInViewController]
+    state = .signUp
   }
+}
 
-  private func setUpNavigation() {
-    navigationItem.prompt = pages.first?.title
-  }
+// MARK: - View state configuration
 
-  private func setUpPageViewController() {
-    delegate = self
-    dataSource = self
-    let page: Page! = pages.first
+private extension WelcomeViewController {
+  private func configurePage(for state: State, from oldState: State) {
+    let page: WelcomeViewPage = pages[state.rawValue]
     view.backgroundColor = page.view.backgroundColor
-    setViewControllers([page], direction: .forward, animated: true, completion: nil)
+    let direction: UIPageViewController.NavigationDirection
+    switch (oldState, state) {
+    case (.signUp, .signUp), (.logIn, .logIn), (.signUp, .logIn):
+      direction = .forward
+    case (.logIn, .signUp):
+      direction = .reverse
+    }
+    pageViewController.setViewControllers([page], direction: direction, animated: true, completion: nil)
+  }
+
+  private func configurePageNavigation(for state: State) {
+    let items: [UIBarButtonItem]
+    switch state {
+    case .signUp:
+      items = [.flexibileSpace, logInButton]
+    case .logIn:
+      items = [signUpButton, .flexibileSpace]
+    }
+    navigationItem.title = pages[state.rawValue].title
+    toolbar.setItems(items, animated: true)
   }
 }
 
@@ -84,7 +130,7 @@ extension WelcomeViewController: UIPageViewControllerDataSource {
   }
 
   func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-    guard let firstViewController = viewControllers?.first else { return 0 }
+    guard let firstViewController = pageViewController.viewControllers?.first else { return 0 }
     return pages.firstIndex { $0 == firstViewController } ?? 0
   }
 }
@@ -96,17 +142,34 @@ extension WelcomeViewController: UIPageViewControllerDelegate {
                           didFinishAnimating finished: Bool,
                           previousViewControllers: [UIViewController],
                           transitionCompleted completed: Bool) {
-    guard completed else { return }
-    let newViewController = pages.filter { !previousViewControllers.contains($0) }.first
-    navigationItem.prompt = newViewController?.title
-    view.backgroundColor = newViewController?.view.backgroundColor
+    guard completed,
+      let newViewController = pages.filter({ !previousViewControllers.contains($0) }).map({ $0 as UIViewController }).first,
+      let pageIndex = pages.firstIndex(where: { $0 == newViewController }) else {
+        return
+    }
+    state = State.allCases[pageIndex]
   }
 }
 
 // MARK: - WelcomeViewDelegate
 
 extension WelcomeViewController: WelcomeViewDelegate {
-  func welcomeViewChild(_ child: UIViewController & WelcomeViewPage, didToggleLoading loading: Bool) {
+  func welcomeViewPage(_ page: WelcomeViewPage, didToggleLoading loading: Bool) {
     self.loading = loading
+  }
+}
+
+// MARK: - Actions
+
+private extension WelcomeViewController {
+  @objc private func switchPageAction(_ sender: UIBarButtonItem) {
+    switch sender {
+    case logInButton:
+      state = .logIn
+    case signUpButton:
+      state = .signUp
+    default:
+      fatalError("Unrecognized sender")
+    }
   }
 }

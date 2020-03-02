@@ -7,15 +7,14 @@
 //
 
 import UIKit
-import ReactiveSwift
-import ReactiveCocoa
 
-class LogInViewController: UITableViewController, WelcomeViewPage {
-  var viewModel: LogInViewModel! = LogInViewModel()
-  var delegate: WelcomeViewDelegate?
-
-  private var textFields: [UITextField]!
-  private var logInAction: CocoaAction<Any>!
+final class LogInViewController: UITableViewController, WelcomeViewPage, ContainerConsumer {
+  weak var delegate: WelcomeViewDelegate?
+  private lazy var viewModel: LogInViewModelProtocol = {
+    var viewModel = container.resolve(LogInViewModelProtocol.self)!
+    viewModel.delegate = self
+    return viewModel
+  }()
 
   // MARK: - Outlets
 
@@ -29,69 +28,85 @@ class LogInViewController: UITableViewController, WelcomeViewPage {
 extension LogInViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = "Log In"
-    logInButton.reactive.isEnabled <~ viewModel.logInEnabled.producer
-    viewModel.username <~ usernameTextField.reactive.continuousTextValues.producer
-    viewModel.password <~ passwordTextField.reactive.continuousTextValues.producer
-    logInAction = CocoaAction(viewModel.logInAction, input: ())
-    logInButton.addTarget(logInAction, action: CocoaAction<Any>.selector, for: .touchUpInside)
-    logInButton.reactive.controlEvents(.touchUpInside).observeValues { [unowned self] _ in
-      self.delegate?.welcomeViewChild(self, didToggleLoading: true)
-    }
+    title = NSLocalizedString("Log In", comment: "Title telling the user to log in to the app")
+  }
+}
 
-    viewModel.logInSignal.observeResult { result in
-      guard let success = result.value else { return }
-      print(success)
-    }
+// MARK: - Editing
 
-    viewModel.logInSignal.observeFailed { error in
-      print(error.localizedDescription)
+extension LogInViewController {
+  override func setEditing(_ editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: animated)
+    if (!editing) {
+      [usernameTextField, passwordTextField].forEach { $0?.resignFirstResponder() }
     }
-
-    textFields = [usernameTextField, passwordTextField]
   }
 }
 
 // MARK: - Actions
 
-extension LogInViewController {
-  @IBAction private func logInAction(_ sender: Any) {
-//    logInButton.isEnabled = false
-//    currentUserService = userService
-//    currentUserService?.logIn(username: username, password: UUID().uuidString, success: nil) { [weak self] error in
-//      self?.currentUserService = nil
-//      print(error)
-//    }
+private extension LogInViewController {
+  @IBAction func logInAction(_ sender: UIButton) {
+    viewModel.attemptLogin()
   }
 
   @IBAction func textFieldDidChange(_ sender: UITextField) {
-//    let validations: [Bool] = textFieldValidations.map { (textField, requiredCharacters) in
-//      let trimmedText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//      let matchesValidation = trimmedText.count >= requiredCharacters
-//      textField.textColor = matchesValidation ? .black : .disabled
-//      return matchesValidation
-//    }
-//
-//    let validTextFields = validations.filter { $0 }
-//    logInButton.isEnabled = validTextFields.count == textFieldValidations.count
+    switch sender {
+    case usernameTextField:
+      viewModel.process(username: sender.text ?? "")
+    case passwordTextField:
+      viewModel.process(password: sender.text ?? "")
+    default:
+      fatalError("Unrecognized text field")
+    }
   }
 }
 
 // MARK: - UITextFieldDelegate
 
 extension LogInViewController: UITextFieldDelegate {
-  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
+                 replacementString string: String) -> Bool {
     return string.rangeOfCharacter(from: .whitespaces) == nil
   }
 
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if textField == textFields.last {
+    if textField == usernameTextField {
+      passwordTextField.becomeFirstResponder()
+    } else if textField == passwordTextField {
       textField.resignFirstResponder()
     } else {
-      guard let index = textFields.firstIndex(of: textField) else { fatalError() }
-      textFields[index + 1].becomeFirstResponder()
+      fatalError("Unrecognized text field")
     }
-
     return true
+  }
+}
+
+// MARK: - LogInViewModelDelegate
+
+extension LogInViewController: LogInViewModelDelegate {
+  func toggleLoading(_ loading: Bool) {
+    delegate?.welcomeViewPage(self, didToggleLoading: loading)
+  }
+
+  func toggleLoginAction(enabled: Bool) {
+    logInButton.isEnabled = enabled
+  }
+
+  func toggleUsernameField(valid: Bool) {
+    usernameTextField.textColor = valid ? .black : .disabled
+  }
+
+  func togglePasswordField(valid: Bool) {
+    passwordTextField.textColor = valid ? .black : .disabled
+  }
+
+  func loginDidSucceed() {
+    debugPrint("Success!")
+  }
+
+  func loginDidFail(reason: String) {
+    debugPrint(reason)
   }
 }

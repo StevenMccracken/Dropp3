@@ -7,31 +7,70 @@
 //
 
 import Foundation
-import ReactiveSwift
 
-class LogInViewModel: UserServiceConsumer {
-  let logInEnabled: Property<Bool>
-  var username: MutableProperty<String> = MutableProperty("")
-  var password: MutableProperty<String> = MutableProperty("")
+final class LogInViewModel {
+  private var username: String?
+  private var password: String?
+  weak var delegate: LogInViewModelDelegate?
+}
 
-  private(set) var logInSignal: Signal<Bool, Error>!
-  private(set) var logInAction: Action<Void, Bool, Error>!
+// MARK: - LogInViewModelProtocol
 
-  init() {
-    logInEnabled = Property.combineLatest(
-      username.map { $0.trimmingCharacters(in: .whitespacesAndNewlines).count >= 8 },
-      password.map { $0.trimmingCharacters(in: .whitespacesAndNewlines).count >= 10 }).map { $0 && $1 }
+extension LogInViewModel: LogInViewModelProtocol {
+  func process(username: String) {
+    self.username = username
+    validateUsernameField(username: username)
+    validateLoginAction()
+  }
 
-    logInSignal = Signal { [unowned self] (subscriber, _) in
-      self.userService.logIn(username: self.username.value, password: self.password.value, success: {
-        subscriber.send(value: true)
-        subscriber.sendCompleted()
-      }, failure: { error in
-        subscriber.send(value: false)
-        subscriber.send(error: error)
-      })
+  func process(password: String) {
+    self.password = password
+    validatePasswordField(password: password)
+    validateLoginAction()
+  }
+
+  func attemptLogin() {
+    guard let username = self.username,
+      let password = self.password,
+      CredentialRules.Username(credential: username).isValid,
+      CredentialRules.Password(credential: password).isValid else {
+        return
     }
+    delegate?.toggleLoading(true)
+    delegate?.toggleLoginAction(enabled: false)
+    userService.logIn(username: username, password: password, success: { [weak self] in
+      DispatchQueue.main.async {
+        self?.delegate?.toggleLoading(false)
+        self?.delegate?.loginDidSucceed()
+      }
+    }) { [weak self] error in
+      DispatchQueue.main.async {
+        self?.delegate?.toggleLoading(false)
+        self?.delegate?.toggleLoginAction(enabled: true)
+        self?.delegate?.loginDidFail(reason: error.localizedDescription)
+      }
+    }
+  }
+}
 
-    logInAction = Action(enabledIf: logInEnabled) { [unowned self] in return self.logInSignal.producer }
+// MARK: - Validations
+
+private extension LogInViewModel {
+  func validateUsernameField(username: String) {
+    delegate?.toggleUsernameField(valid: CredentialRules.Username(credential: username).isValid)
+  }
+
+  func validatePasswordField(password: String) {
+    delegate?.togglePasswordField(valid: CredentialRules.Password(credential: password).isValid)
+  }
+
+  func validateLoginAction() {
+    guard let username = self.username, let password = self.password else {
+      delegate?.toggleLoginAction(enabled: false)
+      return
+    }
+    let isValidUsername = CredentialRules.Username(credential: username).isValid
+    let isValidPassword = CredentialRules.Password(credential: password).isValid
+    delegate?.toggleLoginAction(enabled: isValidUsername && isValidPassword)
   }
 }

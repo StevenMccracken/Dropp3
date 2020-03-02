@@ -9,10 +9,6 @@
 import Foundation
 import UIKit
 
-protocol WelcomeViewPage: UserServiceConsumer {
+protocol WelcomeViewPage: UserServiceConsumer, UIViewController {
   var delegate: WelcomeViewDelegate? { get set }
-}
-
-protocol WelcomeViewDelegate: AnyObject {
-  func welcomeViewChild(_ child: WelcomeViewPage & UIViewController, didToggleLoading loading: Bool)
 }

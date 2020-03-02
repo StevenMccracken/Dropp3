@@ -64,7 +64,7 @@ extension UserServiceAccessor: UserService {
              password: String,
              success: (() -> Void)?,
              failure: @escaping (UserServiceError.LoginError) -> Void) {
-    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(1)) {/* [weak self] in*/
+    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(8)) { [weak self] in
 //      guard let `self` = self else { return }
 //      let currentUser = CurrentUser(username: username,
 //                                    firstName: String(UUID().uuidString.split(separator: "-").first!),
@@ -81,11 +81,12 @@ extension UserServiceAccessor: UserService {
               lastName: String,
               success: (() -> Void)?,
               failure: @escaping (UserServiceError.SignUpError) -> Void) {
-    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-      guard let `self` = self else { return }
-      let currentUser = CurrentUser(username: username, firstName: firstName, lastName: lastName)
-      self.realmProvider.add(currentUser)
-      success?()
+    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(8)) { [weak self] in
+//      guard let `self` = self else { return }
+//      let currentUser = CurrentUser(username: username, firstName: firstName, lastName: lastName)
+//      self.realmProvider.add(currentUser)
+//      success?()
+      failure(.existingUsername)
     }
   }
 }

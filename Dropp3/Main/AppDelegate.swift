@@ -23,12 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return currentUsers.first ?? .noUser
     }
 
+    container.register(UserService.self) { _ in UserServiceAccessor() }.inObjectScope(.container)
+    container.register(DroppService.self) { _ in DroppServiceAccessor() }.inObjectScope(.container)
     container.register(UserProvider.self) { _ in MainUserProvider() }
-    container.register(UserService.self) { _ in UserServiceAccessor() }
-      .inObjectScope(.container)
     container.register(DroppProvider.self) { _ in MainDroppProvider() }
-    container.register(DroppService.self) { _ in DroppServiceAccessor() }
     container.register(NearbyDroppsViewModelProtocol.self) { _ in NearbyDroppsViewModel() }
+    container.register(LogInViewModelProtocol.self) { _ in LogInViewModel() }
+    container.register(SignUpViewModelProtocol.self) { _ in SignUpViewModel() }
   }
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

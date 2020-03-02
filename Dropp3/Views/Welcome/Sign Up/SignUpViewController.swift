@@ -8,12 +8,13 @@
 
 import UIKit
 
-class SignUpViewController: UITableViewController, WelcomeViewPage {
-  var delegate: WelcomeViewDelegate?
-  private var currentUserService: UserService?
-  private var textFields: [UITextField] = []
-  private var nonWhitespaceTextFields: Set<UITextField> = []
-  private var textFieldValidations: [UITextField: UInt] = [:]
+final class SignUpViewController: UITableViewController, WelcomeViewPage {
+  weak var delegate: WelcomeViewDelegate?
+  private lazy var viewModel: SignUpViewModelProtocol = {
+    var viewModel = container.resolve(SignUpViewModelProtocol.self)!
+    viewModel.delegate = self
+    return viewModel
+  }()
 
   // MARK: - Outlets
 
@@ -23,22 +24,6 @@ class SignUpViewController: UITableViewController, WelcomeViewPage {
   @IBOutlet weak var lastNameTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var confirmPasswordTextField: UITextField!
-
-  private var username: String {
-    return usernameTextField.text!
-  }
-
-  private var password: String {
-    return passwordTextField.text!
-  }
-
-  private var firstName: String {
-    return firstNameTextField.text!
-  }
-
-  private var lastName: String {
-    return lastNameTextField.text!
-  }
 }
 
 // MARK: - View lifecycle
@@ -47,57 +32,48 @@ extension SignUpViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = NSLocalizedString("Sign Up", comment: "Title telling the user to sign up for the app")
-    textFieldValidations = [
-      usernameTextField: 8,
-      firstNameTextField: 2,
-      lastNameTextField: 2,
-      passwordTextField: 10,
-      confirmPasswordTextField: 10
-    ]
-    textFields = [usernameTextField, firstNameTextField, lastNameTextField, passwordTextField, confirmPasswordTextField]
-    [usernameTextField, passwordTextField, confirmPasswordTextField].forEach {
-      nonWhitespaceTextFields.insert($0)
+  }
+}
+
+// MARK: - Editing
+
+extension SignUpViewController {
+  override func setEditing(_ editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: animated)
+    if (!editing) {
+      [usernameTextField,
+       firstNameTextField,
+       lastNameTextField,
+       passwordTextField,
+       confirmPasswordTextField].forEach {
+        $0?.resignFirstResponder()
+      }
     }
   }
 }
 
 // MARK: - Actions
 
-extension SignUpViewController {
-  @IBAction private func signUpAction(_ sender: Any) {
-    signUpButton.isEnabled = false
-    delegate?.welcomeViewChild(self, didToggleLoading: true)
-    currentUserService = userService
-    currentUserService?.signUp(username: username,
-                               password: password,
-                               firstName: firstName,
-                               lastName: lastName,
-                               success: nil) { [weak self] error in
-                                self?.currentUserService = nil
-                                debugPrint(error)
-    }
+private extension SignUpViewController {
+  @IBAction func signUpAction(_ sender: Any) {
+    viewModel.attemptSignUp()
   }
 
   @IBAction func textFieldDidChange(_ sender: UITextField) {
-    let validations: [Bool] = textFieldValidations.map { (textField, requiredCharacters) in
-      let trimmedText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-      let matchesValidation = trimmedText.count >= requiredCharacters
-      let matchesExtraValidation: Bool
-      defer {
-        textField.textColor = matchesValidation && matchesExtraValidation ? .black : .disabled
-      }
-
-      guard textField == passwordTextField || textField == confirmPasswordTextField else {
-        matchesExtraValidation = true
-        return matchesValidation
-      }
-
-      matchesExtraValidation = passwordTextField.text == confirmPasswordTextField.text
-      return matchesValidation && matchesExtraValidation
+    switch sender {
+    case firstNameTextField:
+      viewModel.process(firstName: sender.text ?? "")
+    case lastNameTextField:
+      viewModel.process(lastName: sender.text ?? "")
+    case usernameTextField:
+      viewModel.process(username: sender.text ?? "")
+    case passwordTextField:
+      viewModel.process(password: sender.text ?? "")
+    case confirmPasswordTextField:
+      viewModel.process(confirmedPassword: sender.text ?? "")
+    default:
+      fatalError("Unrecognized text field")
     }
-
-    let validTextFields = validations.filter { $0 }
-    signUpButton.isEnabled = validTextFields.count == textFields.count
   }
 }
 
@@ -107,18 +83,63 @@ extension SignUpViewController: UITextFieldDelegate {
   func textField(_ textField: UITextField,
                  shouldChangeCharactersIn range: NSRange,
                  replacementString string: String) -> Bool {
-    guard nonWhitespaceTextFields.contains(textField) else { return true }
     return string.rangeOfCharacter(from: .whitespaces) == nil
   }
 
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if textField == textFields.last {
+    if textField == firstNameTextField {
+      lastNameTextField.becomeFirstResponder()
+    } else if textField == lastNameTextField {
+      usernameTextField.becomeFirstResponder()
+    } else if textField == usernameTextField {
+      passwordTextField.becomeFirstResponder()
+    } else if textField == passwordTextField {
+      confirmPasswordTextField.becomeFirstResponder()
+    } else if textField == confirmPasswordTextField {
       textField.resignFirstResponder()
     } else {
-      guard let index = textFields.firstIndex(of: textField) else { fatalError() }
-      textFields[index + 1].becomeFirstResponder()
+      fatalError("Unrecognized text field")
     }
-
     return true
+  }
+}
+
+// MARK: - SignUpViewModelDelegate
+
+extension SignUpViewController: SignUpViewModelDelegate {
+  func toggleLoading(_ loading: Bool) {
+    delegate?.welcomeViewPage(self, didToggleLoading: loading)
+  }
+
+  func toggleSignUpAction(enabled: Bool) {
+    signUpButton.isEnabled = enabled
+  }
+
+  func toggleFirstNameField(valid: Bool) {
+    firstNameTextField.textColor = valid ? .black : .disabled
+  }
+
+  func toggleLastNameField(valid: Bool) {
+    lastNameTextField.textColor = valid ? .black : .disabled
+  }
+
+  func toggleUsernameField(valid: Bool) {
+    usernameTextField.textColor = valid ? .black : .disabled
+  }
+
+  func togglePasswordField(valid: Bool) {
+    passwordTextField.textColor = valid ? .black : .disabled
+  }
+
+  func toggleConfirmedPasswordField(valid: Bool) {
+    confirmPasswordTextField.textColor = valid ? .black : .disabled
+  }
+
+  func signUpDidSucceed() {
+    debugPrint("Sign up succeeded!")
+  }
+
+  func signUpDidFail(reason: String) {
+    debugPrint(reason)
   }
 }
