@@ -11,12 +11,12 @@ import Foundation
 struct UserServiceError: LocalizedError {
   let code: ServiceErrorCode = .user
 
-  enum LoginError: Int, LocalizedError {
+  enum Login: Int, LocalizedError {
     case unknownUsername
     case invalidCredentials
   }
 
-  enum SignUpError: Int, LocalizedError {
+  enum SignUp: Int, LocalizedError {
     case invalidUsername
     case invalidPassword
     case existingUsername

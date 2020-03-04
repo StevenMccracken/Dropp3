@@ -15,13 +15,10 @@ private struct CoordinateSpanDelta {
 }
 
 final class LocationViewController: UIViewController {
-
   // MARK: - Location
 
   var location: Location!
-  private var coordinate: CLLocationCoordinate2D {
-    return location.coreLocation.coordinate
-  }
+  private var coordinate: CLLocationCoordinate2D { location.coreLocation.coordinate }
   private var annotation: MKAnnotation {
     let annotation = MKPointAnnotation()
     annotation.coordinate = coordinate
@@ -36,12 +33,8 @@ final class LocationViewController: UIViewController {
   // MARK: - Views
 
   @IBOutlet private weak var mapView: MKMapView!
-
-  // MARK: - Buttons
-
   @IBOutlet private weak var coordinatesButton: UIBarButtonItem!
   @IBOutlet private weak var currentLocationButton: UIBarButtonItem!
-
 }
 
 // MARK: - View lifecycle

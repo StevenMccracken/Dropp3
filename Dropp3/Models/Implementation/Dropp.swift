@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class Dropp: Object {
+final class Dropp: Object {
   @objc dynamic var message: String = ""
   @objc dynamic var hasImage: Bool = false
   @objc dynamic var identifier: String = ""

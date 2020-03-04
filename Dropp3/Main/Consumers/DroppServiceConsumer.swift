@@ -16,7 +16,5 @@ protocol DroppServiceConsumer: ContainerConsumer {
 // MARK: - Default implementation
 
 extension DroppServiceConsumer {
-  var droppService: DroppService {
-    return container.resolve(DroppService.self)!
-  }
+  var droppService: DroppService { container.resolve(DroppService.self)! }
 }

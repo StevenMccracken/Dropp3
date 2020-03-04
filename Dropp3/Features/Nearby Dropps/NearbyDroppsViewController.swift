@@ -54,13 +54,10 @@ final class NearbyDroppsViewController: UIViewController, ContainerConsumer {
     }
   }
 
-  // MARK: - Views
+  // MARK: - Subviews
 
   @IBOutlet private weak var mapView: MKMapView!
   @IBOutlet private weak var tableView: UITableView!
-
-  // MARK: - Buttons
-
   @IBOutlet private weak var listButton: UIBarButtonItem!
   @IBOutlet private weak var locateButton: UIBarButtonItem!
   @IBOutlet private weak var refreshButton: UIBarButtonItem!
@@ -151,7 +148,7 @@ extension NearbyDroppsViewController: UITableViewDelegate {
 extension NearbyDroppsViewController: MKMapViewDelegate {
 }
 
-// MARK: - User interaction
+// MARK: - Actions
 
 private extension NearbyDroppsViewController {
   @IBAction func listButtonAction(_ sender: UIBarButtonItem) {

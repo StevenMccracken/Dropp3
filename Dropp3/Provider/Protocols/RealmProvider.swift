@@ -11,7 +11,6 @@ import RealmSwift
 
 /// Defines how to interact with a database backed by Realm
 protocol RealmProvider {
-
   // MARK: - Create/Update
 
   /**

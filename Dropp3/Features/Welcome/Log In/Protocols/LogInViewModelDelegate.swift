@@ -9,7 +9,6 @@
 import Foundation
 
 protocol LogInViewModelDelegate: AnyObject {
-
   // MARK: - Control toggling
 
   func toggleLoading(_ loading: Bool)

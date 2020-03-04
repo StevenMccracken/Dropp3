@@ -9,7 +9,7 @@
 import Foundation
 
 /// Main implementation of the `DroppService` protocol
-class DroppServiceAccessor: RealmProviderConsumer {
+final class DroppServiceAccessor: RealmProviderConsumer {
 }
 
 // MARK: - DroppService
@@ -17,7 +17,7 @@ class DroppServiceAccessor: RealmProviderConsumer {
 extension DroppServiceAccessor: DroppService {
   func getDropps(around location: LocationProtocol,
                  success: @escaping ([Dropp]) -> Void,
-                 failure: ((DroppServiceError.NearbyDroppsError) -> Void)?) {
+                 failure: ((DroppServiceError.NearbyDropps) -> Void)?) {
     DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
       guard let self = self else { return }
       let user = User(username: UUID().uuidString, firstName: UUID().uuidString, lastName: UUID().uuidString)

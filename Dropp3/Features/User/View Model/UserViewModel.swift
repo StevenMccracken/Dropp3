@@ -10,14 +10,9 @@ import Foundation
 import RealmSwift
 
 class UserViewModel: CurrentUserConsumer {
-  // MARK: - Public data
-
   let user: User
   weak var delegate: UserViewModelDelegate?
   private(set) var observationTokens: Set<NotificationToken> = []
-
-  // MARK: - Private data
-
   private enum Section: Int, CaseIterable {
     case user
     case dropps
@@ -37,13 +32,8 @@ class UserViewModel: CurrentUserConsumer {
 // MARK: - UserViewModelProtocol
 
 extension UserViewModel: UserViewModelProtocol {
-  @objc var title: String {
-    return user.username
-  }
-
-  var sections: Int {
-    return Section.allCases.count
-  }
+  @objc var title: String { user.username }
+  var sections: Int { Section.allCases.count }
 
   func numberOfRows(forSection section: Int) -> Int {
     guard let viewSection = Section(rawValue: section) else { fatalError("Invalid section: \(section)") }
@@ -54,7 +44,6 @@ extension UserViewModel: UserViewModelProtocol {
     case .dropps:
       rows = user.dropps.count
     }
-
     return rows
   }
 

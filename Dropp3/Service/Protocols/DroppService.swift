@@ -18,5 +18,5 @@ protocol DroppService {
    */
   func getDropps(around location: LocationProtocol,
                  success: @escaping ([Dropp]) -> Void,
-                 failure: ((DroppServiceError.NearbyDroppsError) -> Void)?)
+                 failure: ((DroppServiceError.NearbyDropps) -> Void)?)
 }

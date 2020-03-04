@@ -16,11 +16,11 @@ final class LogInViewController: UITableViewController, WelcomeViewPage, Contain
     return viewModel
   }()
 
-  // MARK: - Outlets
+  // MARK: - Subviews
 
-  @IBOutlet weak var logInButton: UIButton!
-  @IBOutlet weak var usernameTextField: UITextField!
-  @IBOutlet weak var passwordTextField: UITextField!
+  @IBOutlet private weak var logInButton: UIButton!
+  @IBOutlet private weak var usernameTextField: UITextField!
+  @IBOutlet private weak var passwordTextField: UITextField!
 }
 
 // MARK: - View lifecycle
@@ -65,18 +65,17 @@ private extension LogInViewController {
 // MARK: - UITextFieldDelegate
 
 extension LogInViewController: UITextFieldDelegate {
-  func textField(_ textField: UITextField,
-                 shouldChangeCharactersIn range: NSRange,
-                 replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     return string.rangeOfCharacter(from: .whitespaces) == nil
   }
 
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if textField == usernameTextField {
+    switch textField {
+    case usernameTextField:
       passwordTextField.becomeFirstResponder()
-    } else if textField == passwordTextField {
+    case passwordTextField:
       textField.resignFirstResponder()
-    } else {
+    default:
       fatalError("Unrecognized text field")
     }
     return true

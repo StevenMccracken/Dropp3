@@ -8,16 +8,11 @@
 
 import UIKit
 
-protocol UserDroppCellDelegate: AnyObject {
-  func userDroppTableViewCell(shouldShowLocationFromCell userDroppTableViewCell: UserDroppTableViewCell)
-}
-
-class UserDroppTableViewCell: UITableViewCell {
+final class UserDroppTableViewCell: UITableViewCell {
   static let nib = UINib(nibName: "UserDroppTableViewCell", bundle: .main)
-
   weak var delegate: UserDroppCellDelegate?
 
-  // MARK: - Outlets
+  // MARK: - Subviews
 
   @IBOutlet private weak var messageLabel: UILabel!
   @IBOutlet private weak var locationButton: UIButton!
@@ -53,8 +48,8 @@ extension UserDroppTableViewCell {
 
 // MARK: - Actions
 
-extension UserDroppTableViewCell {
-  @IBAction private func locationButtonAction(_ sender: UIButton) {
+private extension UserDroppTableViewCell {
+  @IBAction func locationButtonAction(_ sender: UIButton) {
     delegate?.userDroppTableViewCell(shouldShowLocationFromCell: self)
   }
 }

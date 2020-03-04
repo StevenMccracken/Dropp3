@@ -11,15 +11,9 @@ import UIKit
 final class CurrentUserViewController: UserViewController {
   // MARK: - Buttons
 
-  private lazy var editButton = UIBarButtonItem(barButtonSystemItem: .edit,
-                                                target: self,
-                                                action: #selector(editAction(_:)))
-  private lazy var deleteButton = UIBarButtonItem(barButtonSystemItem: .trash,
-                                                  target: self,
-                                                  action: #selector(deleteAction(_:)))
-  private lazy var cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                                  target: self,
-                                                  action: #selector(cancelAction(_:)))
+  private lazy var editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editAction(_:)))
+  private lazy var deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteAction(_:)))
+  private lazy var cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction(_:)))
   private lazy var logoutButton: UIBarButtonItem = {
     let title = NSLocalizedString("Logout", comment: "Button prompting the user to log out")
     let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(logOutAction(_:)))
@@ -32,9 +26,7 @@ final class CurrentUserViewController: UserViewController {
     return button
   }()
 
-  private lazy var doneButton = UIBarButtonItem(barButtonSystemItem: .done,
-                                                target: self,
-                                                action: #selector(doneAction(_:)))
+  private lazy var doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction(_:)))
   private lazy var postButton: UIBarButtonItem = {
     let title = NSLocalizedString("Post", comment: "Button prompting the user to create a new dropp")
     let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(postAction(_:)))
@@ -108,13 +100,12 @@ extension CurrentUserViewController {
 
 private extension CurrentUserViewController {
   func deleteRows(at indexPaths: [IndexPath], refreshUserInfo: Bool = true) {
-    let updates: () -> Void = { [weak self] in
+    tableView.performBatchUpdates({ [weak self] in
       self?.tableView.deleteRows(at: indexPaths, with: .automatic)
       if refreshUserInfo {
         self?.tableView.reloadRows(at: [Constants.Table.userIndexPath], with: .automatic)
       }
-    }
-    tableView.performBatchUpdates(updates, completion: nil)
+      }, completion: nil)
   }
 
   func finishEditing() {
@@ -156,10 +147,10 @@ private extension CurrentUserViewController {
     let alertController = UIAlertController(title: logOutTitle, message: nil, preferredStyle: .actionSheet)
     alertController.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
     alertController.addAction(UIAlertAction(title: yesTitle, style: .destructive, handler: { [weak self] _ in
-      guard let strongSelf = self else { return }
-      strongSelf.currentUserViewModel.shouldLogOut()
-      if strongSelf.didPresentViewController {
-        strongSelf.dismiss(animated: true, completion: nil)
+      guard let self = self else { return }
+      self.currentUserViewModel.shouldLogOut()
+      if self.didPresentViewController {
+        self.dismiss(animated: true, completion: nil)
       }
     }))
 
@@ -189,14 +180,16 @@ private extension CurrentUserViewController {
 
 extension CurrentUserViewController {
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    let rows: Int
     switch section {
     case 0:
-      return isEditing ? 0 : super.tableView(tableView, numberOfRowsInSection: section)
+      rows = isEditing ? 0 : super.tableView(tableView, numberOfRowsInSection: section)
     case 1:
-      return super.tableView(tableView, numberOfRowsInSection: section)
+      rows = super.tableView(tableView, numberOfRowsInSection: section)
     default:
       fatalError("Encountered unexpected section: \(section)")
     }
+    return rows
   }
 }
 
@@ -233,8 +226,9 @@ extension CurrentUserViewController {
   }
 
   func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-    guard isEditing else { return }
-    currentUserViewModel.remove(deletedRow: indexPath.row)
+    if isEditing {
+      currentUserViewModel.remove(deletedRow: indexPath.row)
+    }
   }
 }
 

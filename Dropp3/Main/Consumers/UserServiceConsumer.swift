@@ -16,7 +16,5 @@ protocol UserServiceConsumer: ContainerConsumer {
 // MARK: - Default implementation
 
 extension UserServiceConsumer {
-  var userService: UserService {
-    return container.resolve(UserService.self)!
-  }
+  var userService: UserService { container.resolve(UserService.self)! }
 }

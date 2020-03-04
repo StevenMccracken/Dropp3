@@ -42,7 +42,7 @@ final class WelcomeViewController: UIViewController {
     }
   }
 
-  // MARK: - UI objects
+  // MARK: - Subviews
 
   @IBOutlet private weak var toolbar: UIToolbar!
   private var pageViewController: UIPageViewController! {
@@ -53,14 +53,16 @@ final class WelcomeViewController: UIViewController {
   }
   private lazy var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .medium)
   private lazy var loadingIndicatorItem: UIBarButtonItem = UIBarButtonItem(customView: loadingIndicator)
-  private lazy var signUpButton: UIBarButtonItem = UIBarButtonItem(title: "Sign Up",
+  // swiftlint:disable line_length
+  private lazy var signUpButton: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Sign Up", comment: "Button prompting user to switch to Sign Up view"),
                                                                    style: .plain,
                                                                    target: self,
                                                                    action: #selector(switchPageAction(_:)))
-  private lazy var logInButton: UIBarButtonItem = UIBarButtonItem(title: "Log In",
+  private lazy var logInButton: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Log In", comment: "Button prompting user to switch to Log In view"),
                                                                   style: .plain,
                                                                   target: self,
                                                                   action: #selector(switchPageAction(_:)))
+  // swiftlint:enable line_length
 }
 
 // MARK: - View lifecycle

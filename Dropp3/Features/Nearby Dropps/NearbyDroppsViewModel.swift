@@ -21,9 +21,7 @@ final class NearbyDroppsViewModel {
 // MARK: - NearbyDroppsViewModelProtocol
 
 extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
-  var dropps: Results<Dropp> {
-    return realmProvider.objects(Dropp.self, predicate: nil)!
-  }
+  var dropps: Results<Dropp> { realmProvider.objects(Dropp.self, predicate: nil)! }
 
   func controller(forRow row: Int) -> UserViewController {
     let userID: String! = dropps[row].userID

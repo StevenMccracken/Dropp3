@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MainUserProvider {
+final class MainUserProvider {
 }
 
 // MARK: - UserProvider

@@ -12,7 +12,7 @@ final class NearbyDroppTableViewCell: UITableViewCell, UserProviderConsumer {
   static let nib = UINib(nibName: "NearbyDroppTableViewCell", bundle: .main)
   weak var delegate: NearbyDroppCellDelegate?
 
-  // MARK: - Outlets
+  // MARK: - Subviews
 
   @IBOutlet private weak var messageLabel: UILabel!
   @IBOutlet private weak var locationLabel: UILabel!

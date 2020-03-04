@@ -16,7 +16,5 @@ protocol RealmProviderConsumer: ContainerConsumer {
 // MARK: - Default implementation
 
 extension RealmProviderConsumer {
-  var realmProvider: RealmProvider {
-    return container.resolve(RealmProvider.self)!
-  }
+  var realmProvider: RealmProvider { container.resolve(RealmProvider.self)! }
 }

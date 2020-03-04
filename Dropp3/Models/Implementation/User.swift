@@ -32,6 +32,7 @@ class User: Object {
     identifier = UUID().uuidString
   }
 
+  // TODO: remove
   static func random() -> User {
     let names = (1...3).map { _ in return String(UUID().uuidString.split(separator: "-").first!) }
     return User(username: names[0], firstName: names[1], lastName: names[2])

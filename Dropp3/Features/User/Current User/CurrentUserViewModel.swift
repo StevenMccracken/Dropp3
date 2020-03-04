@@ -40,7 +40,7 @@ extension CurrentUserViewModel: CurrentUserViewModelProtocol {
 
   func shouldLogOut() {
     observationTokens.forEach { $0.invalidate() }
-    guard let currentUser = self.currentUser else {
+    guard let currentUser = currentUser else {
       debugPrint("Unable to perform log out because current user could not be resolved")
       return
     }

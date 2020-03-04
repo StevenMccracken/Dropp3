@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class CurrentUser: User {
+final class CurrentUser: User {
   /// Represents a `nil` current user
   static let noUser = CurrentUser()
   let followRequests = List<User>()

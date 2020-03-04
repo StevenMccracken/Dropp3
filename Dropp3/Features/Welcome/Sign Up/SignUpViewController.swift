@@ -16,7 +16,7 @@ final class SignUpViewController: UITableViewController, WelcomeViewPage {
     return viewModel
   }()
 
-  // MARK: - Outlets
+  // MARK: - Subviews
 
   @IBOutlet weak var signUpButton: UIButton!
   @IBOutlet weak var usernameTextField: UITextField!
@@ -51,7 +51,7 @@ extension SignUpViewController {
 // MARK: - Actions
 
 private extension SignUpViewController {
-  @IBAction func signUpAction(_ sender: Any) {
+  @IBAction func signUpAction(_ sender: UIButton) {
     viewModel.attemptSignUp()
   }
 
@@ -76,24 +76,23 @@ private extension SignUpViewController {
 // MARK: - UITextFieldDelegate
 
 extension SignUpViewController: UITextFieldDelegate {
-  func textField(_ textField: UITextField,
-                 shouldChangeCharactersIn range: NSRange,
-                 replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     return string.rangeOfCharacter(from: .whitespaces) == nil
   }
 
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if textField == firstNameTextField {
+    switch textField {
+    case firstNameTextField:
       lastNameTextField.becomeFirstResponder()
-    } else if textField == lastNameTextField {
+    case lastNameTextField:
       usernameTextField.becomeFirstResponder()
-    } else if textField == usernameTextField {
+    case usernameTextField:
       passwordTextField.becomeFirstResponder()
-    } else if textField == passwordTextField {
+    case passwordTextField:
       confirmPasswordTextField.becomeFirstResponder()
-    } else if textField == confirmPasswordTextField {
+    case confirmPasswordTextField:
       textField.resignFirstResponder()
-    } else {
+    default:
       fatalError("Unrecognized text field")
     }
     return true

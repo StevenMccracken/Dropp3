@@ -53,7 +53,7 @@
 		69A46AE2220D58C4001EA7F9 /* RealmProviderConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AE1220D58C4001EA7F9 /* RealmProviderConsumer.swift */; };
 		69A46AE5220D5AD6001EA7F9 /* DroppProviderConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AE4220D5AD6001EA7F9 /* DroppProviderConsumer.swift */; };
 		69A46AE7220D62E3001EA7F9 /* DroppServiceConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AE6220D62E3001EA7F9 /* DroppServiceConsumer.swift */; };
-		69A46AEA220F845E001EA7F9 /* WelcomeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AE9220F845E001EA7F9 /* WelcomeProtocols.swift */; };
+		69A46AEA220F845E001EA7F9 /* WelcomeViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AE9220F845E001EA7F9 /* WelcomeViewPage.swift */; };
 		69A46AEF220F8CF6001EA7F9 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AEE220F8CF6001EA7F9 /* AppearanceManager.swift */; };
 		69A46AF1220F902B001EA7F9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AF0220F902B001EA7F9 /* Colors.swift */; };
 		69A46AF3220F9F37001EA7F9 /* CurrentUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AF2220F9F37001EA7F9 /* CurrentUserViewController.swift */; };
@@ -76,7 +76,6 @@
 		B0535DBC240F2AB700C27145 /* MainDroppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DBB240F2AB700C27145 /* MainDroppProvider.swift */; };
 		B0535DBF240F501E00C27145 /* NearbyDroppsViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DBE240F501E00C27145 /* NearbyDroppsViewModelDelegate.swift */; };
 		B0535DC1240F502600C27145 /* NearbyDroppsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DC0240F502600C27145 /* NearbyDroppsViewModelProtocol.swift */; };
-		B0535DC3240F571C00C27145 /* UIFeedbackGenerator+Prepare.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DC2240F571C00C27145 /* UIFeedbackGenerator+Prepare.swift */; };
 		B0535DC5240F5CDA00C27145 /* NearbyDroppCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DC4240F5CDA00C27145 /* NearbyDroppCellDelegate.swift */; };
 		B0535DC7240F625000C27145 /* UserViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DC6240F625000C27145 /* UserViewModelDelegate.swift */; };
 		B0535DCB240F63E700C27145 /* CurrentUserViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DCA240F63E700C27145 /* CurrentUserViewDelegate.swift */; };
@@ -85,6 +84,10 @@
 		B0535DD2240F971200C27145 /* UserServiceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DD1240F971200C27145 /* UserServiceUser.swift */; };
 		B0535DD4240F986C00C27145 /* MainUserServiceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DD3240F986C00C27145 /* MainUserServiceUser.swift */; };
 		B0535DD6240F98A000C27145 /* MainUserServiceSignUpUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DD5240F98A000C27145 /* MainUserServiceSignUpUser.swift */; };
+		B0535DD8240F9D8800C27145 /* UserInfoCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DD7240F9D8800C27145 /* UserInfoCellDelegate.swift */; };
+		B0535DDA240F9DB400C27145 /* UserDroppCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DD9240F9DB400C27145 /* UserDroppCellDelegate.swift */; };
+		B0535DDC240F9DF700C27145 /* FriendStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DDB240F9DF700C27145 /* FriendStatus.swift */; };
+		B0535DDF240F9E2300C27145 /* FollowerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DDE240F9E2300C27145 /* FollowerStatus.swift */; };
 		B0C20D2D2401E137001EF608 /* LogInViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C20D2C2401E137001EF608 /* LogInViewModelProtocol.swift */; };
 		B0C20D2F2401E2DA001EF608 /* LogInViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C20D2E2401E2DA001EF608 /* LogInViewModelDelegate.swift */; };
 		B0D9612A2401B0FF00621D71 /* CredentialRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D961292401B0FF00621D71 /* CredentialRule.swift */; };
@@ -155,7 +158,7 @@
 		69A46AE1220D58C4001EA7F9 /* RealmProviderConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProviderConsumer.swift; sourceTree = "<group>"; };
 		69A46AE4220D5AD6001EA7F9 /* DroppProviderConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppProviderConsumer.swift; sourceTree = "<group>"; };
 		69A46AE6220D62E3001EA7F9 /* DroppServiceConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppServiceConsumer.swift; sourceTree = "<group>"; };
-		69A46AE9220F845E001EA7F9 /* WelcomeProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeProtocols.swift; sourceTree = "<group>"; };
+		69A46AE9220F845E001EA7F9 /* WelcomeViewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewPage.swift; sourceTree = "<group>"; };
 		69A46AEE220F8CF6001EA7F9 /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		69A46AF0220F902B001EA7F9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		69A46AF2220F9F37001EA7F9 /* CurrentUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserViewController.swift; sourceTree = "<group>"; };
@@ -184,7 +187,6 @@
 		B0535DBB240F2AB700C27145 /* MainDroppProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDroppProvider.swift; sourceTree = "<group>"; };
 		B0535DBE240F501E00C27145 /* NearbyDroppsViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDroppsViewModelDelegate.swift; sourceTree = "<group>"; };
 		B0535DC0240F502600C27145 /* NearbyDroppsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDroppsViewModelProtocol.swift; sourceTree = "<group>"; };
-		B0535DC2240F571C00C27145 /* UIFeedbackGenerator+Prepare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFeedbackGenerator+Prepare.swift"; sourceTree = "<group>"; };
 		B0535DC4240F5CDA00C27145 /* NearbyDroppCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDroppCellDelegate.swift; sourceTree = "<group>"; };
 		B0535DC6240F625000C27145 /* UserViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModelDelegate.swift; sourceTree = "<group>"; };
 		B0535DCA240F63E700C27145 /* CurrentUserViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserViewDelegate.swift; sourceTree = "<group>"; };
@@ -193,6 +195,10 @@
 		B0535DD1240F971200C27145 /* UserServiceUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceUser.swift; sourceTree = "<group>"; };
 		B0535DD3240F986C00C27145 /* MainUserServiceUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserServiceUser.swift; sourceTree = "<group>"; };
 		B0535DD5240F98A000C27145 /* MainUserServiceSignUpUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserServiceSignUpUser.swift; sourceTree = "<group>"; };
+		B0535DD7240F9D8800C27145 /* UserInfoCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCellDelegate.swift; sourceTree = "<group>"; };
+		B0535DD9240F9DB400C27145 /* UserDroppCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDroppCellDelegate.swift; sourceTree = "<group>"; };
+		B0535DDB240F9DF700C27145 /* FriendStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStatus.swift; sourceTree = "<group>"; };
+		B0535DDE240F9E2300C27145 /* FollowerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerStatus.swift; sourceTree = "<group>"; };
 		B0C20D2C2401E137001EF608 /* LogInViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModelProtocol.swift; sourceTree = "<group>"; };
 		B0C20D2E2401E2DA001EF608 /* LogInViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModelDelegate.swift; sourceTree = "<group>"; };
 		B0D961292401B0FF00621D71 /* CredentialRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRule.swift; sourceTree = "<group>"; };
@@ -345,7 +351,6 @@
 				69A46AF0220F902B001EA7F9 /* Colors.swift */,
 				6976265B220FEE0100990882 /* UITableView+Data.swift */,
 				6976265D220FF53A00990882 /* UIBarButtonItem+Items.swift */,
-				B0535DC2240F571C00C27145 /* UIFeedbackGenerator+Prepare.swift */,
 				69FAD4EF2206806C00789AFD /* UIViewController+StoryboardInit.swift */,
 			);
 			path = Extensions;
@@ -386,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				695AE3CD21FFC47600672D85 /* UserInfoTableViewCell.xib */,
+				B0535DD7240F9D8800C27145 /* UserInfoCellDelegate.swift */,
 				695AE3CC21FFC47600672D85 /* UserInfoTableViewCell.swift */,
 			);
 			path = Info;
@@ -395,6 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				695AE3C921FEB8CA00672D85 /* UserDroppTableViewCell.xib */,
+				B0535DD9240F9DB400C27145 /* UserDroppCellDelegate.swift */,
 				695AE3C821FEB8CA00672D85 /* UserDroppTableViewCell.swift */,
 			);
 			path = Dropp;
@@ -448,7 +455,7 @@
 			children = (
 				B0D961292401B0FF00621D71 /* CredentialRule.swift */,
 				B0D9612B2401B11100621D71 /* CredentialRules.swift */,
-				69A46AE9220F845E001EA7F9 /* WelcomeProtocols.swift */,
+				69A46AE9220F845E001EA7F9 /* WelcomeViewPage.swift */,
 				B0E74814240C8986002FA4AE /* WelcomeViewDelegate.swift */,
 			);
 			path = Protocols;
@@ -470,8 +477,8 @@
 			children = (
 				B0E7480D240C3E25002FA4AE /* Protocols */,
 				69117286220719810042212D /* SignUpView.storyboard */,
-				6911728222070A560042212D /* SignUpViewController.swift */,
 				B0E74812240C3F7D002FA4AE /* SignUpViewModel.swift */,
+				6911728222070A560042212D /* SignUpViewController.swift */,
 			);
 			path = "Sign Up";
 			sourceTree = "<group>";
@@ -534,6 +541,7 @@
 		69FAD4F1220685F100789AFD /* Friendship */ = {
 			isa = PBXGroup;
 			children = (
+				B0535DDD240F9E0600C27145 /* Models */,
 				69FAD4F2220685FF00789AFD /* FriendshipView.storyboard */,
 				69FAD4F42206889A00789AFD /* FriendshipViewController.swift */,
 			);
@@ -625,6 +633,15 @@
 				B0535DCC240F640100C27145 /* CurrentUserViewModelProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B0535DDD240F9E0600C27145 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B0535DDB240F9DF700C27145 /* FriendStatus.swift */,
+				B0535DDE240F9E2300C27145 /* FollowerStatus.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		B0C20D2B2401E126001EF608 /* Protocols */ = {
@@ -848,6 +865,7 @@
 				69A46AEF220F8CF6001EA7F9 /* AppearanceManager.swift in Sources */,
 				B0E74813240C3F7D002FA4AE /* SignUpViewModel.swift in Sources */,
 				69A46AE7220D62E3001EA7F9 /* DroppServiceConsumer.swift in Sources */,
+				B0535DDA240F9DB400C27145 /* UserDroppCellDelegate.swift in Sources */,
 				69FAD4F52206889A00789AFD /* FriendshipViewController.swift in Sources */,
 				694120482213D31B00839F4C /* CurrentUserViewModel.swift in Sources */,
 				695AE3D621FFE85000672D85 /* ListViewController.swift in Sources */,
@@ -864,12 +882,13 @@
 				6976265E220FF53A00990882 /* UIBarButtonItem+Items.swift in Sources */,
 				695AE3BE21FE54A700672D85 /* MainViewController.swift in Sources */,
 				6911727F220706CF0042212D /* WelcomeViewController.swift in Sources */,
+				B0535DD8240F9D8800C27145 /* UserInfoCellDelegate.swift in Sources */,
 				B0535DA7240EC3C700C27145 /* UserServiceError.swift in Sources */,
 				5BB90ED121E9DAB800B69E51 /* Dropp.swift in Sources */,
 				69A46AE5220D5AD6001EA7F9 /* DroppProviderConsumer.swift in Sources */,
 				B0E74811240C3E3C002FA4AE /* SignUpViewModelDelegate.swift in Sources */,
 				699CADAD223EBB940064750D /* UserServiceConsumer.swift in Sources */,
-				69A46AEA220F845E001EA7F9 /* WelcomeProtocols.swift in Sources */,
+				69A46AEA220F845E001EA7F9 /* WelcomeViewPage.swift in Sources */,
 				5BB90ECE21E9D93600B69E51 /* DroppProvider.swift in Sources */,
 				695AE3C221FEB09F00672D85 /* User.swift in Sources */,
 				69A46AE0220C01CF001EA7F9 /* CurrentUser.swift in Sources */,
@@ -884,8 +903,8 @@
 				5BB90EC621E9D27D00B69E51 /* DroppService.swift in Sources */,
 				5BB90EC921E9D32B00B69E51 /* LocationProtocol.swift in Sources */,
 				B0535DB4240EC54D00C27145 /* MainUserProvider.swift in Sources */,
+				B0535DDC240F9DF700C27145 /* FriendStatus.swift in Sources */,
 				B0535DBA240ED04000C27145 /* RealmProvider.swift in Sources */,
-				B0535DC3240F571C00C27145 /* UIFeedbackGenerator+Prepare.swift in Sources */,
 				69FAD4F02206806C00789AFD /* UIViewController+StoryboardInit.swift in Sources */,
 				69B2FDBA21E9CE120080A7B2 /* AppDelegate.swift in Sources */,
 				B0E7480F240C3E33002FA4AE /* SignUpViewModelProtocol.swift in Sources */,
@@ -899,6 +918,7 @@
 				6976265C220FEE0100990882 /* UITableView+Data.swift in Sources */,
 				6911727A220701240042212D /* CurrentUserConsumer.swift in Sources */,
 				69A46AF1220F902B001EA7F9 /* Colors.swift in Sources */,
+				B0535DDF240F9E2300C27145 /* FollowerStatus.swift in Sources */,
 				B0C20D2F2401E2DA001EF608 /* LogInViewModelDelegate.swift in Sources */,
 				695AE3CA21FEB8CA00672D85 /* UserDroppTableViewCell.swift in Sources */,
 				B0535DAC240EC44900C27145 /* DroppServiceError.swift in Sources */,

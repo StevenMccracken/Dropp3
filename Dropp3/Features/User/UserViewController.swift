@@ -10,6 +10,8 @@ import UIKit
 import RealmSwift
 
 class UserViewController: UIViewController {
+  // MARK: - Constants
+
   struct Constants {
     struct Table {
       static let userSection = 0

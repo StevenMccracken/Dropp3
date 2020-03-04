@@ -1,5 +1,5 @@
 //
-//  WelcomeProtocols.swift
+//  WelcomeViewPage.swift
 //  Dropp3
 //
 //  Created by Steven McCracken on 2/9/19.

@@ -9,13 +9,13 @@
 import Foundation
 
 /// Main implementation of the `UserService` protocol
-class UserServiceAccessor: RealmProviderConsumer {
+final class UserServiceAccessor: RealmProviderConsumer {
 }
 
 // MARK: - UserService
 
 extension UserServiceAccessor: UserService {
-  func logIn(user: UserServiceUser, success: (() -> Void)?, failure: @escaping (UserServiceError.LoginError) -> Void) {
+  func logIn(user: UserServiceUser, success: (() -> Void)?, failure: @escaping (UserServiceError.Login) -> Void) {
     DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(8)) { [weak self] in
       guard let self = self else { return }
       let currentUser = CurrentUser(username: user.username,
@@ -27,7 +27,7 @@ extension UserServiceAccessor: UserService {
     }
   }
 
-  func signUp(user: UserServiceSignUpUser, success: (() -> Void)?, failure: @escaping (UserServiceError.SignUpError) -> Void) {
+  func signUp(user: UserServiceSignUpUser, success: (() -> Void)?, failure: @escaping (UserServiceError.SignUp) -> Void) {
     DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(8)) { [weak self] in
       guard let self = self else { return }
       let currentUser = CurrentUser(username: user.username, firstName: user.firstName, lastName: user.lastName)

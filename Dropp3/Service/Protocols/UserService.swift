@@ -15,9 +15,7 @@ protocol UserService {
    - parameter success: completion block that is called after the user is logged in
    - parameter failure: completion block that is called after a login failure
    */
-  func logIn(user: UserServiceUser,
-             success: (() -> Void)?,
-             failure: @escaping (UserServiceError.LoginError) -> Void)
+  func logIn(user: UserServiceUser, success: (() -> Void)?, failure: @escaping (UserServiceError.Login) -> Void)
 
   /**
    Attempts to sign up a given user
@@ -25,7 +23,5 @@ protocol UserService {
    - parameter success: completion block that is called after the user is signed up
    - parameter failure: completion block that is called after a signup failure
    */
-  func signUp(user: UserServiceSignUpUser,
-              success: (() -> Void)?,
-              failure: @escaping (UserServiceError.SignUpError) -> Void)
+  func signUp(user: UserServiceSignUpUser, success: (() -> Void)?, failure: @escaping (UserServiceError.SignUp) -> Void)
 }

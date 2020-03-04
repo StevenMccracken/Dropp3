@@ -8,18 +8,11 @@
 
 import UIKit
 
-protocol UserInfoCellDelegate: AnyObject {
-  func userInfoTableViewCell(shouldShowDroppsFromCell userInfoTableViewCell: UserInfoTableViewCell)
-  func userInfoTableViewCell(shouldShowFollowersFromCell userInfoTableViewCell: UserInfoTableViewCell)
-  func userInfoTableViewCell(shouldShowFollowingFromCell userInfoTableViewCell: UserInfoTableViewCell)
-}
-
-class UserInfoTableViewCell: UITableViewCell {
+final class UserInfoTableViewCell: UITableViewCell {
   static let nib = UINib(nibName: "UserInfoTableViewCell", bundle: .main)
-
   weak var delegate: UserInfoCellDelegate?
 
-  // MARK: - Outlets
+  // MARK: - Subviews
 
   @IBOutlet private weak var fullNameLabel: UILabel!
   @IBOutlet private weak var droppsAmountButton: UIButton!

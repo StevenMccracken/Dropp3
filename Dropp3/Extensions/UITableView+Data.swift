@@ -33,9 +33,7 @@ extension UITableView {
    - parameter section: the section to update
    - note: uses `automatic` animation
    */
-  private func perform(update: ([IndexPath], UITableView.RowAnimation) -> Void,
-                       forIndexes indexes: [Int],
-                       in section: Int) {
+  private func perform(update: ([IndexPath], UITableView.RowAnimation) -> Void, forIndexes indexes: [Int], in section: Int) {
     if indexes.isEmpty { return }
     let indexPaths = indexes.map { IndexPath(row: $0, section: section) }
     update(indexPaths, .automatic)

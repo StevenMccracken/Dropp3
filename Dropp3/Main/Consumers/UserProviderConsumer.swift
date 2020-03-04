@@ -16,7 +16,5 @@ protocol UserProviderConsumer: ContainerConsumer {
 // MARK: - Default implementation
 
 extension UserProviderConsumer {
-  var userProvider: UserProvider {
-    return container.resolve(UserProvider.self)!
-  }
+  var userProvider: UserProvider { container.resolve(UserProvider.self)! }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class MainDroppProvider: CurrentUserConsumer {
+final class MainDroppProvider: CurrentUserConsumer {
 }
 
 // MARK: - DroppProvider

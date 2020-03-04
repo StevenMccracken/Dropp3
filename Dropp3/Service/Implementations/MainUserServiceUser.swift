@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Main implementation of the `UserServiceUser` protocol
 struct MainUserServiceUser {
   let username: String
   let password: String

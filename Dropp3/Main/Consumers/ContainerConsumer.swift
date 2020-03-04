@@ -18,7 +18,5 @@ protocol ContainerConsumer {
 // MARK: - Default container implementation
 
 extension ContainerConsumer {
-  var container: Container {
-    return AppDelegate.current.container
-  }
+  var container: Container { AppDelegate.current.container }
 }

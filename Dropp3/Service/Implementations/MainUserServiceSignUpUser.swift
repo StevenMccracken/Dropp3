@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Main implementation of the `UserServiceSignUpUser` protocol
 struct MainUserServiceSignUpUser {
   let firstName: String
   let lastName: String

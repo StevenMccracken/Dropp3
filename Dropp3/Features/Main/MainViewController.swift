@@ -21,6 +21,8 @@ final class MainViewController: UINavigationController, RealmProviderConsumer, C
     }
   }
 
+  // MARK: - Object lifecycle
+
   deinit {
     currentUserToken?.invalidate()
   }
@@ -31,8 +33,8 @@ final class MainViewController: UINavigationController, RealmProviderConsumer, C
 extension MainViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    currentUserToken = realmProvider.observe(resultsForType: CurrentUser.self, withPredicate: nil) { [weak self] in
-      switch $0 {
+    currentUserToken = realmProvider.observe(resultsForType: CurrentUser.self, withPredicate: nil) { [weak self] change in
+      switch change {
       case .initial:
         self?.shouldShowWelcomeView = self?.currentUser == nil
       case .update(_, let deletions, let insertions, _):
