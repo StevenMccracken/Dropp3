@@ -1,29 +1,13 @@
 //
-//  DroppProvider.swift
+//  MainDroppProvider.swift
 //  Dropp3
 //
-//  Created by McCracken, Steven on 1/12/19.
-//  Copyright © 2019 Steven McCracken. All rights reserved.
+//  Created by Steven McCracken on 3/3/20.
+//  Copyright © 2020 Steven McCracken. All rights reserved.
 //
 
 import Foundation
 import RealmSwift
-
-/// Something that provides dropps
-protocol DroppProvider: RealmProviderConsumer, DroppServiceConsumer {
-  /**
-   Gets dropps around a given location
-   - parameter location: the location to search around
-   - parameter completion: closure returning dropp collection changes
-   - returns: token that allows the `completion` parameter to receive calls. You must invalidate this token's strong reference at some point
-   */
-  @discardableResult
-  func getDropps(around location: LocationProtocol,
-                 completion: ((RealmCollectionChange<Results<Dropp>>) -> Void)?) -> NotificationToken?
-
-  func addDroppForCurrentUser()
-  func addDroppForRandomUser()
-}
 
 class MainDroppProvider: CurrentUserConsumer {
 }
@@ -37,21 +21,21 @@ extension MainDroppProvider: DroppProvider {
                       location: Location(latitude: 1, longitude: 1),
                       hasImage: false,
                       message: UUID().uuidString)
-    realmProvider.add(dropp)
-    realmProvider.runTransaction {
+    realmProvider.add(dropp, update: true)
+    realmProvider.transaction(withoutNotifying: []) {
       currentUser.dropps.append(dropp)
     }
   }
 
   func addDroppForRandomUser() {
     let user: User = .random()
-    realmProvider.add(user)
+    realmProvider.add(user, update: true)
     let dropp = Dropp(userID: user.identifier,
                       location: Location(latitude: 1, longitude: 1),
                       hasImage: false,
                       message: UUID().uuidString)
-    realmProvider.add(dropp)
-    realmProvider.runTransaction {
+    realmProvider.add(dropp, update: true)
+    realmProvider.transaction(withoutNotifying: []) {
       user.dropps.append(dropp)
     }
   }
@@ -60,7 +44,7 @@ extension MainDroppProvider: DroppProvider {
                  completion: ((RealmCollectionChange<Results<Dropp>>) -> Void)?) -> NotificationToken? {
     var token: NotificationToken?
     if let completion = completion {
-      token = realmProvider.observe(resultsForType: Dropp.self, completion: completion)
+      token = realmProvider.observe(resultsForType: Dropp.self, withPredicate: nil, completion: completion)
     }
 
     droppService.getDropps(around: location, success: { [weak self] dropps in

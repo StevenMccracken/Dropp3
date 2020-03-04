@@ -10,16 +10,15 @@ import UIKit
 import Swinject
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+final class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
   /// The depedency container for the application
   let container = Container() { container in
-    container.register(RealmProvider.self) { _ in RealmProvider() }
+    container.register(RealmProvider.self) { _ in MainRealmProvider() }
     container.register(CurrentUser.self) { resolver in
       /// There must always be a `nonnil` current user instance
-      let currentUsers = resolver.resolve(RealmProvider.self)!.objects(CurrentUser.self)!
+      let currentUsers = resolver.resolve(RealmProvider.self)!.objects(CurrentUser.self, predicate: nil)!
       return currentUsers.first ?? .noUser
     }
 

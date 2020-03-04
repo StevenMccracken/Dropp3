@@ -36,7 +36,7 @@ class NearbyDroppsViewModel {
 
 extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
   var dropps: Results<Dropp> {
-    return realmProvider.objects(Dropp.self)!
+    return realmProvider.objects(Dropp.self, predicate: nil)!
   }
 
   func viewDidLoad() {

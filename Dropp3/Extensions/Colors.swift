@@ -13,6 +13,8 @@ extension UIColor {
   static let primary = UIColor(named: "Primary")!
   static let primaryDark = UIColor(named: "PrimaryDark")!
   static let primaryLight = UIColor(named: "PrimaryLight")!
-  static let disabled = UIColor.primaryDark
+  static let disabled = UIColor { traits in
+    return traits.userInterfaceStyle == .light ? .primaryDark : .primaryLight
+  }
   static let buttonBackground = UIColor.lightGray.withAlphaComponent(0.1)
 }

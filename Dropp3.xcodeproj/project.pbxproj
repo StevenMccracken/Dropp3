@@ -13,7 +13,7 @@
 		5BB90ECE21E9D93600B69E51 /* DroppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */; };
 		5BB90ED121E9DAB800B69E51 /* Dropp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED021E9DAB800B69E51 /* Dropp.swift */; };
 		5BB90ED321E9DB2600B69E51 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED221E9DB2600B69E51 /* Location.swift */; };
-		5BB90ED521E9DD3100B69E51 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED421E9DD3100B69E51 /* RealmProvider.swift */; };
+		5BB90ED521E9DD3100B69E51 /* MainRealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB90ED421E9DD3100B69E51 /* MainRealmProvider.swift */; };
 		6911727A220701240042212D /* CurrentUserConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69117279220701240042212D /* CurrentUserConsumer.swift */; };
 		6911727D220704F30042212D /* WelcomeView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6911727C220704F30042212D /* WelcomeView.storyboard */; };
 		6911727F220706CF0042212D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6911727E220706CF0042212D /* WelcomeViewController.swift */; };
@@ -67,6 +67,13 @@
 		69FAD4F02206806C00789AFD /* UIViewController+StoryboardInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FAD4EF2206806C00789AFD /* UIViewController+StoryboardInit.swift */; };
 		69FAD4F3220685FF00789AFD /* FriendshipView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69FAD4F2220685FF00789AFD /* FriendshipView.storyboard */; };
 		69FAD4F52206889A00789AFD /* FriendshipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FAD4F42206889A00789AFD /* FriendshipViewController.swift */; };
+		B0535DA7240EC3C700C27145 /* UserServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DA6240EC3C700C27145 /* UserServiceError.swift */; };
+		B0535DAA240EC41400C27145 /* UserServiceAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DA9240EC41400C27145 /* UserServiceAccessor.swift */; };
+		B0535DAC240EC44900C27145 /* DroppServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DAB240EC44900C27145 /* DroppServiceError.swift */; };
+		B0535DAE240EC46300C27145 /* DroppServiceAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DAD240EC46300C27145 /* DroppServiceAccessor.swift */; };
+		B0535DB4240EC54D00C27145 /* MainUserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DB3240EC54D00C27145 /* MainUserProvider.swift */; };
+		B0535DBA240ED04000C27145 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DB9240ED04000C27145 /* RealmProvider.swift */; };
+		B0535DBC240F2AB700C27145 /* MainDroppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DBB240F2AB700C27145 /* MainDroppProvider.swift */; };
 		B0C20D2D2401E137001EF608 /* LogInViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C20D2C2401E137001EF608 /* LogInViewModelProtocol.swift */; };
 		B0C20D2F2401E2DA001EF608 /* LogInViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C20D2E2401E2DA001EF608 /* LogInViewModelDelegate.swift */; };
 		B0D9612A2401B0FF00621D71 /* CredentialRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D961292401B0FF00621D71 /* CredentialRule.swift */; };
@@ -96,7 +103,7 @@
 		5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppProvider.swift; sourceTree = "<group>"; };
 		5BB90ED021E9DAB800B69E51 /* Dropp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropp.swift; sourceTree = "<group>"; };
 		5BB90ED221E9DB2600B69E51 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		5BB90ED421E9DD3100B69E51 /* RealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
+		5BB90ED421E9DD3100B69E51 /* MainRealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRealmProvider.swift; sourceTree = "<group>"; };
 		63D69FFCD31D9CE4978E3735 /* Pods-Dropp3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dropp3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dropp3/Pods-Dropp3.debug.xcconfig"; sourceTree = "<group>"; };
 		69117279220701240042212D /* CurrentUserConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserConsumer.swift; sourceTree = "<group>"; };
 		6911727C220704F30042212D /* WelcomeView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WelcomeView.storyboard; sourceTree = "<group>"; };
@@ -157,6 +164,13 @@
 		69FAD4F42206889A00789AFD /* FriendshipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendshipViewController.swift; sourceTree = "<group>"; };
 		7ED3F048FA8B3E7892DFC5AA /* Pods-Dropp3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dropp3.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dropp3/Pods-Dropp3.release.xcconfig"; sourceTree = "<group>"; };
 		8336531E43DE75BA66EFF5A4 /* Pods_Dropp3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dropp3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0535DA6240EC3C700C27145 /* UserServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceError.swift; sourceTree = "<group>"; };
+		B0535DA9240EC41400C27145 /* UserServiceAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceAccessor.swift; sourceTree = "<group>"; };
+		B0535DAB240EC44900C27145 /* DroppServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppServiceError.swift; sourceTree = "<group>"; };
+		B0535DAD240EC46300C27145 /* DroppServiceAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppServiceAccessor.swift; sourceTree = "<group>"; };
+		B0535DB3240EC54D00C27145 /* MainUserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserProvider.swift; sourceTree = "<group>"; };
+		B0535DB9240ED04000C27145 /* RealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
+		B0535DBB240F2AB700C27145 /* MainDroppProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDroppProvider.swift; sourceTree = "<group>"; };
 		B0C20D2C2401E137001EF608 /* LogInViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModelProtocol.swift; sourceTree = "<group>"; };
 		B0C20D2E2401E2DA001EF608 /* LogInViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModelDelegate.swift; sourceTree = "<group>"; };
 		B0D961292401B0FF00621D71 /* CredentialRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRule.swift; sourceTree = "<group>"; };
@@ -202,8 +216,9 @@
 		5BB90EC421E9D24400B69E51 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				695AE3D321FFD1EA00672D85 /* UserService.swift */,
-				5BB90EC521E9D27D00B69E51 /* DroppService.swift */,
+				B0535DA5240EC3BA00C27145 /* Errors */,
+				B0535DA4240EC3A800C27145 /* Protocols */,
+				B0535DA8240EC3E400C27145 /* Implementations */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -220,9 +235,8 @@
 		5BB90ECC21E9D92900B69E51 /* Provider */ = {
 			isa = PBXGroup;
 			children = (
-				5BB90ED421E9DD3100B69E51 /* RealmProvider.swift */,
-				699CADC1223F04A70064750D /* UserProvider.swift */,
-				5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */,
+				B0535DAF240EC50A00C27145 /* Protocols */,
+				B0535DB2240EC52C00C27145 /* Implementations */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -509,6 +523,53 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B0535DA4240EC3A800C27145 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				695AE3D321FFD1EA00672D85 /* UserService.swift */,
+				5BB90EC521E9D27D00B69E51 /* DroppService.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B0535DA5240EC3BA00C27145 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				B0535DA6240EC3C700C27145 /* UserServiceError.swift */,
+				B0535DAB240EC44900C27145 /* DroppServiceError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		B0535DA8240EC3E400C27145 /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				B0535DA9240EC41400C27145 /* UserServiceAccessor.swift */,
+				B0535DAD240EC46300C27145 /* DroppServiceAccessor.swift */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
+		B0535DAF240EC50A00C27145 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				699CADC1223F04A70064750D /* UserProvider.swift */,
+				5BB90ECD21E9D93600B69E51 /* DroppProvider.swift */,
+				B0535DB9240ED04000C27145 /* RealmProvider.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B0535DB2240EC52C00C27145 /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				B0535DB3240EC54D00C27145 /* MainUserProvider.swift */,
+				5BB90ED421E9DD3100B69E51 /* MainRealmProvider.swift */,
+				B0535DBB240F2AB700C27145 /* MainDroppProvider.swift */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
 		B0C20D2B2401E126001EF608 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -714,6 +775,7 @@
 				69FAD4F52206889A00789AFD /* FriendshipViewController.swift in Sources */,
 				694120482213D31B00839F4C /* CurrentUserViewModel.swift in Sources */,
 				695AE3D621FFE85000672D85 /* ListViewController.swift in Sources */,
+				B0535DAE240EC46300C27145 /* DroppServiceAccessor.swift in Sources */,
 				5BB90ED321E9DB2600B69E51 /* Location.swift in Sources */,
 				699CADCB2241FEE60064750D /* Domain.swift in Sources */,
 				699CADCD2241FF260064750D /* ServiceErrorCode.swift in Sources */,
@@ -724,6 +786,7 @@
 				6976265E220FF53A00990882 /* UIBarButtonItem+Items.swift in Sources */,
 				695AE3BE21FE54A700672D85 /* MainViewController.swift in Sources */,
 				6911727F220706CF0042212D /* WelcomeViewController.swift in Sources */,
+				B0535DA7240EC3C700C27145 /* UserServiceError.swift in Sources */,
 				5BB90ED121E9DAB800B69E51 /* Dropp.swift in Sources */,
 				69A46AE5220D5AD6001EA7F9 /* DroppProviderConsumer.swift in Sources */,
 				B0E74811240C3E3C002FA4AE /* SignUpViewModelDelegate.swift in Sources */,
@@ -741,6 +804,8 @@
 				B0E74815240C8986002FA4AE /* WelcomeViewDelegate.swift in Sources */,
 				5BB90EC621E9D27D00B69E51 /* DroppService.swift in Sources */,
 				5BB90EC921E9D32B00B69E51 /* LocationProtocol.swift in Sources */,
+				B0535DB4240EC54D00C27145 /* MainUserProvider.swift in Sources */,
+				B0535DBA240ED04000C27145 /* RealmProvider.swift in Sources */,
 				69FAD4F02206806C00789AFD /* UIViewController+StoryboardInit.swift in Sources */,
 				69B2FDBA21E9CE120080A7B2 /* AppDelegate.swift in Sources */,
 				B0E7480F240C3E33002FA4AE /* SignUpViewModelProtocol.swift in Sources */,
@@ -753,9 +818,12 @@
 				69A46AF1220F902B001EA7F9 /* Colors.swift in Sources */,
 				B0C20D2F2401E2DA001EF608 /* LogInViewModelDelegate.swift in Sources */,
 				695AE3CA21FEB8CA00672D85 /* UserDroppTableViewCell.swift in Sources */,
+				B0535DAC240EC44900C27145 /* DroppServiceError.swift in Sources */,
 				B0D9612A2401B0FF00621D71 /* CredentialRule.swift in Sources */,
+				B0535DAA240EC41400C27145 /* UserServiceAccessor.swift in Sources */,
+				B0535DBC240F2AB700C27145 /* MainDroppProvider.swift in Sources */,
 				695AE3DF22014D6B00672D85 /* LocationViewController.swift in Sources */,
-				5BB90ED521E9DD3100B69E51 /* RealmProvider.swift in Sources */,
+				5BB90ED521E9DD3100B69E51 /* MainRealmProvider.swift in Sources */,
 				6911728122070A340042212D /* LogInViewController.swift in Sources */,
 				6911728322070A560042212D /* SignUpViewController.swift in Sources */,
 				699CADC2223F04A70064750D /* UserProvider.swift in Sources */,

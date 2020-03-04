@@ -60,7 +60,7 @@ extension CurrentUserViewModel: CurrentUserViewModelProtocol {
 
   func deleteSelectedDropps(performUpdates: ([Int]) -> Void) {
     let dropps = selectedRowsForDeletion.map { user.dropps[$0] }
-    realmProvider.runTransaction(withoutNotifying: Array(tokens)) {
+    realmProvider.transaction(withoutNotifying: Array(tokens)) {
       dropps.forEach { dropp in
         guard let index = user.dropps.firstIndex(of: dropp) else { fatalError() }
         user.dropps.remove(at: index)
@@ -75,7 +75,7 @@ extension CurrentUserViewModel: CurrentUserViewModelProtocol {
 
   func deleteDropp(atIndex index: Int, performUpdates: () -> Void) {
     let dropp = user.dropps[index]
-    realmProvider.runTransaction(withoutNotifying: Array(tokens)) {
+    realmProvider.transaction(withoutNotifying: Array(tokens)) {
       user.dropps.remove(at: index)
       performUpdates()
     }

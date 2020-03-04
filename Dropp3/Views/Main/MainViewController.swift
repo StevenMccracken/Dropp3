@@ -35,8 +35,8 @@ class MainViewController: UINavigationController, RealmProviderConsumer, Current
 extension MainViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    token = realmProvider.observe(resultsForType: CurrentUser.self) { [weak self] collectionChange in
-      switch collectionChange {
+    token = realmProvider.observe(resultsForType: CurrentUser.self, withPredicate: nil) { [weak self] change in
+      switch change {
       case .initial(_):
         self?.shouldShowWelcomeView = self?.currentUser == nil
       case .update(_, let deletions, let insertions, _):
