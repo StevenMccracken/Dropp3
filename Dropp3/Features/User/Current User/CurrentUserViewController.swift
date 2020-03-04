@@ -219,9 +219,7 @@ extension CurrentUserViewController {
     return UISwipeActionsConfiguration(actions: [deleteAction])
   }
 
-  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    return indexPath.section > 0
-  }
+  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { indexPath.section > 0 }
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if isEditing {

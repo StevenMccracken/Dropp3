@@ -65,7 +65,7 @@ private extension LogInViewController {
 
 extension LogInViewController: UITextFieldDelegate {
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    return string.rangeOfCharacter(from: .whitespaces) == nil
+    string.rangeOfCharacter(from: .whitespaces) == nil
   }
 
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {

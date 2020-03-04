@@ -31,9 +31,7 @@ final class NearbyDroppsViewController: UIViewController, ContainerConsumer {
   // MARK: - State
 
   private var showsListView: Bool {
-    get {
-      return !tableView.isHidden
-    }
+    get { !tableView.isHidden }
     set {
       let generator = UIImpactFeedbackGenerator(style: .light)
       generator.prepare()
@@ -119,9 +117,7 @@ private extension NearbyDroppsViewController {
 // MARK: - UITableViewDataSource
 
 extension NearbyDroppsViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return viewModel.dropps.count
-  }
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { viewModel.dropps.count }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: NearbyDroppsViewController.cellID,
@@ -174,9 +170,7 @@ private extension NearbyDroppsViewController {
 
 extension NearbyDroppsViewController: UIGestureRecognizerDelegate {
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
-                         shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-    return true
-  }
+                         shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool { true }
 }
 
 // MARK: - NearbyDroppCellDelegate

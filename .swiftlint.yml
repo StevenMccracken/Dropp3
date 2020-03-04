@@ -32,6 +32,10 @@ opt_in_rules:
   - file_name
   - file_name_no_space
   - file_types_order
+  - first_where
+  - flatmap_over_map_reduce
+  - identical_operands
+  - implicit_return
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 line_length:

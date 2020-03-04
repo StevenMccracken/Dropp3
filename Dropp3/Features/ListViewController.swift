@@ -88,9 +88,7 @@ private extension ListViewController {
 // MARK: - Helpers
 
 private extension ListViewController {
-  func isIndexPathSelected(_ index: IndexPath) -> Bool {
-    return selectedIndexes.contains(index.row)
-  }
+  func isIndexPathSelected(_ index: IndexPath) -> Bool { selectedIndexes.contains(index.row) }
 }
 
 // MARK: - View lifecycle
@@ -132,9 +130,7 @@ extension ListViewController {
 // MARK: - UITableViewDataSource
 
 extension ListViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return itemCount
-  }
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { itemCount }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath)

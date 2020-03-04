@@ -89,13 +89,9 @@ extension UserViewController {
 // MARK: - UITableViewDataSource
 
 extension UserViewController: UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return viewModel.sections
-  }
+  func numberOfSections(in tableView: UITableView) -> Int { viewModel.sections }
 
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return viewModel.numberOfRows(forSection: section)
-  }
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { viewModel.numberOfRows(forSection: section) }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell: UITableViewCell
@@ -125,9 +121,7 @@ extension UserViewController: UITableViewDataSource {
     return cell
   }
 
-  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    return false
-  }
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { false }
 }
 
 // MARK: - UITableViewDelegate

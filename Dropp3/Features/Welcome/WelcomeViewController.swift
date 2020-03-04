@@ -126,9 +126,7 @@ extension WelcomeViewController: UIPageViewControllerDataSource {
     return pages.last
   }
 
-  func presentationCount(for pageViewController: UIPageViewController) -> Int {
-    return pages.count
-  }
+  func presentationCount(for pageViewController: UIPageViewController) -> Int { pages.count }
 
   func presentationIndex(for pageViewController: UIPageViewController) -> Int {
     guard let firstViewController = pageViewController.viewControllers?.first else { return 0 }

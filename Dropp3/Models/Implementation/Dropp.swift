@@ -28,7 +28,5 @@ final class Dropp: Object {
 
   // MARK: - Realm primary key
 
-  override static func primaryKey() -> String? {
-    return "identifier"
-  }
+  override static func primaryKey() -> String? { "identifier" }
 }
