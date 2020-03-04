@@ -43,7 +43,10 @@ extension UserDroppTableViewCell {
 extension UserDroppTableViewCell {
   func provide(dropp: Dropp) {
     messageLabel.text = dropp.message
-    guard let location = dropp.location else { fatalError() }
+    guard let location = dropp.location else {
+      debugPrint("Unable to display location in cell for given dropp")
+      return
+    }
     locationButton.setTitle("\(location.latitude), \(location.longitude)", for: .normal)
   }
 }

@@ -68,7 +68,9 @@ class ListViewController: UIViewController {
   }
 
   required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    itemCount = 0
+    itemClosure = { _ in ("", nil) }
+    super.init(coder: aDecoder)
   }
 }
 
@@ -86,7 +88,7 @@ private extension ListViewController {
   }
 }
 
-// MARK: - Private helpers
+// MARK: - Helpers
 
 private extension ListViewController {
   func isIndexPathSelected(_ index: IndexPath) -> Bool {

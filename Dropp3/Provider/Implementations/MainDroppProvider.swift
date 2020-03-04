@@ -15,8 +15,12 @@ class MainDroppProvider: CurrentUserConsumer {
 // MARK: - DroppProvider
 
 extension MainDroppProvider: DroppProvider {
+  // TODO: Remove
   func addDroppForCurrentUser() {
-    guard let currentUser = self.currentUser else { fatalError() }
+    guard let currentUser = self.currentUser else {
+      debugPrint("Unable to resolve current user to add dropps")
+      return
+    }
     let dropp = Dropp(userID: currentUser.identifier,
                       location: Location(latitude: 1, longitude: 1),
                       hasImage: false,
@@ -27,6 +31,7 @@ extension MainDroppProvider: DroppProvider {
     }
   }
 
+  // TODO: Remove
   func addDroppForRandomUser() {
     let user: User = .random()
     realmProvider.add(user, update: true)

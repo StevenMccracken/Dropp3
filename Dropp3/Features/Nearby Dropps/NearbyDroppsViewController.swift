@@ -129,7 +129,9 @@ extension NearbyDroppsViewController: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: NearbyDroppsViewController.cellID,
-                                                   for: indexPath) as? NearbyDroppTableViewCell else { fatalError() }
+                                                   for: indexPath) as? NearbyDroppTableViewCell else {
+                                                    fatalError("Invalid reusable cell for index path: \(indexPath)")
+    }
     cell.delegate = self
     cell.provide(dropp: viewModel.dropps[indexPath.row])
     return cell

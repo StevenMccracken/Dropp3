@@ -92,7 +92,7 @@ extension UserViewController: UITableViewDataSource {
     case Constants.Table.userSection:
       guard let infoCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellID.profile,
                                                          for: indexPath) as? UserInfoTableViewCell else {
-                                                          fatalError()
+                                                          fatalError("Invalid reusable cell for index path: \(indexPath)")
       }
       infoCell.delegate = self
       infoCell.provide(user: viewModel.user)
@@ -101,7 +101,7 @@ extension UserViewController: UITableViewDataSource {
     case Constants.Table.droppsSection:
       guard let droppCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellID.dropp,
                                                           for: indexPath) as? UserDroppTableViewCell else {
-                                                            fatalError()
+                                                            fatalError("Invalid reusable cell for index path: \(indexPath)")
       }
       droppCell.delegate = self
       droppCell.selectionStyle = .default
@@ -131,7 +131,10 @@ extension UserViewController: UITableViewDelegate {
 
 extension UserViewController: UserDroppCellDelegate {
   func userDroppTableViewCell(shouldShowLocationFromCell userDroppTableViewCell: UserDroppTableViewCell) {
-    guard let indexPath = tableView.indexPath(for: userDroppTableViewCell) else { fatalError() }
+    guard let indexPath = tableView.indexPath(for: userDroppTableViewCell) else {
+      debugPrint("Unable to find index path for given cell")
+      return
+    }
     let locationViewController: LocationViewController = .controller()
     locationViewController.location = viewModel.user.dropps[indexPath.row].location
     locationViewController.navigationItem.backBarButtonItem?.title = nil

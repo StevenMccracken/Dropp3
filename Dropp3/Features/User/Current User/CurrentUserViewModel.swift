@@ -40,21 +40,28 @@ extension CurrentUserViewModel: CurrentUserViewModelProtocol {
 
   func shouldLogOut() {
     observationTokens.forEach { $0.invalidate() }
-    guard let currentUser = self.currentUser else { fatalError() }
+    guard let currentUser = self.currentUser else {
+      debugPrint("Unable to perform log out because current user could not be resolved")
+      return
+    }
     realmProvider.delete(currentUser)
   }
 
   func deleteSelectedDropps(performUpdates: ([Int]) -> Void) {
     let dropps = selectedRowsForDeletion.map { user.dropps[$0] }
-    realmProvider.transaction(withoutNotifying: Array(observationTokens)) {
+    let transaction: () -> Void = {
       dropps.forEach { dropp in
-        guard let index = user.dropps.firstIndex(of: dropp) else { fatalError() }
-        user.dropps.remove(at: index)
+        guard let index = self.user.dropps.firstIndex(of: dropp) else {
+          debugPrint("Unable to find selected dropp in current user's dropps")
+          return
+        }
+        self.user.dropps.remove(at: index)
       }
 
-      performUpdates(Array(selectedRowsForDeletion))
+      performUpdates(Array(self.selectedRowsForDeletion))
     }
 
+    realmProvider.transaction(withoutNotifying: Array(observationTokens), transaction: transaction)
     realmProvider.delete(dropps)
     didRefreshData()
   }
