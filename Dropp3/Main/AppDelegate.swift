@@ -33,6 +33,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // swiftlint:disable:previous discouraged_optional_collection
     // Override point for customization after application launch.
     applyConfigurations()
     return true

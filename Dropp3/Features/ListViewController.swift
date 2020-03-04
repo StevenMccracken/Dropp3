@@ -53,7 +53,7 @@ class ListViewController: UIViewController {
   }
 
   init(numberOfItems: Int,
-       initialSelectedIndexes: [Int]? = nil,
+       initialSelectedIndexes: [Int] = [],
        itemForIndex: @escaping (Int) -> (title: String, subtitle: String?),
        didSelectItemsAtIndexes: (([Int]) -> Void)? = nil) {
     itemCount = numberOfItems
@@ -61,10 +61,7 @@ class ListViewController: UIViewController {
     multiSelectionClosure = didSelectItemsAtIndexes
 
     super.init(nibName: nil, bundle: nil)
-    if let indexes = initialSelectedIndexes {
-      indexes.forEach { selectedIndexes.insert($0) }
-    }
-
+    initialSelectedIndexes.forEach { selectedIndexes.insert($0) }
     setUpViews()
   }
 
