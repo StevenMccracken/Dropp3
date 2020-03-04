@@ -9,18 +9,20 @@
 import UIKit
 import RealmSwift
 
-private struct Constants {
-  static let droppCellID = UUID().uuidString
-  static let profileCellID = UUID().uuidString
-  static let friendSegueID = "ViewFriendshipSegue"
-  static let minimumRowHeight: CGFloat = 45
-}
-
 class UserViewController: UIViewController {
-  struct TableConstants {
-    static let userSection = 0
-    static let droppsSection = 1
-    static let userIndexPath = IndexPath(row: 0, section: TableConstants.userSection)
+  struct Constants {
+    struct Table {
+      static let userSection = 0
+      static let droppsSection = 1
+      static let userIndexPath = IndexPath(row: 0, section: userSection)
+    }
+    struct CellID {
+      static let dropp = UUID().uuidString
+      static let profile = UUID().uuidString
+    }
+    struct Segue {
+      static let viewFriendship = "ViewFriendshipSegue"
+    }
   }
 
   // MARK: - Data
@@ -39,13 +41,16 @@ extension UserViewController {
     super.viewDidLoad()
     configureViews()
     viewModel.delegate = self
-    viewModel.viewDidLoad()
+    viewModel.shouldRefreshData()
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     super.prepare(for: segue, sender: sender)
-    if segue.identifier == Constants.friendSegueID {
-      guard let friendshipViewController = segue.destination as? FriendshipViewController else { fatalError() }
+    if segue.identifier == Constants.Segue.viewFriendship {
+      guard let friendshipViewController = segue.destination as? FriendshipViewController else {
+        debugPrint("Invalid destination for Constants.Segue.viewFriendship")
+        return
+      }
       friendshipViewController.status = .unconnected
     }
   }
@@ -65,8 +70,8 @@ extension UserViewController {
     tableView.separatorInset = .zero
     tableView.tableFooterView = UIView()
     tableView.rowHeight = UITableView.automaticDimension
-    tableView.register(UserDroppTableViewCell.nib, forCellReuseIdentifier: Constants.droppCellID)
-    tableView.register(UserInfoTableViewCell.nib, forCellReuseIdentifier: Constants.profileCellID)
+    tableView.register(UserDroppTableViewCell.nib, forCellReuseIdentifier: Constants.CellID.dropp)
+    tableView.register(UserInfoTableViewCell.nib, forCellReuseIdentifier: Constants.CellID.profile)
   }
 }
 
@@ -84,8 +89,8 @@ extension UserViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell: UITableViewCell
     switch indexPath.section {
-    case TableConstants.userSection:
-      guard let infoCell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellID,
+    case Constants.Table.userSection:
+      guard let infoCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellID.profile,
                                                          for: indexPath) as? UserInfoTableViewCell else {
                                                           fatalError()
       }
@@ -93,8 +98,8 @@ extension UserViewController: UITableViewDataSource {
       infoCell.provide(user: viewModel.user)
       infoCell.selectionStyle = .none
       cell = infoCell
-    case TableConstants.droppsSection:
-      guard let droppCell = tableView.dequeueReusableCell(withIdentifier: Constants.droppCellID,
+    case Constants.Table.droppsSection:
+      guard let droppCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellID.dropp,
                                                           for: indexPath) as? UserDroppTableViewCell else {
                                                             fatalError()
       }
@@ -103,7 +108,7 @@ extension UserViewController: UITableViewDataSource {
       droppCell.provide(dropp: viewModel.user.dropps[indexPath.row])
       cell = droppCell
     default:
-      fatalError()
+      fatalError("Encountered unexpected index path section: \(indexPath.section)")
     }
 
     return cell
@@ -138,11 +143,9 @@ extension UserViewController: UserDroppCellDelegate {
 
 extension UserViewController: UserInfoCellDelegate {
   func userInfoTableViewCell(shouldShowDroppsFromCell userInfoTableViewCell: UserInfoTableViewCell) {
-    if viewModel.user.dropps.isEmpty {
-      return
+    if !viewModel.user.dropps.isEmpty {
+      tableView.scrollToRow(at: IndexPath(row: 0, section: Constants.Table.droppsSection), at: .top, animated: true)
     }
-
-    tableView.scrollToRow(at: IndexPath(row: 0, section: TableConstants.droppsSection), at: .top, animated: true)
   }
 
   func userInfoTableViewCell(shouldShowFollowersFromCell userInfoTableViewCell: UserInfoTableViewCell) {
@@ -166,11 +169,11 @@ extension UserViewController: UserViewModelDelegate {
   }
 
   func updateUserData() {
-    tableView.reloadRows(at: [TableConstants.userIndexPath], with: .automatic)
+    tableView.reloadRows(at: [Constants.Table.userIndexPath], with: .automatic)
   }
 
   func updateData(deletions: [Int], insertions: [Int], modifications: [Int]) {
-    tableView.update(section: TableConstants.droppsSection,
+    tableView.update(section: Constants.Table.droppsSection,
                      deletions: deletions,
                      insertions: insertions,
                      modifications: modifications)

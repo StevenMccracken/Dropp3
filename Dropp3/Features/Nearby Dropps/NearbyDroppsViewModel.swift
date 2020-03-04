@@ -9,26 +9,12 @@
 import Foundation
 import RealmSwift
 
-protocol NearbyDroppsViewModelDelegate: AnyObject {
-  func reloadData()
-  func updateData(deletions: [Int], insertions: [Int], modifications: [Int])
-}
-
-protocol NearbyDroppsViewModelProtocol: RealmProviderConsumer, DroppProviderConsumer {
-  var dropps: Results<Dropp> { get }
-  var delegate: NearbyDroppsViewModelDelegate? { get set }
-
-  func viewDidLoad()
-  func shouldRefreshData()
-  func controller(forRow row: Int) -> UserViewController
-}
-
-class NearbyDroppsViewModel {
-  private var token: NotificationToken?
-  var delegate: NearbyDroppsViewModelDelegate?
+final class NearbyDroppsViewModel {
+  private var getDroppsToken: NotificationToken?
+  weak var delegate: NearbyDroppsViewModelDelegate?
 
   deinit {
-    token?.invalidate()
+    getDroppsToken?.invalidate()
   }
 }
 
@@ -37,10 +23,6 @@ class NearbyDroppsViewModel {
 extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
   var dropps: Results<Dropp> {
     return realmProvider.objects(Dropp.self, predicate: nil)!
-  }
-
-  func viewDidLoad() {
-    shouldRefreshData()
   }
 
   func controller(forRow row: Int) -> UserViewController {
@@ -60,16 +42,16 @@ extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
   }
 
   func shouldRefreshData() {
-    token?.invalidate()
-    token = droppProvider.getDropps(around: Location(latitude: 0, longitude: 0)) { [weak self] collectionChange in
-      switch collectionChange {
+    getDroppsToken?.invalidate()
+    getDroppsToken = droppProvider.getDropps(around: Location(latitude: 0, longitude: 0)) { [weak self] change in
+      guard let self = self else { return }
+      switch change {
       case .initial(_):
-        self?.delegate?.reloadData()
+        self.delegate?.reloadData()
       case .update(_, let deletions, let insertions, let modifications):
-        self?.delegate?.updateData(deletions: deletions, insertions: insertions, modifications: modifications)
+        self.delegate?.updateData(deletions: deletions, insertions: insertions, modifications: modifications)
       case .error(let error):
-        // An error occurred while opening the Realm file on the background worker thread
-        fatalError("\(error)")
+        debugPrint("An error occurred while opening the Realm file on the background worker thread: \(error)")
       }
     }
   }

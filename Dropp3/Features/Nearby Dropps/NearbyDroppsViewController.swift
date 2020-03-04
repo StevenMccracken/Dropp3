@@ -10,18 +10,26 @@ import UIKit
 import MapKit
 import RealmSwift
 
-private struct Constants {
-  static let cellID = UUID().uuidString
-  static let tableViewFadeAlphaDuration = 0.5
-  static let tableViewFadeHiddenDuration = 0.15
+// MARK: - Constants
+
+private struct Duration {
+  struct TableViewFade {
+    static let alpha = 0.5
+    static let hidden = 0.15
+  }
 }
 
-class NearbyDroppsViewController: UIViewController, ContainerConsumer {
+// MARK: - NearbyDroppsViewController
+
+final class NearbyDroppsViewController: UIViewController, ContainerConsumer {
+  private static let cellID = UUID().uuidString
   private lazy var viewModel: NearbyDroppsViewModelProtocol = {
     var viewModel = container.resolve(NearbyDroppsViewModelProtocol.self)!
     viewModel.delegate = self
     return viewModel
   }()
+
+  // MARK: - State
 
   private var showsListView: Bool {
     get {
@@ -31,14 +39,14 @@ class NearbyDroppsViewController: UIViewController, ContainerConsumer {
       let generator = UIImpactFeedbackGenerator(style: .light)
       generator.prepare()
       UIView.transition(with: tableView,
-                        duration: Constants.tableViewFadeHiddenDuration,
+                        duration: Duration.TableViewFade.hidden,
                         options: .transitionCrossDissolve,
                         animations: { [weak self] in
                           self?.tableView.isHidden = !newValue
                           self?.listButton.isEnabled = !newValue
       })
 
-      UIView.animate(withDuration: Constants.tableViewFadeAlphaDuration) { [weak self] in
+      UIView.animate(withDuration: Duration.TableViewFade.alpha) { [weak self] in
         self?.tableView.alpha = newValue ? 1 : 0
       }
 
@@ -53,9 +61,9 @@ class NearbyDroppsViewController: UIViewController, ContainerConsumer {
 
   // MARK: - Buttons
 
-  @IBOutlet var locateButton: UIBarButtonItem!
-  @IBOutlet var refreshButton: UIBarButtonItem!
-  @IBOutlet weak var listButton: UIBarButtonItem!
+  @IBOutlet private weak var listButton: UIBarButtonItem!
+  @IBOutlet private weak var locateButton: UIBarButtonItem!
+  @IBOutlet private weak var refreshButton: UIBarButtonItem!
 
   // MARK: - Gesture recognizers
 
@@ -85,28 +93,28 @@ extension NearbyDroppsViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     configureViews()
-    viewModel.viewDidLoad()
+    viewModel.shouldRefreshData()
   }
 }
 
 // MARK: - View configuration
 
-extension NearbyDroppsViewController {
-  private func configureViews() {
+private extension NearbyDroppsViewController {
+  func configureViews() {
     configureMapView()
     configureTableView()
   }
 
-  private func configureTableView() {
+  func configureTableView() {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.separatorInset = .zero
     tableView.tableFooterView = UIView()
     tableView.rowHeight = UITableView.automaticDimension
-    tableView.register(NearbyDroppTableViewCell.nib, forCellReuseIdentifier: Constants.cellID)
+    tableView.register(NearbyDroppTableViewCell.nib, forCellReuseIdentifier: NearbyDroppsViewController.cellID)
   }
 
-  private func configureMapView() {
+  func configureMapView() {
     mapView.delegate = self
     [panGestureRecognizer, doubleTapGestureRecognizer, pinchGestureRecognizer].forEach(mapView.addGestureRecognizer)
   }
@@ -120,7 +128,7 @@ extension NearbyDroppsViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID,
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: NearbyDroppsViewController.cellID,
                                                    for: indexPath) as? NearbyDroppTableViewCell else { fatalError() }
     cell.delegate = self
     cell.provide(dropp: viewModel.dropps[indexPath.row])
@@ -143,20 +151,20 @@ extension NearbyDroppsViewController: MKMapViewDelegate {
 
 // MARK: - User interaction
 
-extension NearbyDroppsViewController {
-  @IBAction private func listButtonAction(_ sender: UIBarButtonItem) {
+private extension NearbyDroppsViewController {
+  @IBAction func listButtonAction(_ sender: UIBarButtonItem) {
     showsListView = true
   }
 
-  @IBAction private func refreshAction(_ sender: UIBarButtonItem) {
+  @IBAction func refreshAction(_ sender: UIBarButtonItem) {
     viewModel.shouldRefreshData()
   }
 
-  @IBAction private func locateAction(_ sender: UIBarButtonItem) {
+  @IBAction func locateAction(_ sender: UIBarButtonItem) {
     debugPrint("locate")
   }
 
-  @objc private func mapUserInteractionAction(_ gestureRecognizer: UIGestureRecognizer) {
+  @objc func mapUserInteractionAction(_ gestureRecognizer: UIGestureRecognizer) {
     if gestureRecognizer.state == .began, showsListView {
       showsListView = false
     }
@@ -176,11 +184,16 @@ extension NearbyDroppsViewController: UIGestureRecognizerDelegate {
 
 extension NearbyDroppsViewController: NearbyDroppCellDelegate {
   func nearbyDroppTableViewCell(shouldShowUserFromCell nearbyDroppTableViewCell: NearbyDroppTableViewCell) {
-    guard let indexPath = tableView.indexPath(for: nearbyDroppTableViewCell) else { fatalError() }
+    guard let indexPath = tableView.indexPath(for: nearbyDroppTableViewCell) else {
+      debugPrint("Unable to find matching index path for given cell")
+      return
+    }
     let userViewController = viewModel.controller(forRow: indexPath.row)
     navigationController?.pushViewController(userViewController, animated: true)
   }
 }
+
+// MARK: - NearbyDroppsViewModelDelegate
 
 extension NearbyDroppsViewController: NearbyDroppsViewModelDelegate {
   func reloadData() {

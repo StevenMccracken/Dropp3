@@ -8,13 +8,6 @@
 
 import Foundation
 
-protocol UserViewModelDelegate: AnyObject {
-  func exitView()
-  func reloadData()
-  func updateUserData()
-  func updateData(deletions: [Int], insertions: [Int], modifications: [Int])
-}
-
 protocol UserViewModelProtocol {
   var user: User { get }
   var title: String { get }
@@ -23,7 +16,6 @@ protocol UserViewModelProtocol {
   var sections: Int { get }
   func numberOfRows(forSection section: Int) -> Int
 
-  func viewDidLoad()
   func shouldRefreshData()
   func didRefreshData()
 }

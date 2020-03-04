@@ -9,12 +9,8 @@
 import UIKit
 import RealmSwift
 
-class MainViewController: UINavigationController, RealmProviderConsumer, CurrentUserConsumer, DroppProviderConsumer {
-  private struct Constants {
-    static let welcomeViewID = "WelcomeView"
-  }
-
-  private var token: NotificationToken?
+final class MainViewController: UINavigationController, RealmProviderConsumer, CurrentUserConsumer {
+  private var currentUserToken: NotificationToken?
   private var shouldShowWelcomeView = false {
     didSet {
       if shouldShowWelcomeView {
@@ -26,7 +22,7 @@ class MainViewController: UINavigationController, RealmProviderConsumer, Current
   }
 
   deinit {
-    token?.invalidate()
+    currentUserToken?.invalidate()
   }
 }
 
@@ -35,8 +31,8 @@ class MainViewController: UINavigationController, RealmProviderConsumer, Current
 extension MainViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    token = realmProvider.observe(resultsForType: CurrentUser.self, withPredicate: nil) { [weak self] change in
-      switch change {
+    currentUserToken = realmProvider.observe(resultsForType: CurrentUser.self, withPredicate: nil) { [weak self] in
+      switch $0 {
       case .initial(_):
         self?.shouldShowWelcomeView = self?.currentUser == nil
       case .update(_, let deletions, let insertions, _):
@@ -51,7 +47,7 @@ extension MainViewController {
           debugPrint("Current user was updated")
         }
       case .error(let error):
-        fatalError(error.localizedDescription)
+        debugPrint("Received error while subscribing to CurrentUser updates: \(error.localizedDescription)")
       }
     }
   }
@@ -87,7 +83,8 @@ private extension MainViewController {
 
 // MARK: - Actions
 
-private extension MainViewController {
+// TODO: Remove DroppProviderConsumer conformance and make extension private
+extension MainViewController: DroppProviderConsumer {
   @objc private func profileAction(_ sender: UIBarButtonItem) {
     let profileViewController: CurrentUserViewController = .controller()
     profileViewController.didPresentViewController = true
@@ -97,6 +94,7 @@ private extension MainViewController {
     present(navigationController, animated: true, completion: nil)
   }
 
+  // TODO: Delete
   @objc private func postAction(_ sender: UIBarButtonItem) {
     let generator = UINotificationFeedbackGenerator()
     generator.prepare()

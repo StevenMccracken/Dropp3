@@ -8,34 +8,20 @@
 
 import Foundation
 
-protocol CurrentUserViewDelegate: AnyObject {
-  func toggleEditButton(enabled: Bool)
-  func toggleDeleteButton(enabled: Bool)
-}
+final class CurrentUserViewModel: UserViewModel, RealmProviderConsumer, DroppProviderConsumer {
+  // MARK: - Public
 
-protocol CurrentUserViewModelProtocol: UserViewModelProtocol {
-  var currentUserViewDelegate: CurrentUserViewDelegate? { get set }
-
-  func shouldLogOut()
-  func add(deletedRow: Int)
-  func remove(deletedRow: Int)
-
-  func finishEditing()
-  func deleteSelectedDropps(performUpdates: ([Int]) -> Void)
-  func deleteDropp(atIndex index: Int, performUpdates: () -> Void)
-}
-
-class CurrentUserViewModel: UserViewModel, RealmProviderConsumer, DroppProviderConsumer {
-  private lazy var selectedRowsForDeletion: Set<Int> = []
   weak var currentUserViewDelegate: CurrentUserViewDelegate?
+
+  // MARK: - Private
+
+  private lazy var selectedRowsForDeletion: Set<Int> = []
+
+  // MARK: - Overrides
 
   override func didRefreshData() {
     super.didRefreshData()
     currentUserViewDelegate?.toggleEditButton(enabled: !user.dropps.isEmpty)
-  }
-
-  private func validateDeletionState() {
-    currentUserViewDelegate?.toggleDeleteButton(enabled: !selectedRowsForDeletion.isEmpty)
   }
 }
 
@@ -53,14 +39,14 @@ extension CurrentUserViewModel: CurrentUserViewModelProtocol {
   }
 
   func shouldLogOut() {
-    tokens.forEach { $0.invalidate() }
+    observationTokens.forEach { $0.invalidate() }
     guard let currentUser = self.currentUser else { fatalError() }
     realmProvider.delete(currentUser)
   }
 
   func deleteSelectedDropps(performUpdates: ([Int]) -> Void) {
     let dropps = selectedRowsForDeletion.map { user.dropps[$0] }
-    realmProvider.transaction(withoutNotifying: Array(tokens)) {
+    realmProvider.transaction(withoutNotifying: Array(observationTokens)) {
       dropps.forEach { dropp in
         guard let index = user.dropps.firstIndex(of: dropp) else { fatalError() }
         user.dropps.remove(at: index)
@@ -75,7 +61,7 @@ extension CurrentUserViewModel: CurrentUserViewModelProtocol {
 
   func deleteDropp(atIndex index: Int, performUpdates: () -> Void) {
     let dropp = user.dropps[index]
-    realmProvider.transaction(withoutNotifying: Array(tokens)) {
+    realmProvider.transaction(withoutNotifying: Array(observationTokens)) {
       user.dropps.remove(at: index)
       performUpdates()
     }
@@ -86,5 +72,13 @@ extension CurrentUserViewModel: CurrentUserViewModelProtocol {
 
   func finishEditing() {
     selectedRowsForDeletion.removeAll()
+  }
+}
+
+// MARK: - Validation
+
+private extension CurrentUserViewModel {
+  func validateDeletionState() {
+    currentUserViewDelegate?.toggleDeleteButton(enabled: !selectedRowsForDeletion.isEmpty)
   }
 }

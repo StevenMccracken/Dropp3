@@ -8,17 +8,8 @@
 
 import UIKit
 
-private struct Constants {
-  static let hiddenHeight: CGFloat = 45
-}
-
-protocol NearbyDroppCellDelegate: AnyObject {
-  func nearbyDroppTableViewCell(shouldShowUserFromCell nearbyDroppTableViewCell: NearbyDroppTableViewCell)
-}
-
-class NearbyDroppTableViewCell: UITableViewCell, UserProviderConsumer {
+final class NearbyDroppTableViewCell: UITableViewCell, UserProviderConsumer {
   static let nib = UINib(nibName: "NearbyDroppTableViewCell", bundle: .main)
-
   weak var delegate: NearbyDroppCellDelegate?
 
   // MARK: - Outlets
@@ -26,9 +17,11 @@ class NearbyDroppTableViewCell: UITableViewCell, UserProviderConsumer {
   @IBOutlet private weak var messageLabel: UILabel!
   @IBOutlet private weak var locationLabel: UILabel!
   @IBOutlet private weak var usernameButton: UIButton!
+}
 
-  // MARK: - View configuration
+// MARK: - View configuration
 
+extension NearbyDroppTableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     usernameButton.setTitle(nil, for: .normal)
@@ -43,15 +36,18 @@ extension NearbyDroppTableViewCell {
     messageLabel.text = dropp.message
     let user = userProvider.user(for: dropp.userID!)
     usernameButton.setTitle(user?.username, for: .normal)
-    guard let location = dropp.location else { fatalError() }
+    guard let location = dropp.location else {
+      debugPrint("Unable to display location in cell for given dropp")
+      return
+    }
     locationLabel.text = "\(location.latitude), \(location.longitude)"
   }
 }
 
 // MARK: - Actions
 
-extension NearbyDroppTableViewCell {
-  @IBAction private func userButtonAction(_ sender: UIButton) {
+private extension NearbyDroppTableViewCell {
+  @IBAction func userButtonAction(_ sender: UIButton) {
     delegate?.nearbyDroppTableViewCell(shouldShowUserFromCell: self)
   }
 }

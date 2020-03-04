@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppearanceManager: NSObject {
+final class AppearanceManager: NSObject {
   override init() {
     super.init()
     customizeAppearances()

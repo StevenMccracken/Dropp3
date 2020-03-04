@@ -19,7 +19,7 @@ extension DroppServiceAccessor: DroppService {
                  success: @escaping ([Dropp]) -> Void,
                  failure: ((DroppServiceError.NearbyDroppsError) -> Void)?) {
     DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-      guard let `self` = self else { return }
+      guard let self = self else { return }
       let user = User(username: UUID().uuidString, firstName: UUID().uuidString, lastName: UUID().uuidString)
       let dropps: [Dropp] = (0..<10).map { _ in
         let location = Location(latitude: Double.random(in: 0..<100), longitude: Double.random(in: 0..<100))

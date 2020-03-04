@@ -8,8 +8,7 @@
 
 import UIKit
 
-class CurrentUserViewController: UserViewController {
-
+final class CurrentUserViewController: UserViewController {
   // MARK: - Buttons
 
   private lazy var editButton = UIBarButtonItem(barButtonSystemItem: .edit,
@@ -42,13 +41,13 @@ class CurrentUserViewController: UserViewController {
     return button
   }()
 
-  // MARK: - Public data
+  // MARK: - Public
 
   /// Default is `false`
   var didPresentViewController: Bool = false
-
   var currentUserViewModel: CurrentUserViewModelProtocol! {
     didSet {
+      // Pass on value derived in subclass
       viewModel = currentUserViewModel
     }
   }
@@ -60,13 +59,6 @@ extension CurrentUserViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     currentUserViewModel.currentUserViewDelegate = self
-  }
-
-  @objc private func postAction(_ sender: UIBarButtonItem) {
-    let generator = UINotificationFeedbackGenerator()
-    generator.prepare()
-    MainDroppProvider().addDroppForCurrentUser()
-    generator.notificationOccurred(.success)
   }
 }
 
@@ -114,73 +106,82 @@ extension CurrentUserViewController {
 
 // MARK: - Table management
 
-extension CurrentUserViewController {
-  private func deleteRows(at indexPaths: [IndexPath], refreshUserInfo: Bool = true) {
-    tableView.performBatchUpdates({ [weak self] in
+private extension CurrentUserViewController {
+  func deleteRows(at indexPaths: [IndexPath], refreshUserInfo: Bool = true) {
+    let updates: () -> Void = { [weak self] in
       self?.tableView.deleteRows(at: indexPaths, with: .automatic)
       if refreshUserInfo {
-        self?.tableView.reloadRows(at: [TableConstants.userIndexPath], with: .automatic)
+        self?.tableView.reloadRows(at: [Constants.Table.userIndexPath], with: .automatic)
       }
-    }, completion: nil)
+    }
+    tableView.performBatchUpdates(updates, completion: nil)
   }
 
-
-  private func endEditing() {
+  func finishEditing() {
     currentUserViewModel.finishEditing()
     setEditing(false, animated: true)
-    tableView.insertRows(at: [TableConstants.userIndexPath], with: .top)
+    tableView.insertRows(at: [Constants.Table.userIndexPath], with: .top)
   }
 }
 
 // MARK: - Actions
 
-extension CurrentUserViewController {
-  @objc private func editAction(_ sender: UIBarButtonItem) {
+private extension CurrentUserViewController {
+  @objc func editAction(_ sender: UIBarButtonItem) {
     setEditing(true, animated: true)
-    tableView.deleteRows(at: [TableConstants.userIndexPath], with: .top)
+    tableView.deleteRows(at: [Constants.Table.userIndexPath], with: .top)
   }
 
-  @objc private func cancelAction(_ sender: UIBarButtonItem) {
-    endEditing()
+  @objc func cancelAction(_ sender: UIBarButtonItem) {
+    finishEditing()
   }
 
-  @objc private func deleteAction(_ sender: UIBarButtonItem) {
+  @objc func deleteAction(_ sender: UIBarButtonItem) {
     currentUserViewModel.deleteSelectedDropps { rows in
-      let indexPaths = rows.map { IndexPath(row: $0, section: TableConstants.droppsSection) }
+      let indexPaths = rows.map { IndexPath(row: $0, section: Constants.Table.droppsSection) }
       deleteRows(at: indexPaths, refreshUserInfo: false)
     }
 
     let generator = UINotificationFeedbackGenerator()
     generator.prepare()
-    endEditing()
+    finishEditing()
     generator.notificationOccurred(.success)
   }
 
-  @objc private func logOutAction(_ sender: UIBarButtonItem) {
-    let logOutTitle = NSLocalizedString("Log out?", comment: "Question confirming if the user wants to log out")
-    let alertController = UIAlertController(title: logOutTitle, message: nil, preferredStyle: .actionSheet)
+  @objc func logOutAction(_ sender: UIBarButtonItem) {
     let yesTitle = NSLocalizedString("Yes", comment: "Button confirming the log out action")
+    let cancelTitle = NSLocalizedString("Cancel", comment: "Button canceling the log out action")
+    let logOutTitle = NSLocalizedString("Log out?", comment: "Question confirming if the user wants to log out")
+
+    let alertController = UIAlertController(title: logOutTitle, message: nil, preferredStyle: .actionSheet)
+    alertController.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
     alertController.addAction(UIAlertAction(title: yesTitle, style: .destructive, handler: { [weak self] _ in
       guard let strongSelf = self else { return }
       strongSelf.currentUserViewModel.shouldLogOut()
       if strongSelf.didPresentViewController {
         strongSelf.dismiss(animated: true, completion: nil)
       }
-    }))
+    }));
 
-    let cancelTitle = NSLocalizedString("Cancel", comment: "Button canceling the log out action")
-    alertController.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
     let generator = UINotificationFeedbackGenerator()
     generator.prepare()
     alertController.present(from: self, barButtonItem: sender, sourceView: nil, animated: true, completion: nil)
     generator.notificationOccurred(.warning)
   }
 
-  @objc private func profileAction(_ sender: UIBarButtonItem) {
+  @objc func profileAction(_ sender: UIBarButtonItem) {
   }
 
-  @objc private func doneAction(_ sender: UIBarButtonItem) {
+  @objc func doneAction(_ sender: UIBarButtonItem) {
     dismiss(animated: true, completion: nil)
+  }
+
+  // TODO: Remove
+  @objc func postAction(_ sender: UIBarButtonItem) {
+    let generator = UINotificationFeedbackGenerator()
+    generator.prepare()
+    MainDroppProvider().addDroppForCurrentUser()
+    generator.notificationOccurred(.success)
   }
 }
 
@@ -194,7 +195,7 @@ extension CurrentUserViewController {
     case 1:
       return super.tableView(tableView, numberOfRowsInSection: section)
     default:
-      fatalError()
+      fatalError("Encountered unexpected section: \(section)")
     }
   }
 }
@@ -205,16 +206,15 @@ extension CurrentUserViewController {
   func tableView(_ tableView: UITableView,
                  trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     if isEditing { return nil }
+    let deleteUpdates: () -> Void = { [weak self] in
+      let generator = UINotificationFeedbackGenerator()
+      generator.prepare()
+      self?.deleteRows(at: [indexPath])
+      generator.notificationOccurred(.success)
+    }
     let deleteTitle = NSLocalizedString("Delete", comment: "Button prompting the user to delete the item")
-    let deleteAction = UIContextualAction(style: .destructive,
-                                          title: deleteTitle) { [weak self] (action, view, completionHandler) in
-                                            self?.currentUserViewModel.deleteDropp(atIndex: indexPath.row,
-                                                                                   performUpdates: {
-                                                                                    let generator = UINotificationFeedbackGenerator()
-                                                                                    generator.prepare()
-                                                                                    self?.deleteRows(at: [indexPath])
-                                                                                    generator.notificationOccurred(.success)
-                                            })
+    let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { [weak self] (_, _, _) in
+      self?.currentUserViewModel.deleteDropp(atIndex: indexPath.row, performUpdates: deleteUpdates)
     }
     deleteAction.backgroundColor = .buttonBackground
     return UISwipeActionsConfiguration(actions: [deleteAction])

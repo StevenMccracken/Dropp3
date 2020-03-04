@@ -10,33 +10,27 @@ import Foundation
 import RealmSwift
 
 class UserViewModel: CurrentUserConsumer {
-
   // MARK: - Public data
 
   let user: User
   weak var delegate: UserViewModelDelegate?
+  private(set) var observationTokens: Set<NotificationToken> = []
 
-  enum Section: Int, CaseIterable {
+  // MARK: - Private data
+
+  private enum Section: Int, CaseIterable {
     case user
     case dropps
   }
 
-  // MARK: - Private data
-
-  private(set) var tokens: Set<NotificationToken> = []
-
-  // MARK: - Init
+  // MARK: - Object lifecycle
 
   init(user: User) {
     self.user = user
   }
 
   deinit {
-    tokens.forEach { $0.invalidate() }
-  }
-
-  func didRefreshData() {
-    // no-op
+    observationTokens.forEach { $0.invalidate() }
   }
 }
 
@@ -64,13 +58,9 @@ extension UserViewModel: UserViewModelProtocol {
     return rows
   }
 
-  @objc func viewDidLoad() {
-    shouldRefreshData()
-  }
-
   func shouldRefreshData() {
-    tokens.forEach { $0.invalidate() }
-    tokens.removeAll()
+    observationTokens.forEach { $0.invalidate() }
+    observationTokens.removeAll()
     let droppsToken = user.dropps.observe { [weak self] collectionChange in
       switch collectionChange {
       case .initial(_):
@@ -78,7 +68,7 @@ extension UserViewModel: UserViewModelProtocol {
       case .update(_, let deletions, let insertions, let modifications):
         self?.delegate?.updateData(deletions: deletions, insertions: insertions, modifications: modifications)
       case .error(let error):
-        fatalError(error.localizedDescription)
+        debugPrint("Received error while observing user dropps collection: \(error.localizedDescription)")
       }
 
       self?.didRefreshData()
@@ -93,10 +83,14 @@ extension UserViewModel: UserViewModelProtocol {
         self?.delegate?.updateUserData()
         self?.didRefreshData()
       case .error(let error):
-        fatalError(error.localizedDescription)
+        debugPrint("Received error while observing user: \(error.localizedDescription)")
       }
     }
 
-    [userToken, droppsToken].forEach { tokens.insert($0) }
+    [userToken, droppsToken].forEach { observationTokens.insert($0) }
+  }
+
+  @objc func didRefreshData() {
+    // no-op
   }
 }
