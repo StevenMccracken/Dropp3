@@ -17,7 +17,10 @@ opt_in_rules:
   - discouraged_object_literal
   - discouraged_optional_boolean
   - discouraged_optional_collection
+  - empty_collection_literal
   - empty_count
+  - empty_string
+  - empty_xctest_method
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 line_length:

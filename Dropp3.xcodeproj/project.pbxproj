@@ -62,7 +62,6 @@
 		69B2FDBF21E9CE120080A7B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69B2FDBD21E9CE120080A7B2 /* Main.storyboard */; };
 		69B2FDC121E9CE130080A7B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69B2FDC021E9CE130080A7B2 /* Assets.xcassets */; };
 		69B2FDC421E9CE130080A7B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69B2FDC221E9CE130080A7B2 /* LaunchScreen.storyboard */; };
-		69B2FDCF21E9CE130080A7B2 /* Dropp3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2FDCE21E9CE130080A7B2 /* Dropp3Tests.swift */; };
 		69B9D18622035E38004CAF6F /* NearbyDroppsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B9D18522035E38004CAF6F /* NearbyDroppsViewModel.swift */; };
 		69FAD4F02206806C00789AFD /* UIViewController+StoryboardInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FAD4EF2206806C00789AFD /* UIViewController+StoryboardInit.swift */; };
 		69FAD4F3220685FF00789AFD /* FriendshipView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69FAD4F2220685FF00789AFD /* FriendshipView.storyboard */; };
@@ -170,7 +169,6 @@
 		69B2FDC321E9CE130080A7B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		69B2FDC521E9CE130080A7B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69B2FDCA21E9CE130080A7B2 /* Dropp3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Dropp3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		69B2FDCE21E9CE130080A7B2 /* Dropp3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropp3Tests.swift; sourceTree = "<group>"; };
 		69B2FDD021E9CE130080A7B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69B9D18522035E38004CAF6F /* NearbyDroppsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDroppsViewModel.swift; sourceTree = "<group>"; };
 		69FAD4EF2206806C00789AFD /* UIViewController+StoryboardInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+StoryboardInit.swift"; sourceTree = "<group>"; };
@@ -522,7 +520,6 @@
 		69B2FDCD21E9CE130080A7B2 /* Dropp3Tests */ = {
 			isa = PBXGroup;
 			children = (
-				69B2FDCE21E9CE130080A7B2 /* Dropp3Tests.swift */,
 				69B2FDD021E9CE130080A7B2 /* Info.plist */,
 			);
 			path = Dropp3Tests;
@@ -942,7 +939,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69B2FDCF21E9CE130080A7B2 /* Dropp3Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
