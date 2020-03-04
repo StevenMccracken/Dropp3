@@ -12,9 +12,3 @@ protocol CredentialRule {
   var credential: Credential { get }
   var isValid: Bool { get }
 }
-
-protocol DependentCredentialRule: CredentialRule {
-  associatedtype DependentCredential
-  /// Dependent credential that can be used for additional validation against `credential`. Should be assumed to be valid already
-  var dependentCredential: DependentCredential { get }
-}
