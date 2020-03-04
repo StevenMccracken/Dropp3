@@ -23,7 +23,9 @@ extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
   var dropps: Results<Dropp> { realmProvider.objects(Dropp.self, predicate: nil)! }
 
   func controller(forRow row: Int) -> UserViewController {
-    let userID: String! = dropps[row].userID
+    guard let userID = dropps[row].userID else {
+      fatalError("Unable to provide UserViewController for dropp with missing userID")
+    }
     let userViewController: UserViewController
     if let currentUser = realmProvider.object(CurrentUser.self, key: userID) {
       let currentUserViewController: CurrentUserViewController = .controller()

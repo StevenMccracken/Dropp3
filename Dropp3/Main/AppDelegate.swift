@@ -57,7 +57,7 @@ extension AppDelegate {
       return UIApplication.shared.delegate as! AppDelegate // swiftlint:disable:this force_cast
     }
 
-    var delegate: UIApplicationDelegate!
+    var delegate: UIApplicationDelegate! // swiftlint:disable:this implicitly_unwrapped_optional
     DispatchQueue.main.sync {
       delegate = UIApplication.shared.delegate
     }

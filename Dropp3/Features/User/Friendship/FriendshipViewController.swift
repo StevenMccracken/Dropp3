@@ -8,7 +8,7 @@
 import UIKit
 
 final class FriendshipViewController: UIViewController {
-  var status: FriendStatus! {
+  var status: FriendStatus = .unconnected {
     didSet {
       statusLabel?.text = status.message
       actionButtonItem?.title = status.actionMessage

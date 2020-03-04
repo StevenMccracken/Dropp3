@@ -36,6 +36,7 @@ final class CurrentUserViewController: UserViewController {
 
   /// Default is `false`
   var didPresentViewController: Bool = false
+  // swiftlint:disable:next implicitly_unwrapped_optional
   var currentUserViewModel: CurrentUserViewModelProtocol! {
     didSet {
       // Pass on value derived in subclass

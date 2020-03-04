@@ -30,7 +30,7 @@ class UserViewController: UIViewController {
 
   // MARK: - Data
 
-  var viewModel: UserViewModelProtocol!
+  var viewModel: UserViewModelProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   // MARK: - Views
 

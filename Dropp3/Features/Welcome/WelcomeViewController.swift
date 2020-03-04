@@ -44,6 +44,7 @@ final class WelcomeViewController: UIViewController {
   // MARK: - Subviews
 
   @IBOutlet private weak var toolbar: UIToolbar!
+  // swiftlint:disable:next implicitly_unwrapped_optional
   private var pageViewController: UIPageViewController! {
     didSet {
       pageViewController.delegate = self

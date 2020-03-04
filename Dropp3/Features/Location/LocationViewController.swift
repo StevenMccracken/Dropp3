@@ -15,7 +15,7 @@ private enum CoordinateSpanDelta: CLLocationDegrees {
 final class LocationViewController: UIViewController {
   // MARK: - Location
 
-  var location: Location!
+  var location: Location! // swiftlint:disable:this implicitly_unwrapped_optional
   private var coordinate: CLLocationCoordinate2D { location.coreLocation.coordinate }
   private var annotation: MKAnnotation {
     let annotation = MKPointAnnotation()
