@@ -87,7 +87,8 @@ private extension MainViewController {
 
 // TODO: Remove DroppProviderConsumer conformance and make extension private
 extension MainViewController: DroppProviderConsumer {
-  @objc private func profileAction(_ sender: UIBarButtonItem) {
+  @objc
+  private func profileAction(_ sender: UIBarButtonItem) {
     let profileViewController: CurrentUserViewController = .controller()
     profileViewController.didPresentViewController = true
     profileViewController.currentUserViewModel = CurrentUserViewModel(user: currentUser!)
@@ -97,7 +98,8 @@ extension MainViewController: DroppProviderConsumer {
   }
 
   // TODO: Delete
-  @objc private func postAction(_ sender: UIBarButtonItem) {
+  @objc
+  private func postAction(_ sender: UIBarButtonItem) {
     let generator = UINotificationFeedbackGenerator()
     generator.prepare()
     droppProvider.addDroppForRandomUser()

@@ -163,7 +163,8 @@ private extension NearbyDroppsViewController {
     debugPrint("locate")
   }
 
-  @objc func mapUserInteractionAction(_ gestureRecognizer: UIGestureRecognizer) {
+  @objc
+  func mapUserInteractionAction(_ gestureRecognizer: UIGestureRecognizer) {
     if gestureRecognizer.state == .began, showsListView {
       showsListView = false
     }

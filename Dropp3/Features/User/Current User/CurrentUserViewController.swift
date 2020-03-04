@@ -118,16 +118,19 @@ private extension CurrentUserViewController {
 // MARK: - Actions
 
 private extension CurrentUserViewController {
-  @objc func editAction(_ sender: UIBarButtonItem) {
+  @objc
+  func editAction(_ sender: UIBarButtonItem) {
     setEditing(true, animated: true)
     tableView.deleteRows(at: [Constants.Table.userIndexPath], with: .top)
   }
 
-  @objc func cancelAction(_ sender: UIBarButtonItem) {
+  @objc
+  func cancelAction(_ sender: UIBarButtonItem) {
     finishEditing()
   }
 
-  @objc func deleteAction(_ sender: UIBarButtonItem) {
+  @objc
+  func deleteAction(_ sender: UIBarButtonItem) {
     currentUserViewModel.deleteSelectedDropps { rows in
       let indexPaths = rows.map { IndexPath(row: $0, section: Constants.Table.droppsSection) }
       deleteRows(at: indexPaths, refreshUserInfo: false)
@@ -139,7 +142,8 @@ private extension CurrentUserViewController {
     generator.notificationOccurred(.success)
   }
 
-  @objc func logOutAction(_ sender: UIBarButtonItem) {
+  @objc
+  func logOutAction(_ sender: UIBarButtonItem) {
     let yesTitle = NSLocalizedString("Yes", comment: "Button confirming the log out action")
     let cancelTitle = NSLocalizedString("Cancel", comment: "Button canceling the log out action")
     let logOutTitle = NSLocalizedString("Log out?", comment: "Question confirming if the user wants to log out")
@@ -160,15 +164,18 @@ private extension CurrentUserViewController {
     generator.notificationOccurred(.warning)
   }
 
-  @objc func profileAction(_ sender: UIBarButtonItem) {
+  @objc
+  func profileAction(_ sender: UIBarButtonItem) {
   }
 
-  @objc func doneAction(_ sender: UIBarButtonItem) {
+  @objc
+  func doneAction(_ sender: UIBarButtonItem) {
     dismiss(animated: true, completion: nil)
   }
 
   // TODO: Remove
-  @objc func postAction(_ sender: UIBarButtonItem) {
+  @objc
+  func postAction(_ sender: UIBarButtonItem) {
     let generator = UINotificationFeedbackGenerator()
     generator.prepare()
     MainDroppProvider().addDroppForCurrentUser()

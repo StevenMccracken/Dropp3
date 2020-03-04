@@ -69,12 +69,14 @@ extension UserViewController {
 // MARK: - View configuration
 
 extension UserViewController {
-  @objc func configureViews() {
+  @objc
+  func configureViews() {
     configureTableView()
     navigationItem.title = viewModel.title
   }
 
-  @objc func configureTableView() {
+  @objc
+  func configureTableView() {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.separatorInset = .zero

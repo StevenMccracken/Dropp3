@@ -164,7 +164,8 @@ extension WelcomeViewController: WelcomeViewDelegate {
 // MARK: - Actions
 
 private extension WelcomeViewController {
-  @objc private func switchPageAction(_ sender: UIBarButtonItem) {
+  @objc
+  func switchPageAction(_ sender: UIBarButtonItem) {
     switch sender {
     case logInButton:
       state = .logIn

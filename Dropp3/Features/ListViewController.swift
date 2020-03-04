@@ -182,22 +182,25 @@ extension ListViewController: UITableViewDelegate {
 // MARK: - Actions
 
 extension ListViewController {
-  @objc private func applyAction(_ sender: UIBarButtonItem) {
+  @objc
+  private func applyAction(_ sender: UIBarButtonItem) {
     multiSelectionClosure?(selectedIndexes.sorted())
     dismiss(animated: true, completion: nil)
   }
 
-  @objc private func cancelAction(_ sender: UIBarButtonItem) {
+  @objc
+  private func cancelAction(_ sender: UIBarButtonItem) {
     dismiss(animated: true, completion: nil)
   }
 }
 
 extension UIViewController {
-  @objc func present(from presentingViewController: UIViewController,
-                     barButtonItem: UIBarButtonItem? = nil,
-                     sourceView: UIView? = nil,
-                     animated: Bool = true,
-                     completion: (() -> Void)? = nil) {
+  @objc
+  func present(from presentingViewController: UIViewController,
+               barButtonItem: UIBarButtonItem? = nil,
+               sourceView: UIView? = nil,
+               animated: Bool = true,
+               completion: (() -> Void)? = nil) {
     modalPresentationStyle = .popover
     if let barButtonItem = barButtonItem {
       popoverPresentationController?.barButtonItem = barButtonItem

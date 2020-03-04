@@ -79,7 +79,8 @@ extension UserViewModel: UserViewModelProtocol {
     [userToken, droppsToken].forEach { observationTokens.insert($0) }
   }
 
-  @objc func didRefreshData() {
+  @objc
+  func didRefreshData() {
     // no-op
   }
 }
