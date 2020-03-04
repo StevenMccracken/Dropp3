@@ -30,7 +30,7 @@ extension MainRealmProvider: RealmProvider {
   }
 
   func add<T: Object>(_ objects: [T], update: Bool = true) {
-    guard let realm = self.realm else { return  }
+    guard let realm = self.realm else { return }
     realm.refresh()
     do {
       try realm.write { realm.add(objects, update: update ? .all : .modified) }
