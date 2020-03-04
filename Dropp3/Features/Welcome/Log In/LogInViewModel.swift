@@ -38,7 +38,7 @@ extension LogInViewModel: LogInViewModelProtocol {
     }
     delegate?.toggleLoading(true)
     delegate?.toggleLoginAction(enabled: false)
-    userService.logIn(username: username, password: password, success: { [weak self] in
+    userService.logIn(user: MainUserServiceUser(username: username, password: password), success: { [weak self] in
       DispatchQueue.main.async {
         self?.delegate?.toggleLoading(false)
         self?.delegate?.loginDidSucceed()

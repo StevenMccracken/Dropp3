@@ -69,7 +69,8 @@ extension SignUpViewModel: SignUpViewModelProtocol {
 
     delegate?.toggleLoading(true)
     delegate?.toggleSignUpAction(enabled: false)
-    userService.signUp(username: username, password: password, firstName: firstName, lastName: lastName, success: { [weak self] in
+    let user = MainUserServiceSignUpUser(firstName: firstName, lastName: lastName, username: username, password: password)
+    userService.signUp(user: user, success: { [weak self] in
       DispatchQueue.main.async {
         self?.delegate?.toggleLoading(false)
         self?.delegate?.signUpDidSucceed()

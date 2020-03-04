@@ -81,6 +81,10 @@
 		B0535DC7240F625000C27145 /* UserViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DC6240F625000C27145 /* UserViewModelDelegate.swift */; };
 		B0535DCB240F63E700C27145 /* CurrentUserViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DCA240F63E700C27145 /* CurrentUserViewDelegate.swift */; };
 		B0535DCD240F640100C27145 /* CurrentUserViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DCC240F640100C27145 /* CurrentUserViewModelProtocol.swift */; };
+		B0535DD0240F968700C27145 /* UserServiceSignUpUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DCF240F968700C27145 /* UserServiceSignUpUser.swift */; };
+		B0535DD2240F971200C27145 /* UserServiceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DD1240F971200C27145 /* UserServiceUser.swift */; };
+		B0535DD4240F986C00C27145 /* MainUserServiceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DD3240F986C00C27145 /* MainUserServiceUser.swift */; };
+		B0535DD6240F98A000C27145 /* MainUserServiceSignUpUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DD5240F98A000C27145 /* MainUserServiceSignUpUser.swift */; };
 		B0C20D2D2401E137001EF608 /* LogInViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C20D2C2401E137001EF608 /* LogInViewModelProtocol.swift */; };
 		B0C20D2F2401E2DA001EF608 /* LogInViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C20D2E2401E2DA001EF608 /* LogInViewModelDelegate.swift */; };
 		B0D9612A2401B0FF00621D71 /* CredentialRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D961292401B0FF00621D71 /* CredentialRule.swift */; };
@@ -185,6 +189,10 @@
 		B0535DC6240F625000C27145 /* UserViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModelDelegate.swift; sourceTree = "<group>"; };
 		B0535DCA240F63E700C27145 /* CurrentUserViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserViewDelegate.swift; sourceTree = "<group>"; };
 		B0535DCC240F640100C27145 /* CurrentUserViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserViewModelProtocol.swift; sourceTree = "<group>"; };
+		B0535DCF240F968700C27145 /* UserServiceSignUpUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceSignUpUser.swift; sourceTree = "<group>"; };
+		B0535DD1240F971200C27145 /* UserServiceUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceUser.swift; sourceTree = "<group>"; };
+		B0535DD3240F986C00C27145 /* MainUserServiceUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserServiceUser.swift; sourceTree = "<group>"; };
+		B0535DD5240F98A000C27145 /* MainUserServiceSignUpUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserServiceSignUpUser.swift; sourceTree = "<group>"; };
 		B0C20D2C2401E137001EF608 /* LogInViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModelProtocol.swift; sourceTree = "<group>"; };
 		B0C20D2E2401E2DA001EF608 /* LogInViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModelDelegate.swift; sourceTree = "<group>"; };
 		B0D961292401B0FF00621D71 /* CredentialRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRule.swift; sourceTree = "<group>"; };
@@ -546,6 +554,8 @@
 			children = (
 				695AE3D321FFD1EA00672D85 /* UserService.swift */,
 				5BB90EC521E9D27D00B69E51 /* DroppService.swift */,
+				B0535DD1240F971200C27145 /* UserServiceUser.swift */,
+				B0535DCF240F968700C27145 /* UserServiceSignUpUser.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -563,7 +573,9 @@
 			isa = PBXGroup;
 			children = (
 				B0535DA9240EC41400C27145 /* UserServiceAccessor.swift */,
+				B0535DD3240F986C00C27145 /* MainUserServiceUser.swift */,
 				B0535DAD240EC46300C27145 /* DroppServiceAccessor.swift */,
+				B0535DD5240F98A000C27145 /* MainUserServiceSignUpUser.swift */,
 			);
 			path = Implementations;
 			sourceTree = "<group>";
@@ -842,6 +854,7 @@
 				B0535DAE240EC46300C27145 /* DroppServiceAccessor.swift in Sources */,
 				5BB90ED321E9DB2600B69E51 /* Location.swift in Sources */,
 				699CADCB2241FEE60064750D /* Domain.swift in Sources */,
+				B0535DD4240F986C00C27145 /* MainUserServiceUser.swift in Sources */,
 				699CADCD2241FF260064750D /* ServiceErrorCode.swift in Sources */,
 				69B9D18622035E38004CAF6F /* NearbyDroppsViewModel.swift in Sources */,
 				695AE3C721FEB6C400672D85 /* UserViewController.swift in Sources */,
@@ -864,6 +877,7 @@
 				694120452213D26E00839F4C /* UserViewModelProtocol.swift in Sources */,
 				69A46AF3220F9F37001EA7F9 /* CurrentUserViewController.swift in Sources */,
 				693268B42299E24200C4D573 /* LogInViewModel.swift in Sources */,
+				B0535DD0240F968700C27145 /* UserServiceSignUpUser.swift in Sources */,
 				69321E3A21F5692F00103A74 /* NearbyDroppsViewController.swift in Sources */,
 				B0C20D2D2401E137001EF608 /* LogInViewModelProtocol.swift in Sources */,
 				B0E74815240C8986002FA4AE /* WelcomeViewDelegate.swift in Sources */,
@@ -875,6 +889,7 @@
 				69FAD4F02206806C00789AFD /* UIViewController+StoryboardInit.swift in Sources */,
 				69B2FDBA21E9CE120080A7B2 /* AppDelegate.swift in Sources */,
 				B0E7480F240C3E33002FA4AE /* SignUpViewModelProtocol.swift in Sources */,
+				B0535DD6240F98A000C27145 /* MainUserServiceSignUpUser.swift in Sources */,
 				B0535DC1240F502600C27145 /* NearbyDroppsViewModelProtocol.swift in Sources */,
 				B0535DCD240F640100C27145 /* CurrentUserViewModelProtocol.swift in Sources */,
 				69A46AE2220D58C4001EA7F9 /* RealmProviderConsumer.swift in Sources */,
@@ -899,6 +914,7 @@
 				6911728322070A560042212D /* SignUpViewController.swift in Sources */,
 				699CADC2223F04A70064750D /* UserProvider.swift in Sources */,
 				695AE3CE21FFC47600672D85 /* UserInfoTableViewCell.swift in Sources */,
+				B0535DD2240F971200C27145 /* UserServiceUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
