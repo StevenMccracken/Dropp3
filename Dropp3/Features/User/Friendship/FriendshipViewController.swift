@@ -3,7 +3,6 @@
 //  Dropp3
 //
 //  Created by Steven McCracken on 2/2/19.
-//  Copyright © 2019 Steven McCracken. All rights reserved.
 //
 
 import UIKit

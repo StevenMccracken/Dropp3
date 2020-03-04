@@ -3,7 +3,6 @@
 //  Dropp3
 //
 //  Created by Steven McCracken on 2/22/20.
-//  Copyright © 2020 Steven McCracken. All rights reserved.
 //
 
 import Foundation
