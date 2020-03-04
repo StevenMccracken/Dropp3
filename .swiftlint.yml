@@ -1,0 +1,17 @@
+opt_in_rules:
+  - empty_count
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+line_length:
+  warning: 140
+type_body_length:
+  warning: 300
+file_length:
+  warning: 500
+type_name:
+  min_length: 4 # warning
+  max_length: 40 # warning
+identifier_name:
+  min_length: 3 # warning
+  excluded:
+    - id
