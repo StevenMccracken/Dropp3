@@ -8,6 +8,7 @@
 
 import Foundation
 
+// swiftlint:disable:next convenience_type
 struct CredentialRules {
   struct Name: CredentialRule {
     typealias Credential = String

@@ -12,10 +12,10 @@ import RealmSwift
 
 // MARK: - Constants
 
-private struct Duration {
-  struct TableViewFade {
-    static let alpha = 0.5
-    static let hidden = 0.15
+private enum Duration {
+  enum TableViewFade: TimeInterval {
+    case alpha = 0.5
+    case hidden = 0.15
   }
 }
 
@@ -39,14 +39,14 @@ final class NearbyDroppsViewController: UIViewController, ContainerConsumer {
       let generator = UIImpactFeedbackGenerator(style: .light)
       generator.prepare()
       UIView.transition(with: tableView,
-                        duration: Duration.TableViewFade.hidden,
+                        duration: Duration.TableViewFade.hidden.rawValue,
                         options: .transitionCrossDissolve,
                         animations: { [weak self] in
                           self?.tableView.isHidden = !newValue
                           self?.listButton.isEnabled = !newValue
       })
 
-      UIView.animate(withDuration: Duration.TableViewFade.alpha) { [weak self] in
+      UIView.animate(withDuration: Duration.TableViewFade.alpha.rawValue) { [weak self] in
         self?.tableView.alpha = newValue ? 1 : 0
       }
 

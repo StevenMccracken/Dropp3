@@ -9,9 +9,8 @@
 import UIKit
 import MapKit
 
-private struct CoordinateSpanDelta {
-  static let latitude: CLLocationDegrees = 5
-  static let longitude: CLLocationDegrees = 5
+private enum CoordinateSpanDelta: CLLocationDegrees {
+  case standard = 5
 }
 
 final class LocationViewController: UIViewController {
@@ -25,8 +24,8 @@ final class LocationViewController: UIViewController {
     return annotation
   }
   private var region: MKCoordinateRegion {
-    let span = MKCoordinateSpan(latitudeDelta: CoordinateSpanDelta.latitude,
-                                longitudeDelta: CoordinateSpanDelta.longitude)
+    let span = MKCoordinateSpan(latitudeDelta: CoordinateSpanDelta.standard.rawValue,
+                                longitudeDelta: CoordinateSpanDelta.standard.rawValue)
     return MKCoordinateRegion(center: coordinate, span: span)
   }
 

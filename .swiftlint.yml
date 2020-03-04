@@ -2,6 +2,8 @@ disabled_rules:
   - nesting
   - multiple_closures_with_trailing_closure
 opt_in_rules:
+  - anyobject_protocol
+  - convenience_type
   - empty_count
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods

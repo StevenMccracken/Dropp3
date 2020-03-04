@@ -9,6 +9,7 @@
 import UIKit
 
 class ListViewController: UIViewController {
+  // swiftlint:disable:next convenience_type
   private struct Constants {
     static let cellIdentifier = UUID().uuidString
   }

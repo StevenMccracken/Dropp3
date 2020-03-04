@@ -12,6 +12,7 @@ import RealmSwift
 class UserViewController: UIViewController {
   // MARK: - Constants
 
+  // swiftlint:disable convenience_type
   struct Constants {
     struct Table {
       static let userSection = 0
@@ -22,10 +23,11 @@ class UserViewController: UIViewController {
       static let dropp = UUID().uuidString
       static let profile = UUID().uuidString
     }
-    struct Segue {
-      static let viewFriendship = "ViewFriendshipSegue"
+    enum Segue: String {
+      case viewFriendship = "ViewFriendshipSegue"
     }
   }
+  // swiftlint:enable convenience_type
 
   // MARK: - Data
 
@@ -48,7 +50,13 @@ extension UserViewController {
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     super.prepare(for: segue, sender: sender)
-    if segue.identifier == Constants.Segue.viewFriendship {
+    guard let segueConstant = Constants.Segue(rawValue: segue.identifier ?? "") else {
+      debugPrint("Encountered segue with unrecognized identifier: \(segue.identifier ?? "")")
+      return
+    }
+
+    switch segueConstant {
+    case .viewFriendship:
       guard let friendshipViewController = segue.destination as? FriendshipViewController else {
         debugPrint("Invalid destination for Constants.Segue.viewFriendship")
         return
