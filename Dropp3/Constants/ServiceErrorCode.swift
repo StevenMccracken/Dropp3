@@ -9,8 +9,8 @@
 import Foundation
 
 enum ServiceErrorCode: Int, LocalizedError {
-  case user
-  case dropp
+  case user = 100
+  case dropp = 200
 
   var errorDescription: String? {
     switch self {

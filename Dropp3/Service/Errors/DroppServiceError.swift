@@ -12,6 +12,6 @@ struct DroppServiceError: LocalizedError {
   let code: ServiceErrorCode = .dropp
 
   enum NearbyDropps: Int, LocalizedError {
-    case invalidLocation
+    case invalidLocation = 201
   }
 }

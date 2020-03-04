@@ -12,8 +12,8 @@ final class WelcomeViewController: UIViewController {
   // MARK: - State
 
   private enum State: Int, CaseIterable {
-    case signUp
-    case logIn
+    case signUp = 0
+    case logIn = 1
   }
 
   // MARK: - State management

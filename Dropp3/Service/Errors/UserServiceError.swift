@@ -12,13 +12,13 @@ struct UserServiceError: LocalizedError {
   let code: ServiceErrorCode = .user
 
   enum Login: Int, LocalizedError {
-    case unknownUsername
-    case invalidCredentials
+    case unknownUsername = 101
+    case invalidCredentials = 102
   }
 
   enum SignUp: Int, LocalizedError {
-    case invalidUsername
-    case invalidPassword
-    case existingUsername
+    case invalidUsername = 151
+    case invalidPassword = 152
+    case existingUsername = 153
   }
 }

@@ -14,8 +14,8 @@ class UserViewModel: CurrentUserConsumer {
   weak var delegate: UserViewModelDelegate?
   private(set) var observationTokens: Set<NotificationToken> = []
   private enum Section: Int, CaseIterable {
-    case user
-    case dropps
+    case user = 0
+    case dropps = 1
   }
 
   // MARK: - Object lifecycle
