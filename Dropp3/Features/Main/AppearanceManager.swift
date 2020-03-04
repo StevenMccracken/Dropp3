@@ -36,4 +36,3 @@ private extension AppearanceManager {
     appearance.tintColor = .primary
   }
 }
-

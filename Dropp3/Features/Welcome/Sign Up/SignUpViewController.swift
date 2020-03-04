@@ -40,12 +40,8 @@ extension SignUpViewController {
 extension SignUpViewController {
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: animated)
-    if (!editing) {
-      [usernameTextField,
-       firstNameTextField,
-       lastNameTextField,
-       passwordTextField,
-       confirmPasswordTextField].forEach {
+    if !editing {
+      [usernameTextField, firstNameTextField, lastNameTextField, passwordTextField, confirmPasswordTextField].forEach {
         $0?.resignFirstResponder()
       }
     }

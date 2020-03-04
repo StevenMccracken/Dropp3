@@ -37,7 +37,7 @@ extension LogInViewController {
 extension LogInViewController {
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: animated)
-    if (!editing) {
+    if !editing {
       [usernameTextField, passwordTextField].forEach { $0?.resignFirstResponder() }
     }
   }

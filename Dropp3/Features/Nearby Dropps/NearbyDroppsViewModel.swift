@@ -46,7 +46,7 @@ extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
     getDroppsToken = droppProvider.getDropps(around: Location(latitude: 0, longitude: 0)) { [weak self] change in
       guard let self = self else { return }
       switch change {
-      case .initial(_):
+      case .initial:
         self.delegate?.reloadData()
       case .update(_, let deletions, let insertions, let modifications):
         self.delegate?.updateData(deletions: deletions, insertions: insertions, modifications: modifications)

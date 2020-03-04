@@ -63,7 +63,7 @@ extension UserViewModel: UserViewModelProtocol {
     observationTokens.removeAll()
     let droppsToken = user.dropps.observe { [weak self] collectionChange in
       switch collectionChange {
-      case .initial(_):
+      case .initial:
         self?.delegate?.reloadData()
       case .update(_, let deletions, let insertions, let modifications):
         self?.delegate?.updateData(deletions: deletions, insertions: insertions, modifications: modifications)
@@ -79,7 +79,7 @@ extension UserViewModel: UserViewModelProtocol {
       case .deleted:
         if self?.user == self?.currentUser { return }
         self?.delegate?.exitView()
-      case .change(_):
+      case .change:
         self?.delegate?.updateUserData()
         self?.didRefreshData()
       case .error(let error):

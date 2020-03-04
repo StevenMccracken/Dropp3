@@ -14,7 +14,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
   /// The depedency container for the application
-  let container = Container() { container in
+  let container = Container { container in
     container.register(RealmProvider.self) { _ in MainRealmProvider() }
     container.register(CurrentUser.self) { resolver in
       /// There must always be a `nonnil` current user instance
@@ -31,7 +31,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     container.register(SignUpViewModelProtocol.self) { _ in SignUpViewModel() }
   }
 
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     applyConfigurations()
     return true
@@ -53,7 +54,7 @@ extension AppDelegate {
   /// The application's current custom application delegate. Can be called from any thread
   static var current: AppDelegate {
     if Thread.isMainThread {
-      return UIApplication.shared.delegate as! AppDelegate
+      return UIApplication.shared.delegate as! AppDelegate // swiftlint:disable:this force_cast
     }
 
     var delegate: UIApplicationDelegate!
@@ -61,6 +62,6 @@ extension AppDelegate {
       delegate = UIApplication.shared.delegate
     }
 
-    return delegate as! AppDelegate
+    return delegate as! AppDelegate // swiftlint:disable:this force_cast
   }
 }

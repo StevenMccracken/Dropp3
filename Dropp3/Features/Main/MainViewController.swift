@@ -33,7 +33,7 @@ extension MainViewController {
     super.viewDidLoad()
     currentUserToken = realmProvider.observe(resultsForType: CurrentUser.self, withPredicate: nil) { [weak self] in
       switch $0 {
-      case .initial(_):
+      case .initial:
         self?.shouldShowWelcomeView = self?.currentUser == nil
       case .update(_, let deletions, let insertions, _):
         if !insertions.isEmpty {

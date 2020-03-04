@@ -103,7 +103,8 @@ private extension SignUpViewModel {
       delegate?.toggleConfirmedPasswordField(valid: CredentialRules.Password(credential: confirmedPassword ?? "").isValid)
       return
     }
-    delegate?.toggleConfirmedPasswordField(valid: CredentialRules.ConfirmPassword(credential: confirmedPassword ?? "", dependentCredential: password).isValid)
+    delegate?.toggleConfirmedPasswordField(valid: CredentialRules.ConfirmPassword(credential: confirmedPassword ?? "",
+                                                                                  dependentCredential: password).isValid)
   }
 
   func validateSignUpAction() {

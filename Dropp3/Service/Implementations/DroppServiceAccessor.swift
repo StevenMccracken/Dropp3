@@ -23,6 +23,7 @@ extension DroppServiceAccessor: DroppService {
       let user = User(username: UUID().uuidString, firstName: UUID().uuidString, lastName: UUID().uuidString)
       let dropps: [Dropp] = (0..<10).map { _ in
         let location = Location(latitude: Double.random(in: 0..<100), longitude: Double.random(in: 0..<100))
+        // swiftlint:disable:next line_length
         let message = "\(UUID().uuidString) \(UUID().uuidString) \(UUID().uuidString). \(UUID().uuidString).\n\(UUID().uuidString) \(UUID().uuidString)"
         return Dropp(userID: user.identifier, location: location, hasImage: Bool.random(), message: message)
       }

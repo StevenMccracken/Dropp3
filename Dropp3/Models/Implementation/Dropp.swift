@@ -15,7 +15,7 @@ class Dropp: Object {
   @objc dynamic var identifier: String = ""
   @objc dynamic var userID: String?
   @objc dynamic var location: Location?
-  
+
   // MARK: - Init
 
   convenience init(userID: String, location: Location, hasImage: Bool, message: String) {

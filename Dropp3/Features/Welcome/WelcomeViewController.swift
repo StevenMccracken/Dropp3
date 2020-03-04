@@ -68,7 +68,7 @@ final class WelcomeViewController: UIViewController {
 extension WelcomeViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.pageViewController = (children.first as! UIPageViewController) // Added parentheses to silence warning
+    self.pageViewController = (children.first as! UIPageViewController) // swiftlint:disable:this force_cast
     navigationItem.prompt = NSLocalizedString("Welcome", comment: "View header providing a welcoming message")
 
     // Confifigure pages
@@ -118,7 +118,7 @@ extension WelcomeViewController: UIPageViewControllerDataSource {
     guard viewController.isKind(of: LogInViewController.self) else { return nil }
     return pages.first
   }
-  
+
   func pageViewController(_ pageViewController: UIPageViewController,
                           viewControllerAfter viewController: UIViewController) -> UIViewController? {
     guard viewController.isKind(of: SignUpViewController.self) else { return nil }

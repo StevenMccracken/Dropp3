@@ -161,7 +161,7 @@ private extension CurrentUserViewController {
       if strongSelf.didPresentViewController {
         strongSelf.dismiss(animated: true, completion: nil)
       }
-    }));
+    }))
 
     let generator = UINotificationFeedbackGenerator()
     generator.prepare()

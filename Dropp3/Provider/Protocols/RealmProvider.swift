@@ -17,16 +17,16 @@ protocol RealmProvider {
   /**
    Adds or updates the provided object to the database
    - parameter object: the object to add or update
-   - parameter update: whether or not the provided object should be updated. Pass `true` if the object already existed so that any changed fields will be
-   updated. Pass `false` if the object is new so that it will be inserted
+   - parameter update: whether or not the provided object should be updated. Pass `true` if the object already existed so that any changed
+   fields will be updated. Pass `false` if the object is new so that it will be inserted
    */
   func add<T: Object>(_ object: T, update: Bool)
 
   /**
    Adds or updates the provided objects to the database
    - parameter objects: the objects to add or update
-   - parameter update: whether or not the provided objects should be updated. Pass `true` if the objects already existed so that any changed fields will be
-   updated. Pass `false` if the objects is new so that it will be inserted
+   - parameter update: whether or not the provided objects should be updated. Pass `true` if the objects already existed so that any changed
+   fields will be updated. Pass `false` if the objects is new so that it will be inserted
    */
   func add<T: Object>(_ objects: [T], update: Bool)
 
@@ -49,11 +49,13 @@ protocol RealmProvider {
   func objects<T: Object>(_ type: T.Type, predicate: NSPredicate?) -> Results<T>?
 
   /**
-   Queries the database for a homogeneous collection of objects matching the given type and predicate, and continually monitors the collection's status. Use this
-   to receive callbacks about changes to the collection, including the initial query, updates, additions, and/or deletions
+   Queries the database for a homogeneous collection of objects matching the given type and predicate, and continually monitors the
+   collection's status. Use this to receive callbacks about changes to the collection, including the initial query, updates, additions,
+   and/or deletions
    - parameter type: the type of the objects
    - parameter predicate: the predicate to filter the collection with. Pass `nil` to receive the entire collection
-   - parameter completion: the callback to receive changes to the collection, including the initial query, updates, additions, and/or deletions
+   - parameter completion: the callback to receive changes to the collection, including the initial query, updates, additions, and/or
+   deletions
    - returns: token that must be held strongly for the callback to be triggered. Invalidate the token to stop receiving callbacks
    */
   func observe<T: Object>(resultsForType type: T.Type,
@@ -80,7 +82,8 @@ protocol RealmProvider {
   // MARK: - General
 
   /**
-   Performs the given database transaction without notifiying given tokens. Use this when the work of the transaction is already updated in the UI immediately
+   Performs the given database transaction without notifiying given tokens. Use this when the work of the transaction is already updated in
+   the UI immediately
    - parameter tokens: the tokens to bypass notifications for
    - parameter transaction: the transaction to run
    */

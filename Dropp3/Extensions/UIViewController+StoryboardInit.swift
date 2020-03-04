@@ -11,11 +11,14 @@ import UIKit
 extension UIViewController {
   /**
    Instantiates a view controller from a storyboard
-   - parameter storyboardName: The name of the storyboard where the view controller is defined. If `nil`, the view controller's class name will be
-   interpreted as the storyboad name, without the "Controller". If "Controller" is not in the name, then you must provide a storyboard name. Default is `nil`
-   - parameter bundle: the bundle for the view controller. If `nil`, the view controller's `classForCoder` is used for the bundle. Default is `nil`
-   - parameter identifier: the identifier of the view controller within the storyboard. If `nil`, the initial view controller is used to find the view controller in
-   the storyboard. Otherwise, it is assumed the view controller is the initial view controller of the storyboard. Default is `nil`
+   - parameter storyboardName: The name of the storyboard where the view controller is defined. If `nil`, the view controller's class name
+   will be interpreted as the storyboad name, without the "Controller". If "Controller" is not in the name, then you must provide a
+   storyboard name. Default is `nil`
+   - parameter bundle: the bundle for the view controller. If `nil`, the view controller's `classForCoder` is used for the bundle. Default
+   is `nil`
+   - parameter identifier: the identifier of the view controller within the storyboard. If `nil`, the initial view controller is used to
+   find the view controller in the storyboard. Otherwise, it is assumed the view controller is the initial view controller of the
+   storyboard. Default is `nil`
    - returns: the view controller
    */
   static func controller<T: UIViewController>(from storyboardName: String? = nil,
@@ -43,6 +46,6 @@ extension UIViewController {
       viewController = storyboard.instantiateInitialViewController()!
     }
 
-    return viewController as! T
+    return viewController as! T // swiftlint:disable:this force_cast
   }
 }
