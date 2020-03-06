@@ -1,5 +1,4 @@
 disabled_rules:
-  - nesting
   - multiple_closures_with_trailing_closure
 opt_in_rules:
   - anyobject_protocol
@@ -43,6 +42,20 @@ opt_in_rules:
   - legacy_random
   - let_var_whitespace
   - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - missing_docs
+  - modifier_order
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - nimble_operator
+  - nslocalizedstring_key
+  - number_separator
+  - object_literal
+  - operator_usage_whitespace
+  - optional_enum_case_matching
+  - overridden_super_call
+  - override_in_extension
+  - pattern_matching_keywords
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 line_length:
@@ -58,3 +71,5 @@ identifier_name:
   min_length: 3 # warning
   excluded:
     - id
+nesting:
+  type_level: 2

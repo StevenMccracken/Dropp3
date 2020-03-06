@@ -36,7 +36,7 @@ extension MainViewController {
       switch change {
       case .initial:
         self?.shouldShowWelcomeView = self?.currentUser == nil
-      case .update(_, let deletions, let insertions, _):
+      case let .update(_, deletions, insertions, _):
         if !insertions.isEmpty {
           // new current user registered
           self?.shouldShowWelcomeView = false

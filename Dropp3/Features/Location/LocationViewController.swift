@@ -23,8 +23,10 @@ final class LocationViewController: UIViewController {
     return annotation
   }
   private var region: MKCoordinateRegion {
-    let span = MKCoordinateSpan(latitudeDelta: CoordinateSpanDelta.standard.rawValue,
-                                longitudeDelta: CoordinateSpanDelta.standard.rawValue)
+    let span = MKCoordinateSpan(
+      latitudeDelta: CoordinateSpanDelta.standard.rawValue,
+      longitudeDelta: CoordinateSpanDelta.standard.rawValue
+    )
     return MKCoordinateRegion(center: coordinate, span: span)
   }
 

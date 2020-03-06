@@ -54,7 +54,7 @@ extension UserViewModel: UserViewModelProtocol {
       switch collectionChange {
       case .initial:
         self?.delegate?.reloadData()
-      case .update(_, let deletions, let insertions, let modifications):
+      case let .update(_, deletions, insertions, modifications):
         self?.delegate?.updateData(deletions: deletions, insertions: insertions, modifications: modifications)
       case .error(let error):
         debugPrint("Received error while observing user dropps collection: \(error.localizedDescription)")

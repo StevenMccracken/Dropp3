@@ -19,9 +19,7 @@ extension UITableView {
    */
   func update(section: Int = 0, deletions: [Int], insertions: [Int], modifications: [Int]) {
     performBatchUpdates({
-      [(insertRows, insertions, section),
-       (deleteRows, deletions, section),
-       (reloadRows, modifications, section)].forEach(perform)
+      [(insertRows, insertions, section), (deleteRows, deletions, section), (reloadRows, modifications, section)].forEach(perform)
     })
   }
 

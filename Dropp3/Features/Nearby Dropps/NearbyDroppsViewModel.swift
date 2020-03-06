@@ -47,7 +47,7 @@ extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
       switch change {
       case .initial:
         self.delegate?.reloadData()
-      case .update(_, let deletions, let insertions, let modifications):
+      case let .update(_, deletions, insertions, modifications):
         self.delegate?.updateData(deletions: deletions, insertions: insertions, modifications: modifications)
       case .error(let error):
         debugPrint("An error occurred while opening the Realm file on the background worker thread: \(error)")
