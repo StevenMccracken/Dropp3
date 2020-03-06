@@ -54,5 +54,4 @@ extension NearbyDroppsViewModel: NearbyDroppsViewModelProtocol {
       }
     }
   }
-
 }

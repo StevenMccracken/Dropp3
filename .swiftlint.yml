@@ -83,6 +83,7 @@ opt_in_rules:
   - unused_declaration
   - unused_import
   - vertical_parameter_alignment_on_call
+  - vertical_whitespace_closing_braces
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 line_length:
