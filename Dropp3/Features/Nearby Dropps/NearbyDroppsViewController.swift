@@ -35,6 +35,7 @@ final class NearbyDroppsViewController: UIViewController, ContainerConsumer {
     set {
       let generator = UIImpactFeedbackGenerator(style: .light)
       generator.prepare()
+      // swiftlint:disable:next trailing_closure
       UIView.transition(with: tableView,
                         duration: Duration.TableViewFade.hidden.rawValue,
                         options: .transitionCrossDissolve,

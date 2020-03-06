@@ -18,6 +18,7 @@ extension UITableView {
    - note: Updates will only take effect if the given list is not empty
    */
   func update(section: Int = 0, deletions: [Int], insertions: [Int], modifications: [Int]) {
+    // swiftlint:disable:next trailing_closure
     performBatchUpdates({
       [(insertRows, insertions, section), (deleteRows, deletions, section), (reloadRows, modifications, section)].forEach(perform)
     })

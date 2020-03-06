@@ -150,6 +150,7 @@ private extension CurrentUserViewController {
 
     let alertController = UIAlertController(title: logOutTitle, message: nil, preferredStyle: .actionSheet)
     alertController.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
+    // swiftlint:disable:next trailing_closure
     alertController.addAction(UIAlertAction(title: yesTitle, style: .destructive, handler: { [weak self] _ in
       guard let self = self else { return }
       self.currentUserViewModel.shouldLogOut()
