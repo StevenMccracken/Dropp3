@@ -17,12 +17,12 @@ final class SignUpViewController: UITableViewController, WelcomeViewPage {
 
   // MARK: - Subviews
 
-  @IBOutlet weak var signUpButton: UIButton!
-  @IBOutlet weak var usernameTextField: UITextField!
-  @IBOutlet weak var firstNameTextField: UITextField!
-  @IBOutlet weak var lastNameTextField: UITextField!
-  @IBOutlet weak var passwordTextField: UITextField!
-  @IBOutlet weak var confirmPasswordTextField: UITextField!
+  @IBOutlet private weak var signUpButton: UIButton!
+  @IBOutlet private weak var usernameTextField: UITextField!
+  @IBOutlet private weak var firstNameTextField: UITextField!
+  @IBOutlet private weak var lastNameTextField: UITextField!
+  @IBOutlet private weak var passwordTextField: UITextField!
+  @IBOutlet private weak var confirmPasswordTextField: UITextField!
 }
 
 // MARK: - View lifecycle

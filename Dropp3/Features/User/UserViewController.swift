@@ -34,7 +34,7 @@ class UserViewController: UIViewController {
 
   // MARK: - Views
 
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var tableView: UITableView! // swiftlint:disable:this private_outlet
 }
 
 // MARK: - View lifecycle

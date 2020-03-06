@@ -56,6 +56,9 @@ opt_in_rules:
   - overridden_super_call
   - override_in_extension
   - pattern_matching_keywords
+  - prefer_self_type_over_type_of_self
+  - private_action
+  - private_outlet
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 line_length:
