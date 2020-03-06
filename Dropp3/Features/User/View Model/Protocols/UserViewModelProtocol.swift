@@ -13,6 +13,7 @@ protocol UserViewModelProtocol {
   var delegate: UserViewModelDelegate? { get set }
 
   var sections: Int { get }
+
   func numberOfRows(forSection section: Int) -> Int
 
   func shouldRefreshData()

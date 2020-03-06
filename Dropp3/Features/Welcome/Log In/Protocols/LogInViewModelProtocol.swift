@@ -9,6 +9,7 @@ import Foundation
 
 protocol LogInViewModelProtocol: UserServiceConsumer {
   var delegate: LogInViewModelDelegate? { get set }
+
   func process(username: String)
   func process(password: String)
   func attemptLogin()

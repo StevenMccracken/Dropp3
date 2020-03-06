@@ -12,6 +12,7 @@ class UserViewModel: CurrentUserConsumer {
   let user: User
   weak var delegate: UserViewModelDelegate?
   private(set) var observationTokens: Set<NotificationToken> = []
+
   private enum Section: Int, CaseIterable {
     case user = 0
     case dropps = 1

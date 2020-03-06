@@ -9,6 +9,7 @@ import Foundation
 
 protocol SignUpViewModelProtocol: UserServiceConsumer {
   var delegate: SignUpViewModelDelegate? { get set }
+
   func process(firstName: String)
   func process(lastName: String)
   func process(username: String)

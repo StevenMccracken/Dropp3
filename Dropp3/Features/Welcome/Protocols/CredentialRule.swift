@@ -9,6 +9,7 @@ import Foundation
 
 protocol CredentialRule {
   associatedtype Credential
+
   var credential: Credential { get }
   var isValid: Bool { get }
 }
