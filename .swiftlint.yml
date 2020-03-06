@@ -59,6 +59,14 @@ opt_in_rules:
   - prefer_self_type_over_type_of_self
   - private_action
   - private_outlet
+  - prohibited_super_call
+  - quick_discouraged_call
+  - quick_discouraged_focused_test
+  - quick_discouraged_pending_test
+  - raw_value_for_camel_cased_codable_enum
+  - reduce_into
+  - redundant_nil_coalescing
+  - redundant_type_annotation
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 line_length:
