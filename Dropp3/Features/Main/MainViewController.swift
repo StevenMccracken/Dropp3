@@ -69,25 +69,25 @@ private extension MainViewController {
   func showNearbyView() {
     let nearbyDroppsViewController: NearbyDroppsViewController = .controller()
     let navigationItem = nearbyDroppsViewController.navigationItem
-    let profileTitle = NSLocalizedString("Profile", comment: "Button routing the user to view their own profile")
-    navigationItem.leftBarButtonItem = UIBarButtonItem(title: profileTitle,
+    // swiftlint:disable line_length
+    navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Profile", comment: "Button routing the user to view their own profile"),
                                                        style: .plain,
                                                        target: self,
                                                        action: #selector(profileAction(_:)))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post",
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Dropp", comment: "Button starting the Dropp posting process"),
                                                         style: .plain,
                                                         target: self,
-                                                        action: #selector(postAction(_:)))
+                                                        action: #selector(postAction))
+    // swiftlint:enable line_length
     setViewControllers([nearbyDroppsViewController], animated: true)
   }
 }
 
 // MARK: - Actions
 
-// TODO: Remove DroppProviderConsumer conformance and make extension private
-extension MainViewController: DroppProviderConsumer {
+private extension MainViewController {
   @objc
-  private func profileAction(_ sender: UIBarButtonItem) {
+  func profileAction(_ sender: UIBarButtonItem) {
     let profileViewController: CurrentUserViewController = .controller()
     profileViewController.didPresentViewController = true
     profileViewController.currentUserViewModel = CurrentUserViewModel(user: currentUser!)
@@ -96,12 +96,7 @@ extension MainViewController: DroppProviderConsumer {
     present(navigationController, animated: true, completion: nil)
   }
 
-  // TODO: Delete
   @objc
-  private func postAction(_ sender: UIBarButtonItem) {
-    let generator = UINotificationFeedbackGenerator()
-    generator.prepare()
-    droppProvider.addDroppForRandomUser()
-    generator.notificationOccurred(.success)
+  func postAction(_ sender: UIBarButtonItem) {
   }
 }

@@ -27,7 +27,7 @@ final class LogInViewController: UITableViewController, WelcomeViewPage, Contain
 extension LogInViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = NSLocalizedString("Log In", comment: "Title telling the user to log in to the app")
+    navigationItem.title = NSLocalizedString("Log In", comment: "Title telling the user to log in to the app")
   }
 }
 

@@ -103,8 +103,8 @@ extension ListViewController {
                                                        target: self,
                                                        action: #selector(cancelAction(_:)))
     if multiSelectionClosure != nil {
-      let title = NSLocalizedString("Apply", comment: "Button informing the user that changes will be applied")
-      navigationItem.rightBarButtonItem = UIBarButtonItem(title: title,
+      // swiftlint:disable:next line_length
+      navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Apply", comment: "Button informing the user that changes will be applied"),
                                                           style: .plain,
                                                           target: self,
                                                           action: #selector(applyAction(_:)))

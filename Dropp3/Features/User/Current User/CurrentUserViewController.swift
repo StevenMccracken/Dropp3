@@ -13,24 +13,20 @@ final class CurrentUserViewController: UserViewController {
   private lazy var editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editAction(_:)))
   private lazy var deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteAction(_:)))
   private lazy var cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction(_:)))
-  private lazy var logoutButton: UIBarButtonItem = {
-    let title = NSLocalizedString("Logout", comment: "Button prompting the user to log out")
-    let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(logOutAction(_:)))
-    return button
-  }()
-
-  private lazy var profileButton: UIBarButtonItem = {
-    let title = NSLocalizedString("More", comment: "Button routing the user to more configuration options")
-    let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(profileAction(_:)))
-    return button
-  }()
+  private lazy var logoutButton = UIBarButtonItem(title: NSLocalizedString("Logout", comment: "Button prompting the user to log out"),
+                                                  style: .plain,
+                                                  target: self,
+                                                  action: #selector(logOutAction(_:)))
+  private lazy var profileButton = UIBarButtonItem(title: NSLocalizedString("More", comment: "Button routing the user to more options"),
+                                                   style: .plain,
+                                                   target: self,
+                                                   action: #selector(profileAction(_:)))
 
   private lazy var doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction(_:)))
-  private lazy var postButton: UIBarButtonItem = {
-    let title = NSLocalizedString("Post", comment: "Button prompting the user to create a new dropp")
-    let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(postAction(_:)))
-    return button
-  }()
+  private lazy var postButton = UIBarButtonItem(title: NSLocalizedString("Post", comment: "Button prompting the user to create a dropp"),
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(postAction(_:)))
 
   // MARK: - Public
 
@@ -144,19 +140,21 @@ private extension CurrentUserViewController {
 
   @objc
   func logOutAction(_ sender: UIBarButtonItem) {
-    let yesTitle = NSLocalizedString("Yes", comment: "Button confirming the log out action")
-    let cancelTitle = NSLocalizedString("Cancel", comment: "Button canceling the log out action")
-    let logOutTitle = NSLocalizedString("Log out?", comment: "Question confirming if the user wants to log out")
-
-    let alertController = UIAlertController(title: logOutTitle, message: nil, preferredStyle: .actionSheet)
-    alertController.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: nil))
+    let alertController = UIAlertController(title: NSLocalizedString("Log out?", comment: "Question confirming the user wants to log out"),
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+    alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Button canceling the log out action"),
+                                            style: .cancel,
+                                            handler: nil))
     // swiftlint:disable:next trailing_closure
-    alertController.addAction(UIAlertAction(title: yesTitle, style: .destructive, handler: { [weak self] _ in
-      guard let self = self else { return }
-      self.currentUserViewModel.shouldLogOut()
-      if self.didPresentViewController {
-        self.dismiss(animated: true, completion: nil)
-      }
+    alertController.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Button confirming the log out action"),
+                                            style: .destructive,
+                                            handler: { [weak self] _ in
+                                              guard let self = self else { return }
+                                              self.currentUserViewModel.shouldLogOut()
+                                              if self.didPresentViewController {
+                                                self.dismiss(animated: true, completion: nil)
+                                              }
     }))
 
     let generator = UINotificationFeedbackGenerator()
@@ -213,9 +211,10 @@ extension CurrentUserViewController {
       self?.deleteRows(at: [indexPath])
       generator.notificationOccurred(.success)
     }
-    let deleteTitle = NSLocalizedString("Delete", comment: "Button prompting the user to delete the item")
-    let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { [weak self] _, _, _ in
-      self?.currentUserViewModel.deleteDropp(atIndex: indexPath.row, performUpdates: deleteUpdates)
+    let deleteAction = UIContextualAction(style: .destructive,
+                                          title: NSLocalizedString("Delete", comment: "Button prompting the user to delete the item")) { [weak self] _, _, _ in
+                                            // swiftlint:disable:previous line_length
+                                            self?.currentUserViewModel.deleteDropp(atIndex: indexPath.row, performUpdates: deleteUpdates)
     }
     deleteAction.backgroundColor = .buttonBackground
     return UISwipeActionsConfiguration(actions: [deleteAction])

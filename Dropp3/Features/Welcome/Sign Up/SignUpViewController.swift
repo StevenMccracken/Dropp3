@@ -30,7 +30,7 @@ final class SignUpViewController: UITableViewController, WelcomeViewPage {
 extension SignUpViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = NSLocalizedString("Sign Up", comment: "Title telling the user to sign up for the app")
+    navigationItem.title = NSLocalizedString("Sign Up", comment: "Title telling the user to sign up for the app")
   }
 }
 
