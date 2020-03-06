@@ -5,8 +5,8 @@
 //  Created by Steven McCracken on 1/29/19.
 //
 
-import UIKit
 import MapKit
+import UIKit
 
 private enum CoordinateSpanDelta: CLLocationDegrees {
   case standard = 5

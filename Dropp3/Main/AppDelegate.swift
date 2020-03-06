@@ -5,8 +5,8 @@
 //  Created by Steven McCracken on 1/11/19.
 //
 
-import UIKit
 import Swinject
+import UIKit
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {

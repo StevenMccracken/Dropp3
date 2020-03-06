@@ -5,9 +5,9 @@
 //  Created by McCracken, Steven on 1/12/19.
 //
 
+import CoreLocation
 import Foundation
 import RealmSwift
-import CoreLocation
 
 final class Location: Object, Decodable, LocationProtocol {
   var coreLocation: CLLocation { CLLocation(latitude: latitude, longitude: longitude) }

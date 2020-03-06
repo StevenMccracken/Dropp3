@@ -5,8 +5,8 @@
 //  Created by Steven McCracken on 1/27/19.
 //
 
-import UIKit
 import RealmSwift
+import UIKit
 
 final class MainViewController: UINavigationController, RealmProviderConsumer, CurrentUserConsumer {
   private var currentUserToken: NotificationToken?

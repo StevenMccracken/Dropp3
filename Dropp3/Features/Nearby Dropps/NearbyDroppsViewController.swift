@@ -5,9 +5,9 @@
 //  Created by Steven McCracken on 1/20/19.
 //
 
-import UIKit
 import MapKit
 import RealmSwift
+import UIKit
 
 // MARK: - Constants
 

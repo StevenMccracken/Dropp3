@@ -67,6 +67,10 @@ opt_in_rules:
   - reduce_into
   - redundant_nil_coalescing
   - redundant_type_annotation
+  - required_enum_case
+  - single_test_class
+  - sorted_first_last
+  - sorted_imports
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 line_length:
