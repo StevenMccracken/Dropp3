@@ -76,6 +76,8 @@ opt_in_rules:
   - switch_case_on_newline
   - toggle_bool
   - trailing_closure
+  - unavailable_function
+  - unneeded_parentheses_in_closure_argument
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 line_length:

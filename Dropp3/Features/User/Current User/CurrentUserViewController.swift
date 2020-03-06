@@ -214,7 +214,7 @@ extension CurrentUserViewController {
       generator.notificationOccurred(.success)
     }
     let deleteTitle = NSLocalizedString("Delete", comment: "Button prompting the user to delete the item")
-    let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { [weak self] (_, _, _) in
+    let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { [weak self] _, _, _ in
       self?.currentUserViewModel.deleteDropp(atIndex: indexPath.row, performUpdates: deleteUpdates)
     }
     deleteAction.backgroundColor = .buttonBackground
