@@ -55,13 +55,13 @@ final class WelcomeViewController: UIViewController {
   private lazy var loadingIndicatorItem = UIBarButtonItem(customView: loadingIndicator)
   // swiftlint:disable line_length
   private lazy var signUpButton = UIBarButtonItem(title: NSLocalizedString("Sign Up", comment: "Button prompting user to switch to Sign Up view"),
-                                                                   style: .plain,
-                                                                   target: self,
-                                                                   action: #selector(switchPageAction(_:)))
+                                                  style: .plain,
+                                                  target: self,
+                                                  action: #selector(switchPageAction(_:)))
   private lazy var logInButton = UIBarButtonItem(title: NSLocalizedString("Log In", comment: "Button prompting user to switch to Log In view"),
-                                                                  style: .plain,
-                                                                  target: self,
-                                                                  action: #selector(switchPageAction(_:)))
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(switchPageAction(_:)))
   // swiftlint:enable line_length
 }
 
