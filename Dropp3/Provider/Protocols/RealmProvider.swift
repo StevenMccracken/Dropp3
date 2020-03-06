@@ -85,7 +85,7 @@ protocol RealmProvider {
    - parameter tokens: the tokens to bypass notifications for
    - parameter transaction: the transaction to run
    */
-  func transaction(withoutNotifying tokens: [NotificationToken?], transaction: () -> Void)
+  func transaction(withoutNotifying tokens: [NotificationToken?], transaction: () throws -> Void)
 
   // MARK: - Meta
 

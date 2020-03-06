@@ -13,8 +13,8 @@ struct MainRealmProvider {
     let realm: Realm?
     do {
       realm = try Realm()
-    } catch let error {
-      debugPrint("Failed to access Realm with error: \(error.localizedDescription)")
+    } catch let error as NSError {
+      debugPrint("Failed to access Realm with error: \(error.localizedDescription) - \(error.userInfo)")
       realm = nil
     }
     return realm
@@ -33,8 +33,8 @@ extension MainRealmProvider: RealmProvider {
     realm.refresh()
     do {
       try realm.write { realm.add(objects, update: update ? .all : .modified) }
-    } catch let error {
-      debugPrint("Failed to perform Realm write with error: \(error.localizedDescription)")
+    } catch let error as NSError {
+      debugPrint("Failed to perform Realm write transaction with error: \(error.localizedDescription) - \(error.userInfo)")
     }
   }
 
@@ -72,8 +72,8 @@ extension MainRealmProvider: RealmProvider {
     realm.refresh()
     do {
       try realm.write { realm.deleteAll() }
-    } catch let error {
-      debugPrint("Failed to perform Realm write with error: \(error.localizedDescription)")
+    } catch let error as NSError {
+      debugPrint("Failed to perform Realm write transaction with error: \(error.localizedDescription) - \(error.userInfo)")
     }
   }
 
@@ -86,28 +86,34 @@ extension MainRealmProvider: RealmProvider {
     realm.refresh()
     do {
       try realm.write { realm.delete(objects) }
-    } catch let error {
-      debugPrint("Failed to perform Realm write with error: \(error.localizedDescription)")
+    } catch let error as NSError {
+      debugPrint("Failed to perform Realm write transaction with error: \(error.localizedDescription) - \(error.userInfo)")
     }
   }
 
-  func transaction(withoutNotifying tokens: [NotificationToken?] = [], transaction: () -> Void) {
+  func transaction(withoutNotifying tokens: [NotificationToken?] = [], transaction: () throws -> Void) {
     guard let realm = self.realm else { return }
     realm.refresh()
     let validTokens = tokens.compactMap { $0 }
     if validTokens.isEmpty {
       do {
-        try realm.write { transaction() }
+        try realm.write { try transaction() }
+      } catch let error as NSError {
+        debugPrint("Failed to perform Realm write transaction with error: \(error.localizedDescription) - \(error.userInfo)")
       } catch let error {
-        debugPrint("Failed to perform Realm write with error: \(error.localizedDescription)")
+        // swiftlint:disable:previous untyped_error_in_catch
+        debugPrint("Failed to perform custom transaction with error: \(error.localizedDescription)")
       }
     } else {
       realm.beginWrite()
-      transaction()
       do {
+        try transaction()
         try realm.commitWrite(withoutNotifying: validTokens)
+      } catch let error as NSError {
+        debugPrint("Failed to perform Realm write transaction with error: \(error.localizedDescription) - \(error.userInfo)")
       } catch let error {
-        debugPrint("Failed to perform Realm write with error: \(error.localizedDescription)")
+        // swiftlint:disable:previous untyped_error_in_catch
+        debugPrint("Failed to perform custom transaction with error: \(error.localizedDescription)")
       }
     }
   }
