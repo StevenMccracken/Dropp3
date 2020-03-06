@@ -84,6 +84,9 @@ opt_in_rules:
   - unused_import
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_closing_braces
+  - vertical_whitespace_opening_braces
+  - xct_specific_matcher
+  - yoda_condition
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 line_length:
