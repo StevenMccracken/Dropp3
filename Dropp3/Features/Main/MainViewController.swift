@@ -98,5 +98,8 @@ private extension MainViewController {
 
   @objc
   func postAction(_ sender: UIBarButtonItem) {
+    let createDroppViewController = CreateDroppViewController()
+    let navigationController = UINavigationController(rootViewController: createDroppViewController)
+    present(navigationController, animated: true, completion: nil)
   }
 }

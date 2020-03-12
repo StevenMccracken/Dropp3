@@ -88,6 +88,7 @@
 		B0535DDC240F9DF700C27145 /* FriendStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DDB240F9DF700C27145 /* FriendStatus.swift */; };
 		B0535DDF240F9E2300C27145 /* FollowerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DDE240F9E2300C27145 /* FollowerStatus.swift */; };
 		B0535DE1241017FB00C27145 /* DependentCredentialRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DE0241017FB00C27145 /* DependentCredentialRule.swift */; };
+		B0535DE42411FE7700C27145 /* CreateDroppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DE32411FE7700C27145 /* CreateDroppViewController.swift */; };
 		B0C20D2D2401E137001EF608 /* LogInViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C20D2C2401E137001EF608 /* LogInViewModelProtocol.swift */; };
 		B0C20D2F2401E2DA001EF608 /* LogInViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C20D2E2401E2DA001EF608 /* LogInViewModelDelegate.swift */; };
 		B0D9612A2401B0FF00621D71 /* CredentialRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D961292401B0FF00621D71 /* CredentialRule.swift */; };
@@ -199,6 +200,7 @@
 		B0535DDB240F9DF700C27145 /* FriendStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStatus.swift; sourceTree = "<group>"; };
 		B0535DDE240F9E2300C27145 /* FollowerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerStatus.swift; sourceTree = "<group>"; };
 		B0535DE0241017FB00C27145 /* DependentCredentialRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentCredentialRule.swift; sourceTree = "<group>"; };
+		B0535DE32411FE7700C27145 /* CreateDroppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDroppViewController.swift; sourceTree = "<group>"; };
 		B0C20D2C2401E137001EF608 /* LogInViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModelProtocol.swift; sourceTree = "<group>"; };
 		B0C20D2E2401E2DA001EF608 /* LogInViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModelDelegate.swift; sourceTree = "<group>"; };
 		B0D961292401B0FF00621D71 /* CredentialRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRule.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 		69321E3421F5623F00103A74 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				B0535DE22411FE6300C27145 /* Creation */,
 				69321E3521F5624800103A74 /* Main */,
 				6911727B220704E10042212D /* Welcome */,
 				69321E3821F5627300103A74 /* Nearby Dropps */,
@@ -644,6 +647,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		B0535DE22411FE6300C27145 /* Creation */ = {
+			isa = PBXGroup;
+			children = (
+				B0535DE32411FE7700C27145 /* CreateDroppViewController.swift */,
+			);
+			path = Creation;
+			sourceTree = "<group>";
+		};
 		B0C20D2B2401E126001EF608 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -869,6 +880,7 @@
 				69FAD4F52206889A00789AFD /* FriendshipViewController.swift in Sources */,
 				694120482213D31B00839F4C /* CurrentUserViewModel.swift in Sources */,
 				695AE3D621FFE85000672D85 /* ListViewController.swift in Sources */,
+				B0535DE42411FE7700C27145 /* CreateDroppViewController.swift in Sources */,
 				B0535DAE240EC46300C27145 /* DroppServiceAccessor.swift in Sources */,
 				5BB90ED321E9DB2600B69E51 /* Location.swift in Sources */,
 				699CADCB2241FEE60064750D /* Domain.swift in Sources */,
