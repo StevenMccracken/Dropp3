@@ -59,7 +59,6 @@
 		69A46AF3220F9F37001EA7F9 /* CurrentUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A46AF2220F9F37001EA7F9 /* CurrentUserViewController.swift */; };
 		69A46AF5220F9F4C001EA7F9 /* CurrentUserView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69A46AF4220F9F4C001EA7F9 /* CurrentUserView.storyboard */; };
 		69B2FDBA21E9CE120080A7B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2FDB921E9CE120080A7B2 /* AppDelegate.swift */; };
-		69B2FDBF21E9CE120080A7B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69B2FDBD21E9CE120080A7B2 /* Main.storyboard */; };
 		69B2FDC121E9CE130080A7B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69B2FDC021E9CE130080A7B2 /* Assets.xcassets */; };
 		69B2FDC421E9CE130080A7B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69B2FDC221E9CE130080A7B2 /* LaunchScreen.storyboard */; };
 		69B9D18622035E38004CAF6F /* NearbyDroppsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B9D18522035E38004CAF6F /* NearbyDroppsViewModel.swift */; };
@@ -89,6 +88,8 @@
 		B0535DDF240F9E2300C27145 /* FollowerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DDE240F9E2300C27145 /* FollowerStatus.swift */; };
 		B0535DE1241017FB00C27145 /* DependentCredentialRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DE0241017FB00C27145 /* DependentCredentialRule.swift */; };
 		B0535DE42411FE7700C27145 /* CreateDroppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535DE32411FE7700C27145 /* CreateDroppViewController.swift */; };
+		B0561F56241A0A2B00618B14 /* MainChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0561F55241A0A2B00618B14 /* MainChildViewController.swift */; };
+		B0561F58241B4DD500618B14 /* AppearanceManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0561F57241B4DD500618B14 /* AppearanceManaging.swift */; };
 		B0C20D2D2401E137001EF608 /* LogInViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C20D2C2401E137001EF608 /* LogInViewModelProtocol.swift */; };
 		B0C20D2F2401E2DA001EF608 /* LogInViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C20D2E2401E2DA001EF608 /* LogInViewModelDelegate.swift */; };
 		B0D9612A2401B0FF00621D71 /* CredentialRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D961292401B0FF00621D71 /* CredentialRule.swift */; };
@@ -166,7 +167,6 @@
 		69A46AF4220F9F4C001EA7F9 /* CurrentUserView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurrentUserView.storyboard; sourceTree = "<group>"; };
 		69B2FDB621E9CE120080A7B2 /* Dropp3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dropp3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B2FDB921E9CE120080A7B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		69B2FDBE21E9CE120080A7B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		69B2FDC021E9CE130080A7B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		69B2FDC321E9CE130080A7B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		69B2FDC521E9CE130080A7B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -201,6 +201,8 @@
 		B0535DDE240F9E2300C27145 /* FollowerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerStatus.swift; sourceTree = "<group>"; };
 		B0535DE0241017FB00C27145 /* DependentCredentialRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentCredentialRule.swift; sourceTree = "<group>"; };
 		B0535DE32411FE7700C27145 /* CreateDroppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDroppViewController.swift; sourceTree = "<group>"; };
+		B0561F55241A0A2B00618B14 /* MainChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainChildViewController.swift; sourceTree = "<group>"; };
+		B0561F57241B4DD500618B14 /* AppearanceManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManaging.swift; sourceTree = "<group>"; };
 		B0C20D2C2401E137001EF608 /* LogInViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModelProtocol.swift; sourceTree = "<group>"; };
 		B0C20D2E2401E2DA001EF608 /* LogInViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModelDelegate.swift; sourceTree = "<group>"; };
 		B0D961292401B0FF00621D71 /* CredentialRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRule.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				69A46AE3220D590D001EA7F9 /* Consumers */,
+				B0561F59241B515300618B14 /* Appearance */,
 				69B2FDB921E9CE120080A7B2 /* AppDelegate.swift */,
 			);
 			path = Main;
@@ -328,10 +331,9 @@
 		69321E3521F5624800103A74 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				69B2FDBD21E9CE120080A7B2 /* Main.storyboard */,
 				695AE3BD21FE54A700672D85 /* MainViewController.swift */,
 				69B2FDC221E9CE130080A7B2 /* LaunchScreen.storyboard */,
-				69A46AEE220F8CF6001EA7F9 /* AppearanceManager.swift */,
+				B0561F55241A0A2B00618B14 /* MainChildViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -655,6 +657,15 @@
 			path = Creation;
 			sourceTree = "<group>";
 		};
+		B0561F59241B515300618B14 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				69A46AEE220F8CF6001EA7F9 /* AppearanceManager.swift */,
+				B0561F57241B4DD500618B14 /* AppearanceManaging.swift */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
 		B0C20D2B2401E126001EF608 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -772,7 +783,6 @@
 				69117285220719750042212D /* LogInView.storyboard in Resources */,
 				6911727D220704F30042212D /* WelcomeView.storyboard in Resources */,
 				69B2FDC121E9CE130080A7B2 /* Assets.xcassets in Resources */,
-				69B2FDBF21E9CE120080A7B2 /* Main.storyboard in Resources */,
 				69321E3721F5626D00103A74 /* NearbyDroppsView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -920,6 +930,7 @@
 				B0535DBA240ED04000C27145 /* RealmProvider.swift in Sources */,
 				69FAD4F02206806C00789AFD /* UIViewController+StoryboardInit.swift in Sources */,
 				69B2FDBA21E9CE120080A7B2 /* AppDelegate.swift in Sources */,
+				B0561F58241B4DD500618B14 /* AppearanceManaging.swift in Sources */,
 				B0E7480F240C3E33002FA4AE /* SignUpViewModelProtocol.swift in Sources */,
 				B0535DD6240F98A000C27145 /* MainUserServiceSignUpUser.swift in Sources */,
 				B0535DC1240F502600C27145 /* NearbyDroppsViewModelProtocol.swift in Sources */,
@@ -937,6 +948,7 @@
 				B0535DAC240EC44900C27145 /* DroppServiceError.swift in Sources */,
 				B0535DC5240F5CDA00C27145 /* NearbyDroppCellDelegate.swift in Sources */,
 				B0D9612A2401B0FF00621D71 /* CredentialRule.swift in Sources */,
+				B0561F56241A0A2B00618B14 /* MainChildViewController.swift in Sources */,
 				B0535DAA240EC41400C27145 /* UserServiceAccessor.swift in Sources */,
 				B0535DBC240F2AB700C27145 /* MainDroppProvider.swift in Sources */,
 				B0535DCB240F63E700C27145 /* CurrentUserViewDelegate.swift in Sources */,
@@ -969,14 +981,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		69B2FDBD21E9CE120080A7B2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				69B2FDBE21E9CE120080A7B2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		69B2FDC221E9CE130080A7B2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -7,22 +7,11 @@
 
 import UIKit
 
-final class AppearanceManager: NSObject {
-  override init() {
-    super.init()
-    customizeAppearances()
-  }
-}
+/// Main implementation of `AppearanceManaging`
+struct AppearanceManager {
+  // MARK: - Styling
 
-// MARK: - Styling
-
-private extension AppearanceManager {
-  func customizeAppearances() {
-    customizeButtons()
-    customizeBarButtonItems()
-  }
-
-  func customizeButtons() {
+  private func customizeButtons() {
     let appearance = UIButton.appearance()
     appearance.tintColor = .primary
     appearance.setTitleColor(.primary, for: .normal)
@@ -30,8 +19,17 @@ private extension AppearanceManager {
     appearance.setTitleColor(UIColor.primary.withAlphaComponent(0.5), for: .disabled)
   }
 
-  func customizeBarButtonItems() {
+  private func customizeBarButtonItems() {
     let appearance = UIBarButtonItem.appearance()
     appearance.tintColor = .primary
+  }
+}
+
+// MARK: - AppearanceManaging
+
+extension AppearanceManager: AppearanceManaging {
+  func customizeAppearances() {
+    customizeButtons()
+    customizeBarButtonItems()
   }
 }

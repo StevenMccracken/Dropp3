@@ -14,6 +14,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
   /// The depedency container for the application
   let container = Container { container in
+    container.register(AppearanceManaging.self) { _ in AppearanceManager() }.inObjectScope(.container)
     container.register(RealmProvider.self) { _ in MainRealmProvider() }
     container.register(CurrentUser.self) { resolver in
       /// There must always be a `nonnil` current user instance
@@ -35,6 +36,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     // swiftlint:disable:previous discouraged_optional_collection
     // Override point for customization after application launch.
     applyConfigurations()
+    setUpWindow()
+    customizeAppearance()
     return true
   }
 }
@@ -45,6 +48,18 @@ private extension AppDelegate {
   /// Configures registered dependencies for initial use
   func applyConfigurations() {
     container.resolve(RealmProvider.self)!.configure()
+  }
+
+  func setUpWindow() {
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    window.backgroundColor = .systemBackground
+    window.rootViewController = MainViewController(rootViewController: MainChildViewController())
+    window.makeKeyAndVisible()
+    self.window = window
+  }
+
+  func customizeAppearance() {
+    container.resolve(AppearanceManaging.self)!.customizeAppearances()
   }
 }
 
